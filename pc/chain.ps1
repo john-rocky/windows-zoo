@@ -52,6 +52,7 @@ try {
             $lastRelease = Get-Date
         }
         foreach ($u in $cells[$Stream]) {
+          try {  # a PowerShell error inside one unit is logged and the stream goes on
             $name = $u.cell + ($(if ($u.flags -contains "compile") { "_compile" } else { "" }))
             if ($name -eq "ovnpu_pre" -and -not (Test-Path "$Root\blobs\$m.blob")) { Mark $m $name "skip-no-blob"; continue }
             if ($Pass -ne "first") {
@@ -83,6 +84,10 @@ try {
             Say $log "$m $name $state rc=$rc waited=$w ram_wait=$wr rtx_before=[$rtxBefore] rtx_after=[$(RtxLine)] :: $((Get-Content "$Root\logs\$Pass\$m\$name.out" -Tail 2 -ErrorAction SilentlyContinue) -join ' | ')"
             $free = [math]::Round((Get-PSDrive C).Free / 1GB, 1)
             if ($free -lt 100) { Say $log "C: free $free GB < 100 GB" }
+          } catch {
+            Say $log "unit $m $($u.cell) FAILED in the chain: $_"
+            Mark $m $u.cell "chain-error"
+          }
         }
     }
     Say $log "chain $Stream $Pass done"

@@ -107,3 +107,10 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
 - Same time: class-score outputs are picked by output shape, not by output index (tf2onnx does not keep the
   original output order). Models whose class 0 is background or unused (yolact, rfdetr, ssdlite) are counted from
   class 1; ssdlite's class output [1, 6×91, H, W] is split into 6 anchors × 91 classes.
+- 2026-11-06 12:3x JST, after the first end-to-end run (an error, not a number, prompted it): the fp16 copy for
+  `cuda16` is cleaned after `convert_float_to_float16`, for every model. For rtdetr_graphB_fp16 the converter
+  inserted the same Cast (same input, same output name) once per consumer of an fp16 constant, so one tensor had
+  several definitions and ONNX Runtime refused the copy as an invalid model. The cleaning drops a node that repeats
+  an earlier node exactly, renames nodes whose name still repeats, and puts the nodes in dependency order (the
+  converter appends the input Casts at the end). None of this changes the computation; the counts are in each
+  `cuda16` record (`fp16_convert`).

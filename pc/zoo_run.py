@@ -156,10 +156,75 @@ def onnx_graph_nodes(path):
     return len(m.graph.node), ops
 
 
+def drop_identical_nodes(m):
+    """Drop a node that repeats an earlier node exactly (same op, attributes, inputs and outputs), keeping the first.
+    convert_float_to_float16 inserts the same Cast once per consumer of an fp16 constant (rtdetr_graphB_fp16:
+    six 'arith.constant58' -> 'arith.constant58_cast_to_fp32' Casts), which defines one tensor several times and
+    ONNX Runtime rejects as an invalid model. The first copy comes before every consumer, so the graph computes the
+    same. Returns the number of nodes dropped."""
+    seen = set()
+    keep = []
+    for nd in m.graph.node:
+        key = (nd.domain, nd.op_type, tuple(nd.input), tuple(nd.output),
+               tuple(sorted(a.SerializeToString() for a in nd.attribute)))
+        if key in seen:
+            continue
+        seen.add(key)
+        keep.append(nd)
+    dropped = len(m.graph.node) - len(keep)
+    if dropped:
+        del m.graph.node[:]
+        m.graph.node.extend(keep)
+    return dropped
+
+
+def topo_sort(m):
+    """Put the nodes in dependency order (convert_float_to_float16 appends the graph-input Casts at the end; ONNX
+    Runtime sorts on load, the ONNX checker does not). Returns False when a node waits on an undefined tensor."""
+    g = m.graph
+    ready = {i.name for i in g.input} | {t.name for t in g.initializer} | {""}
+    pending = list(g.node)
+    order = []
+    while pending:
+        rest = [nd for nd in pending if not all(x in ready for x in nd.input)]
+        done = [nd for nd in pending if all(x in ready for x in nd.input)]
+        if not done:
+            return False
+        for nd in done:
+            order.append(nd)
+            ready.update(nd.output)
+        pending = rest
+    del g.node[:]
+    g.node.extend(order)
+    return True
+
+
+def unique_node_names(m):
+    """Rename the nodes whose name repeats. convert_float_to_float16 can give two of the Cast nodes it inserts the same
+    name (rtdetr_graphB_fp16: two 'arith.constant58_cast_to_fp32_node'), which ONNX Runtime rejects as an invalid
+    model; a node name does not change the computation. Returns the number of nodes renamed."""
+    names = {nd.name for nd in m.graph.node}
+    seen = {}
+    renamed = 0
+    for nd in m.graph.node:
+        if not nd.name:
+            continue
+        seen[nd.name] = seen.get(nd.name, 0) + 1
+        if seen[nd.name] > 1:
+            new = f"{nd.name}__dup{seen[nd.name] - 1}"
+            while new in names:
+                new += "_"
+            names.add(new)
+            nd.name = new
+            renamed += 1
+    return renamed
+
+
 def fp16_model(root, model, src, rec):
     dst = os.path.join(root, "fp16", model + ".onnx")
-    if os.path.exists(dst):
-        rec["fp16_convert"] = {"cached": True, "path": dst}
+    if os.path.exists(dst) and os.path.exists(dst + ".json"):
+        with open(dst + ".json", encoding="utf-8") as f:
+            rec["fp16_convert"] = {**json.load(f), "cached": True}
         return dst
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     import onnx  # noqa: PLC0415
@@ -167,10 +232,17 @@ def fp16_model(root, model, src, rec):
     t = time.perf_counter()
     m = onnx.load(src)
     m16 = convert_float_to_float16(m, keep_io_types=True)
+    dropped = drop_identical_nodes(m16)
+    renamed = unique_node_names(m16)
+    sorted_ok = topo_sort(m16)
     onnx.save(m16, dst + ".tmp")
     os.replace(dst + ".tmp", dst)
-    rec["fp16_convert"] = {"cached": False, "path": dst, "seconds": time.perf_counter() - t, "bytes": os.path.getsize(dst),
-                           "tool": "onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True)"}
+    info = {"path": dst, "seconds": time.perf_counter() - t, "bytes": os.path.getsize(dst), "sha256": sha256(dst),
+            "tool": "onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True)",
+            "dropped_identical_nodes": dropped, "renamed_duplicate_node_names": renamed, "topo_sorted": sorted_ok}
+    with open(dst + ".json", "w", encoding="utf-8") as f:
+        json.dump(info, f, indent=1)
+    rec["fp16_convert"] = {**info, "cached": False}
     return dst
 
 
@@ -288,6 +360,8 @@ def run_ov(args, rec, feeds):
         rec["execution_devices"] = str(compiled.get_property("EXECUTION_DEVICES"))
         t = time.perf_counter()
         data = compiled.export_model()
+        if hasattr(data, "getvalue"):  # OpenVINO 2026.4 returns io.BytesIO, older releases bytes
+            data = data.getvalue()
         os.makedirs(os.path.dirname(blob), exist_ok=True)
         with open(blob + ".tmp", "wb") as f:
             f.write(data)
@@ -300,7 +374,11 @@ def run_ov(args, rec, feeds):
     t = time.perf_counter()
     with open(blob, "rb") as f:
         data = f.read()
-    compiled = core.import_model(data, "NPU", config)
+    try:
+        compiled = core.import_model(data, "NPU", config)
+    except TypeError:  # a release that takes a stream only
+        import io  # noqa: PLC0415
+        compiled = core.import_model(io.BytesIO(data), "NPU", config)
     rec["load_ms"] = (time.perf_counter() - t) * 1000
     rec["execution_devices"] = str(compiled.get_property("EXECUTION_DEVICES"))
     request = compiled.create_infer_request()

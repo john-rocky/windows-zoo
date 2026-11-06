@@ -8,8 +8,14 @@ $Run = "$Root\pc\zoo_run.py"
 $Smi = "$env:SystemRoot\System32\nvidia-smi.exe"
 $Progress = "$Root\progress.txt"
 
-function Say([string]$Log, [string]$t) { [IO.File]::AppendAllText($Log, "[$(Get-Date -Format o)] $t`r`n") }
-function Mark([string]$Model, [string]$Cell, [string]$State) { [IO.File]::AppendAllText($Progress, "$(Get-Date -Format o) $Model $Cell $State`r`n") }
+# Two streams append to the same progress file: retry when the other one holds it for a moment.
+function Append-Retry([string]$Path, [string]$Line) {
+    foreach ($i in 1..50) {
+        try { [IO.File]::AppendAllText($Path, $Line); return } catch { Start-Sleep -Milliseconds (20 + (Get-Random -Maximum 80)) }
+    }
+}
+function Say([string]$Log, [string]$t) { Append-Retry $Log "[$(Get-Date -Format o)] $t`r`n" }
+function Mark([string]$Model, [string]$Cell, [string]$State) { Append-Retry $Progress "$(Get-Date -Format o) $Model $Cell $State`r`n" }
 
 # Wait while another lane holds the marker (younger than 2 h). The marker must then stay absent for 3 minutes
 # (lanes chain plans back to back and drop the marker between them: about a second between plans, 1-2 minutes for a
