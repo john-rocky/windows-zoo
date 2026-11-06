@@ -1,8 +1,8 @@
 """Render RESULTS_WINDOWS.md from results/<model>/<cell>.json and the X2E / Galaxy S26 rows of the earlier AI Hub lane.
 
-    python3 table.py [--x2e hub/results_wide.json]
+    python3 table.py [--x2e aihub/results_wide.json]
 
-hub/results_wide.json = the Qualcomm AI Hub records of the same 52 files on a Snapdragon X2 Elite and a Galaxy S26
+aihub/results_wide.json = the Qualcomm AI Hub records of the same 52 files on a Snapdragon X2 Elite and a Galaxy S26
 (one profile job per model x device x form, 2026-10-30; a byte copy of the earlier lane's results_wide.json).
 
 Speed = the quiet-pass median (PLAN.md section 6); a cell without a quiet number shows the first-pass median with *.
@@ -56,7 +56,7 @@ def ran_on_device(r):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--x2e", default=os.path.join(HERE, "hub", "results_wide.json"))
+    ap.add_argument("--x2e", default=os.path.join(HERE, "aihub", "results_wide.json"))
     a = ap.parse_args()
     X = json.load(open(a.x2e))
 
@@ -111,7 +111,7 @@ def main():
         "Times are medians of 30 runs from host memory to host memory (copies included), taken one cell at a time on a quiet "
         "machine; * = first-pass number (no quiet re-run). The X2E / S26 columns are Qualcomm AI Hub's "
         "`estimated_inference_time` of the precompiled QNN form (one profile job per cell, 2026-10-30, "
-        "`hub/results_wide.json`): AI Hub's own timer on the device, not this repo's host-to-host timer.\n",
+        "`aihub/results_wide.json`): AI Hub's own timer on the device, not this repo's host-to-host timer.\n",
         concl + "\n",
         "| model | Galaxy S26 NPU ms | X2E NPU ms | Intel NPU as-is ms | Intel NPU precompiled ms | Intel GPU ms | RTX fp16 ms | CPU ms | "
         "load s: Intel NPU as-is / Intel NPU precompiled / X2E as-is | parity | note |",

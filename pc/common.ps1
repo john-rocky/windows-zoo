@@ -21,13 +21,19 @@ function Mark([string]$Model, [string]$Cell, [string]$State) { Append-Retry $Pro
 # (lanes chain plans back to back and drop the marker between them: about a second between plans, 1-2 minutes for a
 # build; L1 asked for at least a full minute on 11-06).
 # Returns the seconds waited.
-function Wait-Other([string]$Log) {
+# -IgnoreBuild (jobs that do not time anything: the first pass, conversion, export): a marker line that ends in the
+# word `build` means the other lane uses the PC but is not timing (build, download, export, parity) = do not wait.
+function Wait-Other([string]$Log, [switch]$IgnoreBuild) {
     if (-not $Busy) { return 0 }
     $t0 = Get-Date; $last = ""
     while ($true) {
         while (Test-Path $Busy) {
             $text = (Get-Content $Busy -Raw -ErrorAction SilentlyContinue)
             if ($text -and $text.StartsWith($Label)) { return [int]((Get-Date) - $t0).TotalSeconds }
+            if ($IgnoreBuild -and $text -and ($text -match '\bbuild\b')) {
+                if ($text -ne $last) { Say $Log "marker says build, not waiting: $($text.Trim())" }
+                return [int]((Get-Date) - $t0).TotalSeconds
+            }
             $age = ((Get-Date) - (Get-Item $Busy).LastWriteTime).TotalMinutes
             if ($age -ge 120) { Say $Log "marker $([int]$age) min old, not waiting: $text"; return [int]((Get-Date) - $t0).TotalSeconds }
             if ($text -ne $last) { Say $Log "waiting for the marker: $text"; $last = $text }

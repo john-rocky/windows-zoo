@@ -94,5 +94,5 @@ on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Ev
 
 The models keep the licences of their Hugging Face repos ([LICENSES.md](LICENSES.md)). The code here is
 Apache-2.0 ([LICENSE](LICENSE)); `convert/fold_deq.py` is copied from
-[LiteRT-Models](https://github.com/john-rocky/LiteRT-Models) (MIT). `hub/results_wide.json` holds the Qualcomm AI
+[LiteRT-Models](https://github.com/john-rocky/LiteRT-Models) (MIT). `aihub/results_wide.json` holds the Qualcomm AI
 Hub profile records of the X2 Elite and Galaxy S26 columns.

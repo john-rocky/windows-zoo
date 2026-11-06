@@ -6,7 +6,7 @@
 # -Pass first|quiet ; -Models = file with one model name per line ; -Quiet = take the marker and gate every unit
 # Log = C:\src\zoo\logs\chain_<Stream>_<Pass>.log ; progress = C:\src\zoo\progress.txt
 param([Parameter(Mandatory=$true)][string]$Stream, [string]$Pass = "first", [string]$Models = "",
-      [switch]$Quiet, [int]$TimeoutMin = 30, [string]$Only = "")
+      [switch]$Quiet, [int]$TimeoutMin = 30, [string]$Only = "", [string]$ResumeSince = "")
 . "$PSScriptRoot\common.ps1"
 if (-not $Models) { $Models = "$PSScriptRoot\models52.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
 $log = "$Root\logs\chain_${Stream}_$Pass.log"
@@ -55,11 +55,18 @@ try {
           try {  # a PowerShell error inside one unit is logged and the stream goes on
             $name = $u.cell + ($(if ($u.flags -contains "compile") { "_compile" } else { "" }))
             if ($name -eq "ovnpu_pre" -and -not (Test-Path "$Root\blobs\$m.blob")) { Mark $m $name "skip-no-blob"; continue }
+            if ($ResumeSince) {  # a restarted stream: skip the units this pass already ran since that time
+                $rj = "$Root\runs\$Pass\$m\$name.json"
+                if (Test-Path $rj) {
+                    $st = (Get-Content $rj -Raw | ConvertFrom-Json).started
+                    if ($st -and ([datetime]$st -ge [datetime]$ResumeSince)) { continue }
+                }
+            }
             if ($Pass -ne "first") {
                 $fj = "$Root\runs\first\$m\$name.json"
                 if (-not (Test-Path $fj) -or -not ((Get-Content $fj -Raw) -match '"status": "OK"')) { Mark $m $name "skip-first-not-ok"; continue }
             }
-            $w = Wait-Other $log
+            $w = if ($Quiet) { Wait-Other $log } else { Wait-Other $log -IgnoreBuild }
             $wr = Wait-Ram $log
             $extra = @()
             if ($Quiet) {

@@ -11,7 +11,7 @@ $list = Get-Content $Models | Where-Object { $_.Trim() -ne "" -and -not $_.Start
 if ($Only) { $list = $list | Where-Object { $_ -in ($Only -split ",") } }
 Say $log "convert start pid=$PID models=$($list.Count)"
 foreach ($m in $list) {
-    $null = Wait-Other $log
+    $null = Wait-Other $log -IgnoreBuild
     cmd /c "`"$py`" -u `"$Root\convert\convert_all.py`" --out `"$Root\onnx`" --model $m >> `"$log`" 2>&1"
     Say $log "$m convert exit=$LASTEXITCODE"
 }
