@@ -17,7 +17,7 @@ import subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PULL = os.path.join(HERE, "pc_pull")
-CELLS = ["cpu", "cuda32", "cuda16", "ovgpu", "ovnpu", "ovnpu_pre"]
+CELLS = ["cpu", "cuda32", "cuda16", "ovgpu", "ovnpu", "ovnpu_pre", "ovcpu"]  # ovcpu = fallback reference (yolact)
 MODELS = [l.strip() for l in open(os.path.join(HERE, "pc", "models52.txt")) if l.strip()]
 
 
@@ -67,6 +67,8 @@ def main():
                 status = "ERROR"
             elif first is not None and first.get("status") == "OK":
                 status = "PASS" if c == "cpu" else (par or {}).get("status", "UNCOMPARED")
+                if c == "ovcpu" and par is None:
+                    status = "REFERENCE"  # the parity reference of a model ONNX Runtime cannot load
             q_ok = quiet is not None and quiet.get("status") == "OK"
             table = {
                 "ms": (quiet or {}).get("ms", {}).get("median") if q_ok else None,

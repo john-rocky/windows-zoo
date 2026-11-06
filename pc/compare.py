@@ -134,7 +134,10 @@ def main():
     models = args.model or sorted(os.listdir(os.path.join(args.root, "out")))
     for m in models:
         d = os.path.join(args.root, "out", m)
-        refp = os.path.join(d, "cpu.npz")
+        refp, ref_name = os.path.join(d, "cpu.npz"), "cpu"
+        if not os.path.exists(refp) and os.path.exists(os.path.join(d, "ovcpu.npz")):
+            # ONNX Runtime could not load the model (yolact): OpenVINO on the CPU in fp32 is the reference
+            refp, ref_name = os.path.join(d, "ovcpu.npz"), "ovcpu"
         if not os.path.exists(refp):
             print(f"{m}: no reference")
             continue
@@ -142,11 +145,11 @@ def main():
         amx = spec.get(m, {}).get("argmax_outputs", [])
         for f in sorted(glob.glob(os.path.join(d, "*.npz"))):
             cell = os.path.basename(f)[:-4]
-            if cell == "cpu":
+            if cell == ref_name:
                 continue
             test = np.load(f, allow_pickle=False)
             res = compare_cell(ref, test, amx, cell)
-            res.update({"model": m, "cell": cell, "pass": args.pass_, "reference": "cpu", "line": {"cos": COS_LINE, "argmax": ARGMAX_LINE}})
+            res.update({"model": m, "cell": cell, "pass": args.pass_, "reference": ref_name, "line": {"cos": COS_LINE, "argmax": ARGMAX_LINE}})
             od = os.path.join(args.root, "parity", args.pass_, m)
             os.makedirs(od, exist_ok=True)
             with open(os.path.join(od, cell + ".json"), "w", encoding="utf-8") as fo:

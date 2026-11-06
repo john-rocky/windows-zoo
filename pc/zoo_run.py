@@ -397,10 +397,38 @@ def run_ov(args, rec, feeds):
     return names, out
 
 
+def run_ovcpu(args, rec, feeds):
+    """The fallback parity reference for a model ONNX Runtime cannot load (yolact): OpenVINO on the CPU in fp32
+    (INFERENCE_PRECISION_HINT f32), from the same ONNX file. Not a table column."""
+    import openvino as ov  # noqa: PLC0415
+    rec["versions"]["openvino"] = ov.__version__
+    core = ov.Core()
+    path = os.path.join(args.root, "onnx", args.model + ".onnx")
+    rec["model_path"] = path
+    rec["model_sha256"] = sha256(path)
+    config = {"INFERENCE_PRECISION_HINT": "f32", **dict(args.ep_option)}
+    rec["ov_config"] = config
+    t = time.perf_counter()
+    compiled = core.compile_model(core.read_model(path), "CPU", config)
+    rec["load_ms"] = (time.perf_counter() - t) * 1000
+    rec["device"] = {"FULL_DEVICE_NAME": core.get_property("CPU", "FULL_DEVICE_NAME"),
+                     "INFERENCE_PRECISION_HINT": str(compiled.get_property("INFERENCE_PRECISION_HINT"))}
+    request = compiled.create_infer_request()
+    names = [o.get_any_name() for o in compiled.outputs]
+    rec["outputs"] = [{"name": o.get_any_name(), "shape": list(o.get_shape()), "type": str(o.get_element_type())} for o in compiled.outputs]
+    feed = {i.get_any_name(): feeds[i.get_any_name()] for i in compiled.inputs}
+
+    def once():
+        res = request.infer(feed, share_outputs=False)
+        return [np.asarray(res[o]) for o in compiled.outputs]
+
+    return names, bench(once, rec)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model", required=True)
-    p.add_argument("--cell", required=True, choices=sorted(ORT_CELLS | {"ovnpu_pre"}))
+    p.add_argument("--cell", required=True, choices=sorted(ORT_CELLS | {"ovnpu_pre", "ovcpu"}))
     p.add_argument("--pass", dest="pass_", default="first")
     p.add_argument("--phase", default="run", choices=["compile", "run"], help="ovnpu_pre only")
     p.add_argument("--root", default=os.environ.get("ZOO_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -429,6 +457,8 @@ def main():
         rec["inputs"] = {k: {"shape": list(v.shape), "dtype": str(v.dtype)} for k, v in feeds.items()}
         if args.cell == "ovnpu_pre":
             names, outs = run_ov(args, rec, feeds)
+        elif args.cell == "ovcpu":
+            names, outs = run_ovcpu(args, rec, feeds)
         else:
             names, outs = run_ort(args, rec, feeds)
         if outs is not None:

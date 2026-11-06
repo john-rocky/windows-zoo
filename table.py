@@ -97,6 +97,9 @@ def main():
                 notes.append(f"{c} ERROR: {last[0][:90]}")
             elif r and r["status"] == "FAIL":
                 notes.append(f"{c} FAIL: {'; '.join((r.get('parity') or {}).get('fails', []))[:90]}")
+        refs = {((R[c] or {}).get("parity") or {}).get("reference") for c in CODE if R[c]}
+        if "ovcpu" in refs:
+            notes.append("parity against OpenVINO on the CPU in fp32 (ONNX Runtime cannot load this file)")
         for c in ("ovnpu", "ovnpu_pre", "ovgpu"):
             if R[c] and R[c]["status"] != "ERROR" and not ran_on_device(R[c]):
                 notes.append(f"{c}: no engine time on its device in the process counters")

@@ -123,3 +123,7 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
 - 2026-11-06 15:3x JST, before the quiet pass: the quiet gate waits at most 10 minutes (was 60), the cap that the
   jobs sharing this PC agreed for every timing job; a unit that hits it is measured once more at the end. The
   marker is now taken only when no one holds it (create-new), never overwritten.
+- 2026-11-06 15:3x JST, after the CPU cell of yolact failed (an error, not a number): ONNX Runtime 1.31.1 cannot load
+  yolact.onnx at all (`[ShapeInferenceError] Incompatible dimensions` on an FPN Add), so its CPU reference does not
+  exist. For such a model only, the reference is OpenVINO on the CPU in fp32 (`ovcpu`: the same ONNX file,
+  `INFERENCE_PRECISION_HINT` f32), and the table row says so.
