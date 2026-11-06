@@ -17,6 +17,7 @@ runs/
 out/
 parity/
 logs/
+prof/
 freeze.*.txt
 setup.log
 *.done
