@@ -1,0 +1,462 @@
+{
+ "model": "plantnet",
+ "cell": "ovnpu_pre",
+ "status": "PASS",
+ "table": {
+  "ms": 1.1033999999199295,
+  "ms_first_pass": 1.1026499996660277,
+  "load_ms": 15.099399999598972,
+  "load_ms_first_pass": 30.819899999187328,
+  "compile_ms": 421.4847999974154,
+  "gate": "quiet"
+ },
+ "first_pass": {
+  "model": "plantnet",
+  "cell": "ovnpu_pre",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:35:20.523417+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "plantnet",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "first",
+   "--phase",
+   "run",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "b40ce6ad191804e6823ff26cfc0ab85fa6f11618aca24728155a2d9ea9014440",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     224,
+     224
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "2352010000000000",
+   "counter_luid": "0x00000000_0x00015223",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\plantnet.blob",
+   "bytes": 23937153,
+   "sha256": "ccfef9f016f18cd49c7de17037a3a9384798e19dbcfe94400bc510aacc3983e9"
+  },
+  "load_ms": 30.819899999187328,
+  "execution_devices": "NPU",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1081
+    ],
+    "type": "<Type: 'float32'>"
+   }
+  ],
+  "first_run_ms": 3.938099995139055,
+  "warmup": 5,
+  "ms": {
+   "median": 1.1026499996660277,
+   "p10": 0.9973999985959381,
+   "p90": 1.210500005981885,
+   "min": 0.9567999950377271,
+   "max": 1.306200007093139,
+   "n": 30
+  },
+  "ms_all": [
+   0.9848,
+   1.0972,
+   0.9647,
+   1.1079,
+   0.9974,
+   1.0292,
+   0.9568,
+   1.0593,
+   1.3062,
+   1.2334,
+   1.306,
+   1.176,
+   1.0974,
+   1.1164,
+   1.1292,
+   1.0614,
+   1.1713,
+   1.1357,
+   1.0562,
+   1.1639,
+   1.1277,
+   1.0909,
+   1.2105,
+   1.0967,
+   1.1223,
+   1.1742,
+   1.119,
+   1.0597,
+   1.0456,
+   1.063
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -223.875,
+    "max": -97.875,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1081
+    ],
+    "sha256": "818a1fe7e92c137643cf9a5460efed35855fe556a86ca33c3488059dace751ee",
+    "mean": -138.44096901017576,
+    "std": 22.71272180855958,
+    "sample_pos": [
+     189,
+     214,
+     239,
+     264,
+     453,
+     478,
+     503,
+     528,
+     717,
+     742,
+     767,
+     792,
+     981,
+     1006,
+     1031,
+     1056
+    ],
+    "sample": [
+     -109.1875,
+     -136.75,
+     -122.375,
+     -148.5,
+     -117.5625,
+     -140.125,
+     -118.625,
+     -150.5,
+     -138.25,
+     -132.75,
+     -171.5,
+     -167.625,
+     -116.3125,
+     -135.0,
+     -167.25,
+     -125.3125
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00015223/neural": 29.414
+  },
+  "ended": "2026-11-06T15:35:23.166689+09:00"
+ },
+ "compile": {
+  "model": "plantnet",
+  "cell": "ovnpu_pre",
+  "phase": "compile",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:35:14.797978+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "plantnet",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "first",
+   "--phase",
+   "compile"
+  ],
+  "status": "OK",
+  "input_sha256": "b40ce6ad191804e6823ff26cfc0ab85fa6f11618aca24728155a2d9ea9014440",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     224,
+     224
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "2352010000000000",
+   "counter_luid": "0x00000000_0x00015223",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "model_path": "C:\\src\\zoo\\onnx\\plantnet.onnx",
+  "model_sha256": "53bbc7d65df5ce97eeffd7b49443fcd1a9849ce66c3c2171387a07dd42a2917e",
+  "read_ms": 54.142099994351156,
+  "query_ms": 58.50729999656323,
+  "query_model": {
+   "ops": 217,
+   "supported": 217,
+   "unsupported_by_type": {}
+  },
+  "compile_ms": 421.4847999974154,
+  "execution_devices": "NPU",
+  "export_ms": 62.78269999893382,
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\plantnet.blob",
+   "bytes": 23937153
+  },
+  "ended": "2026-11-06T15:35:15.644365+09:00"
+ },
+ "quiet": {
+  "model": "plantnet",
+  "cell": "ovnpu_pre",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-06T19:55:33.982323+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "plantnet",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "quiet",
+   "--phase",
+   "run",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\plantnet\\ovnpu_pre.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 12,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 17.6,
+   "state": "quiet",
+   "waited_s": 35,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "b40ce6ad191804e6823ff26cfc0ab85fa6f11618aca24728155a2d9ea9014440",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     224,
+     224
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "4c3e010000000000",
+   "counter_luid": "0x00000000_0x00013e4c",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\plantnet.blob",
+   "bytes": 23937153,
+   "sha256": "ccfef9f016f18cd49c7de17037a3a9384798e19dbcfe94400bc510aacc3983e9"
+  },
+  "load_ms": 15.099399999598972,
+  "execution_devices": "NPU",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1081
+    ],
+    "type": "<Type: 'float32'>"
+   }
+  ],
+  "first_run_ms": 3.156400000079884,
+  "warmup": 5,
+  "ms": {
+   "median": 1.1033999999199295,
+   "p10": 1.065500000549946,
+   "p90": 1.1514999987412011,
+   "min": 0.9336000002804212,
+   "max": 1.3414999993983656,
+   "n": 30
+  },
+  "ms_all": [
+   1.0861,
+   1.1515,
+   1.0876,
+   1.0901,
+   1.1093,
+   1.1509,
+   1.0968,
+   1.3415,
+   1.289,
+   1.1152,
+   1.0989,
+   1.129,
+   1.0383,
+   1.0655,
+   1.099,
+   1.0977,
+   1.1035,
+   0.9336,
+   1.0636,
+   1.0769,
+   1.2946,
+   1.1164,
+   1.1033,
+   1.1048,
+   1.0963,
+   1.1012,
+   1.1037,
+   1.1081,
+   1.1299,
+   1.107
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -223.875,
+    "max": -97.875,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1081
+    ],
+    "sha256": "818a1fe7e92c137643cf9a5460efed35855fe556a86ca33c3488059dace751ee",
+    "mean": -138.44096901017576,
+    "std": 22.71272180855958,
+    "sample_pos": [
+     189,
+     214,
+     239,
+     264,
+     453,
+     478,
+     503,
+     528,
+     717,
+     742,
+     767,
+     792,
+     981,
+     1006,
+     1031,
+     1056
+    ],
+    "sample": [
+     -109.1875,
+     -136.75,
+     -122.375,
+     -148.5,
+     -117.5625,
+     -140.125,
+     -118.625,
+     -150.5,
+     -138.25,
+     -132.75,
+     -171.5,
+     -167.625,
+     -116.3125,
+     -135.0,
+     -167.25,
+     -125.3125
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00013e4c/neural": 29.873
+  },
+  "ended": "2026-11-06T19:55:36.150910+09:00"
+ },
+ "parity": {
+  "status": "PASS",
+  "fails": [],
+  "reason_candidate": null,
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1081
+    ],
+    "max_abs": 0.0981597900390625,
+    "mean_abs": 0.02870534637479403,
+    "cos": 0.999999974890653,
+    "nan": 0,
+    "inf": 0,
+    "ref_min": -223.96194458007812,
+    "ref_max": -97.91270446777344,
+    "ref_range": 126.04924011230469,
+    "max_abs_over_range": 0.0007787416247143273,
+    "argmax": {
+     "positions": 1,
+     "counted": 1,
+     "agree": 1,
+     "rate": 1.0,
+     "ties_skipped": 0,
+     "classes_from": 0,
+     "flipped_ref_margin_median": null,
+     "ref_margin_median": 1.1185073852539062
+    }
+   }
+  ],
+  "model": "plantnet",
+  "cell": "ovnpu_pre",
+  "pass": "first",
+  "reference": "cpu",
+  "line": {
+   "cos": 0.99,
+   "argmax": 0.99
+  }
+ },
+ "stderr_fallback_lines": []
+}

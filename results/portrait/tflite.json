@@ -1,0 +1,43 @@
+{
+ "model": "portrait",
+ "cell": "tflite",
+ "tflite": "litert-community/U2Net-Portrait-Sketch-LiteRT@5c4f635ba467/portrait.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1,
+    512,
+    512
+   ],
+   "max_abs": 2.1904706954956055e-05,
+   "mean_abs": 1.1906474796105341e-07,
+   "cos": 0.9999999999970444,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 0.0,
+   "ref_max": 0.9979456663131714,
+   "ref_range": 0.9979456663131714,
+   "max_abs_over_range": 2.194979916680354e-05
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

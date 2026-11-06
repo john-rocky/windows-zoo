@@ -1,0 +1,202 @@
+{
+ "model": "sam2_encoder",
+ "cell": "cpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 1388.2734500002698,
+  "load_ms": 342.6314999960596,
+  "load_ms_first_pass": 342.6314999960596,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "sam2_encoder",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:31:27.567988+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "sam2_encoder",
+   "--cell",
+   "cpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "56ef6717f7554476312a91e272dffa6fdc81e77b945863cc554396528a061cc6",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     1024,
+     1024
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\sam2_encoder.onnx",
+  "model_sha256": "2377332c91031aa842d01d7bd53c1e3b772a2310d9c2925aed2b11e74fb59b4f",
+  "load_ms": 342.6314999960596,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     4194304
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 1494.1874999931315,
+  "placement": {
+   "nodes_by_provider": {
+    "CPUExecutionProvider": 1000
+   },
+   "cpu_ops": {
+    "Conv": 7,
+    "ReorderOutput": 11,
+    "Add": 96,
+    "Transpose": 114,
+    "Reshape": 332,
+    "ReduceMean": 48,
+    "Sub": 48,
+    "Mul": 128,
+    "Sqrt": 24,
+    "Reciprocal": 24,
+    "Gemm": 51,
+    "Slice": 46,
+    "FusedMatMul": 1,
+    "Softmax": 12,
+    "MatMul": 23,
+    "Erf": 12,
+    "ReorderInput": 10,
+    "MaxPool": 6,
+    "Pad": 5,
+    "Resize": 1,
+    "Concat": 1
+   },
+   "profile_bytes": 1476392,
+   "graph_nodes": 972
+  },
+  "first_run_ms": 2072.359600002528,
+  "warmup": 5,
+  "ms": {
+   "median": 1388.2734500002698,
+   "p10": 1256.4133999985643,
+   "p90": 1909.2181000014534,
+   "min": 1046.99509999773,
+   "max": 2191.984399993089,
+   "n": 30
+  },
+  "ms_all": [
+   1798.0547,
+   2191.9844,
+   1482.7902,
+   1255.3345,
+   1294.603,
+   1387.1182,
+   1587.0159,
+   1306.7062,
+   1347.883,
+   1246.1155,
+   1269.86,
+   1307.9931,
+   1389.4287,
+   1463.0281,
+   1395.0167,
+   1361.0784,
+   1632.1294,
+   1701.4904,
+   1822.6576,
+   1508.6953,
+   1372.3909,
+   1516.3822,
+   1968.8435,
+   1992.2405,
+   1909.2181,
+   1305.6489,
+   1290.327,
+   1046.9951,
+   1256.4134,
+   1270.3598
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -1.725736141204834,
+    "max": 1.4447487592697144,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     4194304
+    ],
+    "sha256": "debb0584ee19ecbf4e79302949dea80c6e3e5b0a2e26149a70ffb074136535e6",
+    "mean": 0.0070066807371403205,
+    "std": 0.1859354199835959,
+    "sample_pos": [
+     8543,
+     283607,
+     567214,
+     842278,
+     1125885,
+     1400949,
+     1684556,
+     1959620,
+     2243227,
+     2518291,
+     2801898,
+     3076962,
+     3360569,
+     3635633,
+     3644176,
+     3919240
+    ],
+    "sample": [
+     -0.19180577993392944,
+     -0.10471869260072708,
+     -0.03533909469842911,
+     -0.1479402780532837,
+     -0.05464799702167511,
+     0.05755934119224548,
+     -0.0069162920117378235,
+     0.1136048287153244,
+     0.008802139200270176,
+     0.01818574219942093,
+     -0.15097054839134216,
+     0.016083724796772003,
+     0.1237238273024559,
+     0.09053896367549896,
+     0.25189465284347534,
+     0.05086831375956535
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-06T15:32:32.323709+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": null,
+ "stderr_fallback_lines": []
+}

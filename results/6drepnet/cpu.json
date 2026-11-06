@@ -1,0 +1,165 @@
+{
+ "model": "6drepnet",
+ "cell": "cpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 25.221000003512017,
+  "load_ms": 354.5077000017045,
+  "load_ms_first_pass": 354.5077000017045,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "6drepnet",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:20:04.495806+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "6drepnet",
+   "--cell",
+   "cpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "7ee6c2df42e815d0d416109648b7139cb6aac14d6aa4c5db0328f73e97b8396d",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     224,
+     224
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\6drepnet.onnx",
+  "model_sha256": "7a0ede49b22803e4e6bacbd3549dbde4e4892217022ef63462a974dd452417ea",
+  "load_ms": 354.5077000017045,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     6
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 93.63940000184812,
+  "placement": {
+   "nodes_by_provider": {
+    "CPUExecutionProvider": 31
+   },
+   "cpu_ops": {
+    "Conv": 28,
+    "ReorderOutput": 1,
+    "ReduceSum": 1,
+    "Gemm": 1
+   },
+   "profile_bytes": 44771,
+   "graph_nodes": 64
+  },
+  "first_run_ms": 184.0652999962913,
+  "warmup": 5,
+  "ms": {
+   "median": 25.221000003512017,
+   "p10": 19.261899986304343,
+   "p90": 50.54830000153743,
+   "min": 16.760600003181025,
+   "max": 82.75509999657515,
+   "n": 30
+  },
+  "ms_all": [
+   16.7606,
+   20.5023,
+   34.0011,
+   82.7551,
+   60.8795,
+   39.0335,
+   60.5447,
+   44.2044,
+   45.7618,
+   50.5483,
+   19.2619,
+   21.808,
+   17.8926,
+   17.006,
+   19.7193,
+   48.9746,
+   23.4147,
+   21.8887,
+   22.0205,
+   29.0362,
+   19.5818,
+   25.3376,
+   24.7105,
+   25.1044,
+   22.3701,
+   28.2295,
+   34.7114,
+   24.7314,
+   26.313,
+   30.6593
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -1.2727327346801758,
+    "max": 16.22974395751953,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     6
+    ],
+    "sha256": "eb192a0159543e67fcd6af957bbb2819b0f85b0e71ddbe568c56317943935fd2",
+    "mean": 5.010964994629224,
+    "std": 7.330014455531132,
+    "sample_pos": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "sample": [
+     14.306406021118164,
+     -1.0005488395690918,
+     0.30596068501472473,
+     1.4969608783721924,
+     16.22974395751953,
+     -1.2727327346801758
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-06T15:20:08.376609+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": null,
+ "stderr_fallback_lines": []
+}

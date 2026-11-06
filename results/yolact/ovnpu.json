@@ -1,0 +1,72 @@
+{
+ "model": "yolact",
+ "cell": "ovnpu",
+ "status": "ERROR",
+ "table": {
+  "ms": null,
+  "ms_first_pass": null,
+  "load_ms": null,
+  "load_ms_first_pass": null,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "yolact",
+  "cell": "ovnpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T16:00:34.128185+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "yolact",
+   "--cell",
+   "ovnpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "ERROR",
+  "input_sha256": "02d11c80d7a915f1079ba4d90778f1aa12007813277d53de927f292652e3f2cb",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     550,
+     550
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "ov_device": "NPU",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "DEVICE_ARCHITECTURE": "5010",
+   "DEVICE_LUID": "2352010000000000",
+   "counter_luid": "0x00000000_0x00015223"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\yolact.onnx",
+  "model_sha256": "414d1e9ad7c8e9075e0f285ae794307beaa5befe785b5fda22f1e0cc7cfb6eed",
+  "error": "Traceback (most recent call last):\n  File \"C:\\src\\zoo\\pc\\zoo_run.py\", line 463, in main\n    names, outs = run_ort(args, rec, feeds)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\src\\zoo\\pc\\zoo_run.py\", line 287, in run_ort\n    sess = ort.InferenceSession(path, sess_options=so, providers=providers) if providers else ort.InferenceSession(path, sess_options=so)\n                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\src\\zoo\\.venv-ort\\Lib\\site-packages\\onnxruntime\\capi\\onnxruntime_inference_collection.py\", line 683, in __init__\n    self._create_inference_session(providers, provider_options, disabled_optimizers)\n  File \"C:\\src\\zoo\\.venv-ort\\Lib\\site-packages\\onnxruntime\\capi\\onnxruntime_inference_collection.py\", line 778, in _create_inference_session\n    sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nonnxruntime.capi.onnxruntime_pybind11_state.Fail: [ONNXRuntimeError] : 1 : FAIL : Load model from C:\\src\\zoo\\onnx\\yolact.onnx failed:Node (__main__.Wrap/yolact.Yolact_n/yolact.FPN_fpn;3) Op (Add) [ShapeInferenceError] Incompatible dimensions\n",
+  "error_type": "Fail",
+  "ended": "2026-11-06T16:00:35.785465+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": null,
+ "stderr_fallback_lines": []
+}

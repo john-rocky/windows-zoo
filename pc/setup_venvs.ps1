@@ -1,4 +1,5 @@
-# Three venvs in the repo root (each runtime brings its own ONNX Runtime / OpenVINO, so one package family per venv).
+# Three venvs in the repo root, plus .venv-tf (tf2onnx) when ZOO_WITH_CONVERT=1 (each runtime brings its own ONNX
+# Runtime / OpenVINO, so one package family per venv).
 #   .venv-ort  = onnxruntime (CPU EP, the reference) + onnxruntime-ep-openvino (Intel GPU / NPU through ONNX Runtime)
 #   .venv-cuda = onnxruntime-gpu with the CUDA / cuDNN pip wheels (RTX)
 #   .venv-ov   = openvino (NPU compile_model / export_model / import_model without ONNX Runtime)

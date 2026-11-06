@@ -1,0 +1,51 @@
+{
+ "model": "plantnet",
+ "cell": "tflite",
+ "tflite": "litert-community/PlantNet-300K-ResNet18-LiteRT@54f7b14eda04/plantnet.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1081
+   ],
+   "max_abs": 0.0001678466796875,
+   "mean_abs": 3.408878407579787e-05,
+   "cos": 0.9999999999999547,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -223.9619140625,
+   "ref_max": -97.91271209716797,
+   "ref_range": 126.04920196533203,
+   "max_abs_over_range": 1.3315965279467913e-06,
+   "argmax": {
+    "positions": 1,
+    "counted": 1,
+    "agree": 1,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 1.1185226440429688
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

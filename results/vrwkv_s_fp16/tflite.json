@@ -1,0 +1,51 @@
+{
+ "model": "vrwkv_s_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/Vision-RWKV-S-LiteRT@184992fed3c7/vrwkv_s_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1000
+   ],
+   "max_abs": 7.748603820800781e-06,
+   "mean_abs": 1.506933374912478e-06,
+   "cos": 0.9999999999968198,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -2.33571457862854,
+   "ref_max": 8.938328742980957,
+   "ref_range": 11.274043083190918,
+   "max_abs_over_range": 6.872959206935793e-07,
+   "argmax": {
+    "positions": 1,
+    "counted": 1,
+    "agree": 1,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 3.4903807640075684
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

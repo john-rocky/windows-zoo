@@ -1,0 +1,53 @@
+{
+ "model": "clothseg",
+ "cell": "tflite",
+ "tflite": "litert-community/Cloth-Segmentation-U2Net-LiteRT@37e0b75777a6/clothseg.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    4,
+    768,
+    768
+   ],
+   "max_abs": 0.0007143020629882812,
+   "mean_abs": 4.3081551090366994e-05,
+   "cos": 0.9999999999922139,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -56.667816162109375,
+   "ref_max": 34.58972930908203,
+   "ref_range": 91.2575454711914,
+   "max_abs_over_range": 7.827320571686594e-06,
+   "argmax": {
+    "positions": 589824,
+    "counted": 589824,
+    "agree": 589824,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 20.880606174468994
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

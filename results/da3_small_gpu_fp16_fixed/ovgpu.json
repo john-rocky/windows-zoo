@@ -1,0 +1,233 @@
+{
+ "model": "da3_small_gpu_fp16_fixed",
+ "cell": "ovgpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 219.12354999994932,
+  "load_ms": 5194.719099999929,
+  "load_ms_first_pass": 5194.719099999929,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "da3_small_gpu_fp16_fixed",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T18:10:01.851080+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "da3_small_gpu_fp16_fixed",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "84de112d1e9ea9af5e2416655c625e2c4c3da55e7f5c01f7eaa3d6972b4c1e52",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     896,
+     504
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "0e26010000000000",
+   "counter_luid": "0x00000000_0x0001260e"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\da3_small_gpu_fp16_fixed.onnx",
+  "model_sha256": "8e678f8b980878ffaac506070e9c6995b359c626a9ed31ae00c9de0ed0902a8e",
+  "load_ms": 5194.719099999929,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     896,
+     504
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 319.3877999997312,
+  "placement": {
+   "nodes_by_provider": {
+    "OpenVINOExecutionProvider": 1
+   },
+   "cpu_ops": {},
+   "profile_bytes": 475507,
+   "graph_nodes": 1567
+  },
+  "first_run_ms": 471.8080999996346,
+  "warmup": 5,
+  "ms": {
+   "median": 219.12354999994932,
+   "p10": 201.6145000002325,
+   "p90": 734.2848999996932,
+   "min": 195.97060000023703,
+   "max": 1143.3404000003975,
+   "n": 30
+  },
+  "ms_all": [
+   206.4061,
+   204.5042,
+   205.4187,
+   207.9684,
+   201.6145,
+   210.0038,
+   216.1087,
+   208.6918,
+   221.1604,
+   734.2849,
+   1143.3404,
+   489.3205,
+   205.4779,
+   200.167,
+   354.4264,
+   258.135,
+   199.504,
+   733.7537,
+   320.971,
+   290.4077,
+   786.2898,
+   375.0634,
+   549.3029,
+   208.9552,
+   998.2707,
+   242.5647,
+   210.9472,
+   217.0867,
+   195.9706,
+   229.6092
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.29150390625,
+    "max": 1.1826171875,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1,
+     896,
+     504
+    ],
+    "sha256": "575d0c53a8493c573f6cfbd44c2b29f881e2f6814fada9bfd95597296a3f1f48",
+    "mean": 0.7941930915763319,
+    "std": 0.2556446623800457,
+    "sample_pos": [
+     25009,
+     50018,
+     75027,
+     100036,
+     125045,
+     150054,
+     175063,
+     200072,
+     225081,
+     250090,
+     275099,
+     300108,
+     325117,
+     350126,
+     375135,
+     400144
+    ],
+    "sample": [
+     0.75244140625,
+     0.7578125,
+     0.84326171875,
+     0.94873046875,
+     1.0859375,
+     1.1357421875,
+     1.142578125,
+     1.140625,
+     1.0966796875,
+     1.0322265625,
+     0.89697265625,
+     0.71630859375,
+     0.5380859375,
+     0.50439453125,
+     0.472412109375,
+     0.444580078125
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x0001260e/compute": 11976.747
+  },
+  "ended": "2026-11-06T18:10:24.265345+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": {
+  "status": "PASS",
+  "fails": [],
+  "reason_candidate": null,
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     896,
+     504
+    ],
+    "max_abs": 0.0013211965560913086,
+    "mean_abs": 0.00018895313997970483,
+    "cos": 0.9999999583101579,
+    "nan": 0,
+    "inf": 0,
+    "ref_min": 0.29175764322280884,
+    "ref_max": 1.1828768253326416,
+    "ref_range": 0.8911191821098328,
+    "max_abs_over_range": 0.0014826260982994614
+   }
+  ],
+  "model": "da3_small_gpu_fp16_fixed",
+  "cell": "ovgpu",
+  "pass": "first",
+  "reference": "cpu",
+  "line": {
+   "cos": 0.99,
+   "argmax": 0.99
+  }
+ },
+ "stderr_fallback_lines": []
+}

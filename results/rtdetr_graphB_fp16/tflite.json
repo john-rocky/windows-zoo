@@ -1,0 +1,75 @@
+{
+ "model": "rtdetr_graphB_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/RT-DETRv2-S-LiteRT@60f16dbbf37d/rtdetr_graphB_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  },
+  {
+   "onnx": "serving_default_output_1_output",
+   "tflite": "serving_default_output_1_output"
+  }
+ ],
+ "status": "FAIL",
+ "fails": [
+  "serving_default_output_1_output: argmax agreement 264/300"
+ ],
+ "reason_candidate": "argmax flips where the reference margin between top-1 and top-2 is small (see flipped_ref_margin_median)",
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    300,
+    4
+   ],
+   "max_abs": 0.32919810712337494,
+   "mean_abs": 0.019395719385550667,
+   "cos": 0.9961155838938475,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 0.01108525786548853,
+   "ref_max": 0.9846959114074707,
+   "ref_range": 0.9736106395721436,
+   "max_abs_over_range": 0.3381209014601999
+  },
+  {
+   "name": "serving_default_output_1_output",
+   "shape": [
+    1,
+    300,
+    80
+   ],
+   "max_abs": 3.0514659881591797,
+   "mean_abs": 0.45856937452374646,
+   "cos": 0.9949508003808378,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -10.096318244934082,
+   "ref_max": 2.5908870697021484,
+   "ref_range": 12.68720531463623,
+   "max_abs_over_range": 0.24051522084528287,
+   "argmax": {
+    "positions": 300,
+    "counted": 300,
+    "agree": 264,
+    "rate": 0.88,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": 0.13029968738555908,
+    "ref_margin_median": 1.490683913230896
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

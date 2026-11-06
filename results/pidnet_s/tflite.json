@@ -1,0 +1,53 @@
+{
+ "model": "pidnet_s",
+ "cell": "tflite",
+ "tflite": "litert-community/PIDNet-S-Cityscapes-LiteRT@3d79fd7a4927/pidnet_s.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    19,
+    128,
+    128
+   ],
+   "max_abs": 2.47955322265625e-05,
+   "mean_abs": 1.777837737500305e-06,
+   "cos": 0.9999999999994329,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -6.898013114929199,
+   "ref_max": 8.431437492370605,
+   "ref_range": 15.329450607299805,
+   "max_abs_over_range": 1.6175095156218447e-06,
+   "argmax": {
+    "positions": 16384,
+    "counted": 16384,
+    "agree": 16384,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 1.2611411809921265
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

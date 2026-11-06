@@ -1,0 +1,53 @@
+{
+ "model": "faceparsing",
+ "cell": "tflite",
+ "tflite": "litert-community/BiSeNet-Face-Parsing-LiteRT@62996ba4ebcf/faceparsing.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    19,
+    512,
+    512
+   ],
+   "max_abs": 1.5735626220703125e-05,
+   "mean_abs": 1.2147042974282391e-06,
+   "cos": 0.9999999999997142,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -4.740469932556152,
+   "ref_max": 12.590651512145996,
+   "ref_range": 17.33112144470215,
+   "max_abs_over_range": 9.079404509921808e-07,
+   "argmax": {
+    "positions": 262144,
+    "counted": 262144,
+    "agree": 262144,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 1.3435449600219727
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

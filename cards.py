@@ -15,17 +15,17 @@ import os
 import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATE = "2026-11-06"
 LISTED = [l.strip() for l in open(os.path.join(HERE, "pc", "models.txt")) if l.strip()]
 GITHUB = "https://github.com/john-rocky/windows-zoo"
 HUB_ORG = "mlboydaisuke"  # the proposed Hub owner (decided with the upload)
 EP = "ONNX Runtime 1.31.1 + OpenVINO EP 1.8.1"
+RTX = "RTX 5080 Laptop"
 ROWS = [  # cell, processor, runtime, file
     ("ovnpu_pre", "Intel AI Boost NPU", "OpenVINO 2026.4.1", "`npu/` blob (`import_model`)"),
     ("ovnpu", "Intel AI Boost NPU", EP, "`.onnx`, compiled when the session loads"),
     ("ovgpu", "Intel Graphics (iGPU)", EP, "`.onnx`"),
-    ("cuda16", "RTX 5080 Laptop (95 W cap)", "ONNX Runtime 1.31.1, CUDA EP", "fp16 copy of the `.onnx` (not in this repo)"),
-    ("cuda32", "RTX 5080 Laptop (95 W cap)", "ONNX Runtime 1.31.1, CUDA EP", "`.onnx`"),
+    ("cuda16", RTX, "ONNX Runtime 1.31.1, CUDA EP", "fp16 copy of the `.onnx` (not in this repo)"),
+    ("cuda32", RTX, "ONNX Runtime 1.31.1, CUDA EP", "`.onnx`"),
     ("cpu", "Core Ultra 9 386H CPU", "ONNX Runtime 1.31.1, CPU EP", "`.onnx`"),
     ("ovcpu", "Core Ultra 9 386H CPU", "OpenVINO 2026.4.1", "`.onnx`, f32"),
 ]
@@ -86,8 +86,9 @@ def timing(r):
 
 
 def graph_rows(m, hubx, with_hub):
+    """The table rows of one graph, its notes, the days its quiet-pass rows were measured, and the Snapdragon row count."""
     R = {c: load(os.path.join(HERE, "results", m, c + ".json")) for c, *_ in ROWS}
-    rows, notes = [], set()
+    rows, notes, days, n_hub = [], set(), set(), 0
     for c, proc, rt, form in ROWS:
         r = R[c]
         if r is None:
@@ -95,6 +96,8 @@ def graph_rows(m, hubx, with_hub):
         if c == "ovcpu" and R.get("cpu") and R["cpu"]["status"] != "ERROR":
             continue  # OpenVINO CPU is shown only where it is the reference (ONNX Runtime cannot load the file)
         t = timing(r)
+        if t is not None and (r.get("quiet") or {}).get("started"):
+            days.add(r["quiet"]["started"][:10])
         ms = "-" if t is None else f"{t['ms']:.2f}"
         if t and t["gate"] == "timeout":
             ms += " †"
@@ -111,10 +114,11 @@ def graph_rows(m, hubx, with_hub):
         if not h or h.get("status") != "SUCCESS":
             continue
         cpu = (h.get("units") or {}).get("CPU", 0)
-        ms = f"{h['infer_us'] / 1000:.2f}" + (f" ({cpu} ops on the CPU)" if cpu else "")
+        ms = f"{h['infer_us'] / 1000:.2f}" + (f" ({cpu} layers on the CPU)" if cpu else "")
         load_s = f"{h['first_load_us'] / 1e6:.2f}" if h.get("first_load_us") else "-"
         rows.append(f"| {label} | {rt} | {f} | {ms} | {load_s} | not compared (AI Hub profile job, 2026-10-30) |")
-    return R, rows, notes
+        n_hub += 1
+    return R, rows, notes, days, n_hub
 
 
 def snippet_ov(m, has_blob):
@@ -178,11 +182,13 @@ def card(repo, info, hubx):
     fm += ["tags:", "- openvino", "- onnx", "- intel-npu", "---", ""]
     graphs_txt = models[0] if len(models) == 1 else " and ".join(models)
     blob_ms = []
-    sections, notes_all, Rm = [], set(), {}
+    sections, notes_all, Rm, days, n_hub = [], set(), {}, set(), 0
     for m in models:
-        R, rows, notes = graph_rows(srcs[m], hubx, with_hub=srcs[m] == m)
+        R, rows, notes, d, h = graph_rows(srcs[m], hubx, with_hub=srcs[m] == m)
         Rm[m] = R
         notes_all |= notes
+        days |= d
+        n_hub += h
         t = timing(R.get("ovnpu_pre"))
         if t:
             blob_ms.append(f"{t['ms']:.2f} ms" + (f" ({m})" if len(models) > 1 else ""))
@@ -203,7 +209,8 @@ def card(repo, info, hubx):
                  f"{' and '.join(fixed)}; these files were converted with a one-line fix of that handler "
                  "(`convert/patch_tf2onnx.py` in the GitHub repo), and their outputs match the `.tflite`.")
     if blob_ms:
-        lead += f" On a Core Ultra 9 386H the blob runs in {' and '.join(blob_ms)} per run, input to output."
+        lead += (f" On the NPU of a Core Ultra 9 386H the blob runs in {' and '.join(blob_ms)} per run, numpy input to "
+                 "numpy output.")
     body = [f"# {folder}", "", lead, "",
             f"Scripts, raw records, and the same table for all 52 graphs of LiteRT-Models: {GITHUB}", "",
             "## Files", "", "| file | bytes | sha256 |", "|---|---|---|"]
@@ -215,13 +222,28 @@ def card(repo, info, hubx):
         body += ["", f"The NPU blob{'s were' if len(models) > 1 else ' was'} compiled with "
                      f"{fmt_versions(json.loads(next(iter(bcs))))}. If `import_model` refuses a blob on another driver "
                      "or OpenVINO version, compile the IR instead (the commented line in the snippet)."]
-    body += ["", "## How it was measured", "",
-             f"MSI Stealth 16 AI+ (Core Ultra 9 386H, RTX 5080 Laptop, Windows 11 build 26200.9711), {DATE}. Each row is one process: "
-             "load, one run, 5 warmup runs, then the median of 30 timed runs (2 warmup + 10 timed runs when one run "
-             "takes more than 3 s), numpy input to numpy output, every runtime at its default settings, one process at "
-             "a time on an idle machine. Output check: each output against ONNX Runtime's CPU output in fp32 on the "
-             "same input; PASS = cosine ≥ 0.99, no NaN or Inf, and top-1 agreement ≥ 0.99 for class scores. The "
-             "Snapdragon rows are Qualcomm AI Hub profile jobs of the same ONNX files (their own timer).", ""]
+    days = sorted(days)
+    when = "-" if not days else days[0] if len(days) == 1 else f"{days[0]} to {days[-1]}"
+    ov_ref = [m for m in models if ((Rm[m].get("cpu") or {}).get("status") == "ERROR" and Rm[m].get("ovcpu"))]
+    if not ov_ref:
+        ref = "ONNX Runtime's CPU EP"
+    elif ov_ref == models:
+        ref = "OpenVINO on the CPU, as ONNX Runtime 1.31.1 cannot load this file"
+    else:
+        ref = f"ONNX Runtime's CPU EP; OpenVINO on the CPU for {', '.join(ov_ref)}, which ONNX Runtime 1.31.1 cannot load"
+    how = (f"MSI Stealth 16 AI+ (Core Ultra 9 386H, {RTX}, Windows 11 build 26200.9711), {when}. On the laptop, each "
+           "row is one process: load, one run, 5 warmup runs, then the median of 30 timed runs (2 warmup + 10 timed "
+           "runs when one run takes more than 3 s), numpy input to numpy output, every runtime at its default "
+           "settings, one process at a time, each started after the CPU, the RTX and the Intel GPU had gone idle (the "
+           f"thresholds are in METHOD.md of the GitHub repo). Output check: each output against the CPU output in "
+           f"fp32 on the same input ({ref}); PASS = cosine ≥ 0.99, no NaN or Inf, and top-1 agreement ≥ 0.99 for "
+           "class scores.")
+    if n_hub:
+        how += " The Snapdragon rows are Qualcomm AI Hub profile jobs of the same ONNX files (their own timer)."
+    if fixed:
+        how += ((" No Snapdragon rows: " if len(fixed) == len(models) else f" No Snapdragon rows for {' and '.join(fixed)}: ")
+                + "Qualcomm AI Hub measured the file before the bias fix (its numbers are in the GitHub table).")
+    body += ["", "## How it was measured", "", how, ""]
     body += sections
     if notes_all:
         body += [""] + sorted(notes_all)

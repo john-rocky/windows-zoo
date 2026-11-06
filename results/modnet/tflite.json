@@ -1,0 +1,43 @@
+{
+ "model": "modnet",
+ "cell": "tflite",
+ "tflite": "litert-community/MODNet-LiteRT@4d5bd22bde15/modnet.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1,
+    512,
+    512
+   ],
+   "max_abs": 9.828805923461914e-05,
+   "mean_abs": 1.2093039969031425e-07,
+   "cos": 0.9999999999775465,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 6.540350899753022e-11,
+   "ref_max": 1.0,
+   "ref_range": 1.0,
+   "max_abs_over_range": 9.828805923461914e-05
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

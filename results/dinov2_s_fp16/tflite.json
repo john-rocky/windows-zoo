@@ -1,0 +1,42 @@
+{
+ "model": "dinov2_s_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/DINOv2-ViT-S14-LiteRT@5b584fb82b92/dinov2_s_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1024,
+    384
+   ],
+   "max_abs": 0.00019931793212890625,
+   "mean_abs": 8.195557952284105e-06,
+   "cos": 0.9999999999900934,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -20.150348663330078,
+   "ref_max": 15.172067642211914,
+   "ref_range": 35.322418212890625,
+   "max_abs_over_range": 5.642816721312892e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

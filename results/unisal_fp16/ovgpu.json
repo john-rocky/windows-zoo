@@ -1,0 +1,234 @@
+{
+ "model": "unisal_fp16",
+ "cell": "ovgpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 4.028149996884167,
+  "load_ms": 2568.3347000012873,
+  "load_ms_first_pass": 2568.3347000012873,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "unisal_fp16",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:33:12.146578+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "unisal_fp16",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "89660b5456dc2262de2759468d3e6862edd3d72c04245db725506f79dc099d18",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     256,
+     256
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "803b010000000000",
+   "counter_luid": "0x00000000_0x00013b80"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\unisal_fp16.onnx",
+  "model_sha256": "046c6a149c3deaa53b28a8bf2182ec4692f9d4e1414b7ee5f7d14d2aa6a49a47",
+  "load_ms": 2568.3347000012873,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     256,
+     256
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 15.334399999119341,
+  "placement": {
+   "nodes_by_provider": {
+    "OpenVINOExecutionProvider": 1
+   },
+   "cpu_ops": {},
+   "profile_bytes": 68429,
+   "graph_nodes": 134
+  },
+  "first_run_ms": 8.234499997342937,
+  "warmup": 5,
+  "ms": {
+   "median": 4.028149996884167,
+   "p10": 3.8158999959705397,
+   "p90": 4.189200000837445,
+   "min": 3.6158000002615154,
+   "max": 4.378400000859983,
+   "n": 30
+  },
+  "ms_all": [
+   3.9361,
+   4.09,
+   4.1892,
+   4.3784,
+   4.1475,
+   4.045,
+   4.0703,
+   4.0241,
+   4.0248,
+   4.0714,
+   4.0322,
+   4.1184,
+   4.1346,
+   4.0315,
+   4.2062,
+   4.2716,
+   3.7112,
+   3.6158,
+   3.9462,
+   3.9251,
+   4.0542,
+   4.0895,
+   3.9947,
+   3.9699,
+   3.8692,
+   3.8806,
+   3.878,
+   3.9132,
+   3.8159,
+   3.7931
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -11.671875,
+    "max": 3.158203125,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1,
+     256,
+     256
+    ],
+    "sha256": "ef0c604a39f3d64ed32de360b35fbc026e3a4a22bbed384e41e461e9f5201ea9",
+    "mean": -2.993383743682898,
+    "std": 2.9044761367414225,
+    "sample_pos": [
+     8543,
+     11773,
+     15003,
+     18233,
+     21463,
+     24693,
+     27923,
+     31153,
+     39696,
+     42926,
+     46156,
+     49386,
+     52616,
+     55846,
+     59076,
+     62306
+    ],
+    "sample": [
+     -0.393310546875,
+     -2.8359375,
+     1.150390625,
+     -1.154296875,
+     -3.41796875,
+     1.865234375,
+     -3.24609375,
+     -0.94921875,
+     -5.53515625,
+     -2.03515625,
+     -2.35546875,
+     -7.5625,
+     -0.67578125,
+     -7.0390625,
+     -6.2265625,
+     -5.828125
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00013b80/copy": 1.641,
+   "0x00000000_0x00013b80/compute": 189.449
+  },
+  "ended": "2026-11-06T15:33:18.455978+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": {
+  "status": "PASS",
+  "fails": [],
+  "reason_candidate": null,
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     256,
+     256
+    ],
+    "max_abs": 0.3640875816345215,
+    "mean_abs": 0.03337773472346983,
+    "cos": 0.9999365879486688,
+    "nan": 0,
+    "inf": 0,
+    "ref_min": -11.561297416687012,
+    "ref_max": 3.1747825145721436,
+    "ref_range": 14.736080169677734,
+    "max_abs_over_range": 0.024707220471268904
+   }
+  ],
+  "model": "unisal_fp16",
+  "cell": "ovgpu",
+  "pass": "first",
+  "reference": "cpu",
+  "line": {
+   "cos": 0.99,
+   "argmax": 0.99
+  }
+ },
+ "stderr_fallback_lines": []
+}

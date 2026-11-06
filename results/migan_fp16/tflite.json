@@ -1,0 +1,43 @@
+{
+ "model": "migan_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/MI-GAN-512-Places2-LiteRT@179a35d8e8a5/migan_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    3,
+    512,
+    512
+   ],
+   "max_abs": 1.2159347534179688e-05,
+   "mean_abs": 1.232329164639149e-07,
+   "cos": 0.9999999999999225,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.030882716178894,
+   "ref_max": 1.1200358867645264,
+   "ref_range": 2.150918483734131,
+   "max_abs_over_range": 5.653095468811207e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

@@ -1,0 +1,553 @@
+{
+ "model": "rtdetr_graphA_fp16",
+ "cell": "ovgpu",
+ "status": "PASS",
+ "table": {
+  "ms": 9.933599998475984,
+  "ms_first_pass": 17.330099995888304,
+  "load_ms": 1200.6161000026623,
+  "load_ms_first_pass": 4429.53480000142,
+  "compile_ms": null,
+  "gate": "quiet"
+ },
+ "first_pass": {
+  "model": "rtdetr_graphA_fp16",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:29:19.260202+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "rtdetr_graphA_fp16",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "46bd322d0ef4f16626a7b4e10cc5a0c6908ca1aec5c42dbce2b364800a2128ba",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     640,
+     640
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "803b010000000000",
+   "counter_luid": "0x00000000_0x00013b80"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\rtdetr_graphA_fp16.onnx",
+  "model_sha256": "f7c4a6cb3af2a03bdc0c2efc0b4dcff81b4463fe60955f9379f708a31471a64c",
+  "load_ms": 4429.53480000142,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     8400,
+     80
+    ],
+    "type": "tensor(float)"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     8400,
+     256
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 334.576700013713,
+  "placement": {
+   "nodes_by_provider": {
+    "OpenVINOExecutionProvider": 1
+   },
+   "cpu_ops": {},
+   "profile_bytes": 162729,
+   "graph_nodes": 313
+  },
+  "first_run_ms": 1059.7476999973878,
+  "warmup": 5,
+  "ms": {
+   "median": 17.330099995888304,
+   "p10": 16.360199995688163,
+   "p90": 488.8038999924902,
+   "min": 16.098399995826185,
+   "max": 687.2259999945527,
+   "n": 30
+  },
+  "ms_all": [
+   18.3969,
+   64.4353,
+   39.2428,
+   339.1547,
+   687.226,
+   589.1429,
+   488.8039,
+   494.1118,
+   80.4247,
+   18.8513,
+   16.821,
+   16.7332,
+   16.3557,
+   16.7516,
+   17.1433,
+   16.9291,
+   16.4241,
+   16.3602,
+   16.2206,
+   16.0984,
+   16.8821,
+   16.5342,
+   16.5335,
+   18.0923,
+   17.4535,
+   17.3254,
+   18.5046,
+   18.4061,
+   17.3348,
+   17.1789
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -15.390625,
+    "max": 2.3984375,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     8400,
+     80
+    ],
+    "sha256": "c0d83fb36875d91dd96e2a5ae90508e70bbd51bdfc02fd6fbc7c8e72b3986a69",
+    "mean": -7.577884490376427,
+    "std": 1.380025140585954,
+    "sample_pos": [
+     35761,
+     71522,
+     107283,
+     143044,
+     178805,
+     214566,
+     250327,
+     286088,
+     321849,
+     357610,
+     393371,
+     429132,
+     464893,
+     500654,
+     536415,
+     572176
+    ],
+    "sample": [
+     -7.87890625,
+     -6.9921875,
+     -7.7421875,
+     -8.46875,
+     -7.33203125,
+     -5.11328125,
+     -7.01953125,
+     -7.515625,
+     -8.03125,
+     -9.46875,
+     -7.47265625,
+     -11.3984375,
+     -7.28515625,
+     -7.671875,
+     -6.3125,
+     -4.2578125
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": -3.765625,
+    "max": 3.7578125,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     8400,
+     256
+    ],
+    "sha256": "92fcc05161ad9ffdf62ea763f89c9f18dbbfd002e48954f0e5be1aa7310bd0a5",
+    "mean": -0.0007189924103052665,
+    "std": 0.34425478279302285,
+    "sample_pos": [
+     196093,
+     286088,
+     376083,
+     572176,
+     662171,
+     752166,
+     842161,
+     1038254,
+     1128249,
+     1218244,
+     1504332,
+     1594327,
+     1684322,
+     1880415,
+     1970410,
+     2060405
+    ],
+    "sample": [
+     -0.06683349609375,
+     0.11993408203125,
+     0.25390625,
+     0.0958251953125,
+     0.081298828125,
+     -0.966796875,
+     -0.388671875,
+     -0.20361328125,
+     -0.046173095703125,
+     -0.061767578125,
+     -0.12445068359375,
+     -0.67578125,
+     0.09637451171875,
+     0.383056640625,
+     -0.2161865234375,
+     -0.525390625
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00013b80/compute": 5324.769
+  },
+  "ended": "2026-11-06T15:29:33.940905+09:00"
+ },
+ "compile": null,
+ "quiet": {
+  "model": "rtdetr_graphA_fp16",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T06:27:45.154735+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "rtdetr_graphA_fp16",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\rtdetr_graphA_fp16\\ovgpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 8,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 5.1,
+   "state": "quiet",
+   "waited_s": 6,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "46bd322d0ef4f16626a7b4e10cc5a0c6908ca1aec5c42dbce2b364800a2128ba",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     640,
+     640
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "0e26010000000000",
+   "counter_luid": "0x00000000_0x0001260e"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\rtdetr_graphA_fp16.onnx",
+  "model_sha256": "f7c4a6cb3af2a03bdc0c2efc0b4dcff81b4463fe60955f9379f708a31471a64c",
+  "load_ms": 1200.6161000026623,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     8400,
+     80
+    ],
+    "type": "tensor(float)"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     8400,
+     256
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 17.129200001363643,
+  "warmup": 5,
+  "ms": {
+   "median": 9.933599998475984,
+   "p10": 9.85969999601366,
+   "p90": 10.136100005183835,
+   "min": 9.84039999457309,
+   "max": 10.255599998345133,
+   "n": 30
+  },
+  "ms_all": [
+   9.8811,
+   9.9229,
+   9.8879,
+   9.8803,
+   9.9008,
+   9.9537,
+   9.9443,
+   9.8596,
+   10.2556,
+   9.9662,
+   9.9961,
+   9.9008,
+   9.9508,
+   10.0372,
+   9.8834,
+   9.8895,
+   9.8404,
+   9.8698,
+   9.8856,
+   10.1348,
+   10.1361,
+   10.1163,
+   10.2035,
+   10.1985,
+   10.0656,
+   9.8679,
+   9.8597,
+   10.0149,
+   9.9533,
+   9.8487
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -15.390625,
+    "max": 2.3984375,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     8400,
+     80
+    ],
+    "sha256": "c0d83fb36875d91dd96e2a5ae90508e70bbd51bdfc02fd6fbc7c8e72b3986a69",
+    "mean": -7.577884490376427,
+    "std": 1.380025140585954,
+    "sample_pos": [
+     35761,
+     71522,
+     107283,
+     143044,
+     178805,
+     214566,
+     250327,
+     286088,
+     321849,
+     357610,
+     393371,
+     429132,
+     464893,
+     500654,
+     536415,
+     572176
+    ],
+    "sample": [
+     -7.87890625,
+     -6.9921875,
+     -7.7421875,
+     -8.46875,
+     -7.33203125,
+     -5.11328125,
+     -7.01953125,
+     -7.515625,
+     -8.03125,
+     -9.46875,
+     -7.47265625,
+     -11.3984375,
+     -7.28515625,
+     -7.671875,
+     -6.3125,
+     -4.2578125
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": -3.765625,
+    "max": 3.7578125,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     8400,
+     256
+    ],
+    "sha256": "92fcc05161ad9ffdf62ea763f89c9f18dbbfd002e48954f0e5be1aa7310bd0a5",
+    "mean": -0.0007189924103052665,
+    "std": 0.34425478279302285,
+    "sample_pos": [
+     196093,
+     286088,
+     376083,
+     572176,
+     662171,
+     752166,
+     842161,
+     1038254,
+     1128249,
+     1218244,
+     1504332,
+     1594327,
+     1684322,
+     1880415,
+     1970410,
+     2060405
+    ],
+    "sample": [
+     -0.06683349609375,
+     0.11993408203125,
+     0.25390625,
+     0.0958251953125,
+     0.081298828125,
+     -0.966796875,
+     -0.388671875,
+     -0.20361328125,
+     -0.046173095703125,
+     -0.061767578125,
+     -0.12445068359375,
+     -0.67578125,
+     0.09637451171875,
+     0.383056640625,
+     -0.2161865234375,
+     -0.525390625
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x0001260e/compute": 383.321
+  },
+  "ended": "2026-11-07T06:27:49.014059+09:00"
+ },
+ "parity": {
+  "status": "PASS",
+  "fails": [],
+  "reason_candidate": null,
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     8400,
+     80
+    ],
+    "max_abs": 0.0444488525390625,
+    "mean_abs": 0.003281772122141861,
+    "cos": 0.999999829648215,
+    "nan": 0,
+    "inf": 0,
+    "ref_min": -15.390979766845703,
+    "ref_max": 2.4003806114196777,
+    "ref_range": 17.79136085510254,
+    "max_abs_over_range": 0.002498339104077844
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     8400,
+     256
+    ],
+    "max_abs": 0.021459564566612244,
+    "mean_abs": 0.0006050732962171423,
+    "cos": 0.9999963848990696,
+    "nan": 0,
+    "inf": 0,
+    "ref_min": -3.768476963043213,
+    "ref_max": 3.7627999782562256,
+    "ref_range": 7.531276702880859,
+    "max_abs_over_range": 0.002849392661194289
+   }
+  ],
+  "model": "rtdetr_graphA_fp16",
+  "cell": "ovgpu",
+  "pass": "first",
+  "reference": "cpu",
+  "line": {
+   "cos": 0.99,
+   "argmax": 0.99
+  }
+ },
+ "stderr_fallback_lines": []
+}

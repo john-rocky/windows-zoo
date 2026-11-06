@@ -1,0 +1,619 @@
+{
+ "model": "rtm_animal_fp16",
+ "cell": "ovnpu_pre",
+ "status": "FAIL",
+ "table": {
+  "ms": 1.7602000007173046,
+  "ms_first_pass": 7.760749998851679,
+  "load_ms": 28.51320000263513,
+  "load_ms_first_pass": 56.22379999840632,
+  "compile_ms": 3090.73699999135,
+  "gate": "quiet"
+ },
+ "first_pass": {
+  "model": "rtm_animal_fp16",
+  "cell": "ovnpu_pre",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:42:20.359711+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "rtm_animal_fp16",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "first",
+   "--phase",
+   "run",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "c29fed231e7f0cb409e18aaf029cbff10f65109e0551a48f78bd143f8ddcb090",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     256,
+     256
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "2352010000000000",
+   "counter_luid": "0x00000000_0x00015223",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\rtm_animal_fp16.blob",
+   "bytes": 28639368,
+   "sha256": "546752d7c1ae5e48b1bb04fcb9c546dda290c08ee404975956256f429df18255"
+  },
+  "load_ms": 56.22379999840632,
+  "execution_devices": "NPU",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "type": "<Type: 'float32'>"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "type": "<Type: 'float32'>"
+   }
+  ],
+  "first_run_ms": 11.524300003657117,
+  "warmup": 5,
+  "ms": {
+   "median": 7.760749998851679,
+   "p10": 3.8920000079087913,
+   "p90": 12.906200005090795,
+   "min": 2.222399998572655,
+   "max": 17.961000005016103,
+   "n": 30
+  },
+  "ms_all": [
+   7.6346,
+   3.892,
+   5.2513,
+   8.9549,
+   5.796,
+   2.2224,
+   8.7444,
+   6.6561,
+   2.5117,
+   7.8869,
+   6.0962,
+   12.0362,
+   4.624,
+   12.9062,
+   4.6483,
+   17.6268,
+   16.431,
+   4.2981,
+   12.8589,
+   17.961,
+   6.7216,
+   9.6456,
+   5.1004,
+   3.0869,
+   9.0334,
+   9.0167,
+   7.5472,
+   8.6938,
+   8.0327,
+   9.6623
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -2.306640625,
+    "max": 1.8681640625,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "sha256": "46adc173c8b9251bc9246f3a8dfb75290ebf21d2986fd887486c058d5fc4153b",
+    "mean": 0.019615296507254243,
+    "std": 0.45432046770141427,
+    "sample_pos": [
+     275,
+     550,
+     825,
+     1100,
+     1375,
+     2993,
+     3268,
+     3543,
+     3818,
+     4093,
+     4368,
+     5986,
+     6261,
+     6536,
+     6811,
+     7086
+    ],
+    "sample": [
+     0.6220703125,
+     0.3466796875,
+     0.90380859375,
+     0.318603515625,
+     0.6884765625,
+     -0.031585693359375,
+     -0.0504150390625,
+     0.11260986328125,
+     -0.234619140625,
+     -0.2393798828125,
+     -0.68115234375,
+     0.280029296875,
+     -0.169921875,
+     -0.48681640625,
+     -0.13623046875,
+     -0.0121307373046875
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": -1.4111328125,
+    "max": 1.52734375,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "sha256": "b480eb2c64feff8fdd524ec359bc8f8868f641040e8a857c04f79a6f4ab1c43b",
+    "mean": 0.025598424260833245,
+    "std": 0.32215277709244355,
+    "sample_pos": [
+     275,
+     550,
+     825,
+     1100,
+     1375,
+     2993,
+     3268,
+     3543,
+     3818,
+     4093,
+     4368,
+     5986,
+     6261,
+     6536,
+     6811,
+     7086
+    ],
+    "sample": [
+     -0.048858642578125,
+     0.458740234375,
+     0.61669921875,
+     0.408447265625,
+     -0.29541015625,
+     -0.07855224609375,
+     0.01183319091796875,
+     0.78369140625,
+     -0.065185546875,
+     0.529296875,
+     -0.1248779296875,
+     0.251708984375,
+     0.1544189453125,
+     -0.377685546875,
+     0.08685302734375,
+     -0.07879638671875
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00015223/neural": 64.706
+  },
+  "ended": "2026-11-06T15:42:25.059296+09:00"
+ },
+ "compile": {
+  "model": "rtm_animal_fp16",
+  "cell": "ovnpu_pre",
+  "phase": "compile",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:42:08.975315+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "rtm_animal_fp16",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "first",
+   "--phase",
+   "compile"
+  ],
+  "status": "OK",
+  "input_sha256": "c29fed231e7f0cb409e18aaf029cbff10f65109e0551a48f78bd143f8ddcb090",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     256,
+     256
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "2352010000000000",
+   "counter_luid": "0x00000000_0x00015223",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "model_path": "C:\\src\\zoo\\onnx\\rtm_animal_fp16.onnx",
+  "model_sha256": "401a657ea5aefcef95ebf321fe62906fb9d9322a484e26dd2bb0b4f49438a91f",
+  "read_ms": 105.68350000539795,
+  "query_ms": 235.28689998784102,
+  "query_model": {
+   "ops": 843,
+   "supported": 843,
+   "unsupported_by_type": {}
+  },
+  "compile_ms": 3090.73699999135,
+  "execution_devices": "NPU",
+  "export_ms": 104.81639999488834,
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\rtm_animal_fp16.blob",
+   "bytes": 28639368
+  },
+  "ended": "2026-11-06T15:42:13.558481+09:00"
+ },
+ "quiet": {
+  "model": "rtm_animal_fp16",
+  "cell": "ovnpu_pre",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-06T22:28:56.614712+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "rtm_animal_fp16",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "quiet",
+   "--phase",
+   "run",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\rtm_animal_fp16\\ovnpu_pre.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 13,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 17.6,
+   "state": "quiet",
+   "waited_s": 34,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "c29fed231e7f0cb409e18aaf029cbff10f65109e0551a48f78bd143f8ddcb090",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     256,
+     256
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "4c3e010000000000",
+   "counter_luid": "0x00000000_0x00013e4c",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\rtm_animal_fp16.blob",
+   "bytes": 28639368,
+   "sha256": "546752d7c1ae5e48b1bb04fcb9c546dda290c08ee404975956256f429df18255"
+  },
+  "load_ms": 28.51320000263513,
+  "execution_devices": "NPU",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "type": "<Type: 'float32'>"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "type": "<Type: 'float32'>"
+   }
+  ],
+  "first_run_ms": 5.866700001206482,
+  "warmup": 5,
+  "ms": {
+   "median": 1.7602000007173046,
+   "p10": 1.7379000018991064,
+   "p90": 1.844300000811927,
+   "min": 1.630200000363402,
+   "max": 1.9613000004028436,
+   "n": 30
+  },
+  "ms_all": [
+   1.7742,
+   1.7976,
+   1.7246,
+   1.7616,
+   1.7482,
+   1.7517,
+   1.6365,
+   1.9271,
+   1.9613,
+   1.7626,
+   1.7758,
+   1.7635,
+   1.7464,
+   1.7383,
+   1.758,
+   1.8928,
+   1.7768,
+   1.7434,
+   1.7387,
+   1.7494,
+   1.7379,
+   1.7498,
+   1.7551,
+   1.6302,
+   1.8188,
+   1.8443,
+   1.7723,
+   1.7588,
+   1.7626,
+   1.7674
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -2.306640625,
+    "max": 1.8681640625,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "sha256": "46adc173c8b9251bc9246f3a8dfb75290ebf21d2986fd887486c058d5fc4153b",
+    "mean": 0.019615296507254243,
+    "std": 0.45432046770141427,
+    "sample_pos": [
+     275,
+     550,
+     825,
+     1100,
+     1375,
+     2993,
+     3268,
+     3543,
+     3818,
+     4093,
+     4368,
+     5986,
+     6261,
+     6536,
+     6811,
+     7086
+    ],
+    "sample": [
+     0.6220703125,
+     0.3466796875,
+     0.90380859375,
+     0.318603515625,
+     0.6884765625,
+     -0.031585693359375,
+     -0.0504150390625,
+     0.11260986328125,
+     -0.234619140625,
+     -0.2393798828125,
+     -0.68115234375,
+     0.280029296875,
+     -0.169921875,
+     -0.48681640625,
+     -0.13623046875,
+     -0.0121307373046875
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": -1.4111328125,
+    "max": 1.52734375,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "sha256": "b480eb2c64feff8fdd524ec359bc8f8868f641040e8a857c04f79a6f4ab1c43b",
+    "mean": 0.025598424260833245,
+    "std": 0.32215277709244355,
+    "sample_pos": [
+     275,
+     550,
+     825,
+     1100,
+     1375,
+     2993,
+     3268,
+     3543,
+     3818,
+     4093,
+     4368,
+     5986,
+     6261,
+     6536,
+     6811,
+     7086
+    ],
+    "sample": [
+     -0.048858642578125,
+     0.458740234375,
+     0.61669921875,
+     0.408447265625,
+     -0.29541015625,
+     -0.07855224609375,
+     0.01183319091796875,
+     0.78369140625,
+     -0.065185546875,
+     0.529296875,
+     -0.1248779296875,
+     0.251708984375,
+     0.1544189453125,
+     -0.377685546875,
+     0.08685302734375,
+     -0.07879638671875
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00013e4c/neural": 54.685
+  },
+  "ended": "2026-11-06T22:28:58.756332+09:00"
+ },
+ "parity": {
+  "status": "FAIL",
+  "fails": [
+   "serving_default_output_0_output: argmax agreement 15/17",
+   "serving_default_output_1_output: argmax agreement 15/17"
+  ],
+  "reason_candidate": "argmax flips where the reference margin between top-1 and top-2 is small (see flipped_ref_margin_median)",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "max_abs": 0.0040357112884521484,
+    "mean_abs": 0.00045369893647810333,
+    "cos": 0.9999990333493156,
+    "nan": 0,
+    "inf": 0,
+    "ref_min": -2.3094966411590576,
+    "ref_max": 1.866607904434204,
+    "ref_range": 4.176104545593262,
+    "max_abs_over_range": 0.0009663817666420109,
+    "argmax": {
+     "positions": 17,
+     "counted": 17,
+     "agree": 15,
+     "rate": 0.8823529411764706,
+     "ties_skipped": 0,
+     "classes_from": 0,
+     "flipped_ref_margin_median": 0.0004190206527709961,
+     "ref_margin_median": 0.0010426044464111328
+    }
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "max_abs": 0.003406912088394165,
+    "mean_abs": 0.000455517776650956,
+    "cos": 0.9999982944096476,
+    "nan": 0,
+    "inf": 0,
+    "ref_min": -1.4120665788650513,
+    "ref_max": 1.5266332626342773,
+    "ref_range": 2.938699722290039,
+    "max_abs_over_range": 0.0011593263723247173,
+    "argmax": {
+     "positions": 17,
+     "counted": 17,
+     "agree": 15,
+     "rate": 0.8823529411764706,
+     "ties_skipped": 0,
+     "classes_from": 0,
+     "flipped_ref_margin_median": 0.00022083520889282227,
+     "ref_margin_median": 0.0019237995147705078
+    }
+   }
+  ],
+  "model": "rtm_animal_fp16",
+  "cell": "ovnpu_pre",
+  "pass": "first",
+  "reference": "cpu",
+  "line": {
+   "cos": 0.99,
+   "argmax": 0.99
+  }
+ },
+ "stderr_fallback_lines": []
+}

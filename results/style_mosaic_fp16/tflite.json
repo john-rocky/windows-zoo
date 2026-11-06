@@ -1,0 +1,43 @@
+{
+ "model": "style_mosaic_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/Fast-Neural-Style-LiteRT@1a697a4af21a/style_mosaic_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    3,
+    256,
+    256
+   ],
+   "max_abs": 0.0013427734375,
+   "mean_abs": 0.00010099592793721968,
+   "cos": 0.9999999999997023,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -160.94749450683594,
+   "ref_max": 327.2155456542969,
+   "ref_range": 488.16302490234375,
+   "max_abs_over_range": 2.750666005006462e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

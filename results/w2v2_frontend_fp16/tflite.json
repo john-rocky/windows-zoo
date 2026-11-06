@@ -1,0 +1,42 @@
+{
+ "model": "w2v2_frontend_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/wav2vec2-keyword-spotting@4f30d050bc19/w2v2_frontend_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    49,
+    768
+   ],
+   "max_abs": 9.322166442871094e-05,
+   "mean_abs": 5.750865791425081e-06,
+   "cos": 0.9999999999287118,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -6.3536295890808105,
+   "ref_max": 6.741591453552246,
+   "ref_range": 13.095220565795898,
+   "max_abs_over_range": 7.118754812897276e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

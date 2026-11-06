@@ -1,0 +1,42 @@
+{
+ "model": "dac_16khz_deconly_zs_fp16",
+ "cell": "tflite",
+ "tflite": "mlboydaisuke/DAC-16kHz-LiteRT@376f41e9b4e6/dac_16khz_deconly_zs_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1,
+    15992
+   ],
+   "max_abs": 5.066394805908203e-07,
+   "mean_abs": 5.8256912168978654e-08,
+   "cos": 0.999999999999778,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -0.29930830001831055,
+   "ref_max": 0.2996220588684082,
+   "ref_range": 0.5989303588867188,
+   "max_abs_over_range": 8.459071627835879e-07
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "model": "sam2_encoder",
+ "cell": "tflite",
+ "tflite": "mlboydaisuke/SAM2-hiera-tiny-LiteRT@8736e24606f7/sam2_encoder.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    4194304
+   ],
+   "max_abs": 1.0848045349121094e-05,
+   "mean_abs": 2.819990024412292e-07,
+   "cos": 0.9999999999965034,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.7257368564605713,
+   "ref_max": 1.4447492361068726,
+   "ref_range": 3.1704859733581543,
+   "max_abs_over_range": 3.4215717843504376e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

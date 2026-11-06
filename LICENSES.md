@@ -4,9 +4,9 @@ Source: each Hugging Face repo's `cardData.license` and its card's License secti
 link (the HF API and each card, read on 2026-11-06).
 All 45 repos carry a permissive licence (Apache-2.0 25, MIT 16, BSD-3-Clause 3, BSD-2-Clause 1 — counted per repo).
 An NPU blob or an IR is a compiled form of the same weights, so it would carry the repo's licence and its card's
-upstream credit. Training-data terms that a card names (last column) are not read here = unverified.
+upstream credit. The terms of the datasets in the last column were not read: unverified.
 
-| model | HF repo (revision) | licence | the card's License section (verbatim, first 220 characters, lines joined with a space) | base_model | datasets the card names |
+| model | HF repo (revision) | licence | the card's License section (verbatim, first 220 characters, lines joined with a space, HTML comments and `---` lines left out) | base_model | datasets the card's License section names |
 |---|---|---|---|---|---|
 | 6drepnet | [litert-community/6DRepNet-HeadPose-LiteRT](https://huggingface.co/litert-community/6DRepNet-HeadPose-LiteRT/tree/6a7d8fe0ca04) | mit | MIT (6DRepNet / thohemp). Trained on 300W-LP. | - | 300W-LP |
 | faceparsing | [litert-community/BiSeNet-Face-Parsing-LiteRT](https://huggingface.co/litert-community/BiSeNet-Face-Parsing-LiteRT/tree/62996ba4ebcf) | mit | MIT (BiSeNet / zllrunning/face-parsing.PyTorch). CelebAMask-HQ label taxonomy. | - | CelebAMask-HQ |

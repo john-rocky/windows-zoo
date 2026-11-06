@@ -1,0 +1,212 @@
+{
+ "model": "metric3d_fp16",
+ "cell": "cpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 515.2770999993663,
+  "load_ms": 1238.2702999893809,
+  "load_ms_first_pass": 1238.2702999893809,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "metric3d_fp16",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:30:41.272305+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "metric3d_fp16",
+   "--cell",
+   "cpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "6e52fb9a1f8b028495316b68e60994d06b7dc079354122e1913728569e52f233",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     448,
+     448
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\metric3d_fp16.onnx",
+  "model_sha256": "ccde5da9c6c751bab40dd98285fc05706881b0667663f64f6b7850f89c6c414e",
+  "load_ms": 1238.2702999893809,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     448,
+     448
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 1011.8971999909263,
+  "placement": {
+   "nodes_by_provider": {
+    "CPUExecutionProvider": 2600
+   },
+   "cpu_ops": {
+    "Conv": 128,
+    "ReorderOutput": 118,
+    "Reshape": 363,
+    "Concat": 84,
+    "Add": 403,
+    "Slice": 324,
+    "Transpose": 55,
+    "ReduceMean": 86,
+    "Sub": 117,
+    "Mul": 470,
+    "Sqrt": 44,
+    "Reciprocal": 43,
+    "Gemm": 52,
+    "FusedMatMul": 12,
+    "Softmax": 29,
+    "MatMul": 40,
+    "Tanh": 36,
+    "Resize": 21,
+    "ReorderInput": 76,
+    "Relu": 29,
+    "AveragePool": 12,
+    "Sigmoid": 40,
+    "ReduceSum": 1,
+    "Div": 3,
+    "Exp": 1,
+    "FusedConv": 12,
+    "Pad": 1
+   },
+   "profile_bytes": 4632419,
+   "graph_nodes": 2557
+  },
+  "first_run_ms": 1522.9223999922397,
+  "warmup": 5,
+  "ms": {
+   "median": 515.2770999993663,
+   "p10": 473.4995000035269,
+   "p90": 610.8408000000054,
+   "min": 440.26810000650585,
+   "max": 1222.7473999955691,
+   "n": 30
+  },
+  "ms_all": [
+   1222.7474,
+   697.7349,
+   566.4325,
+   610.8408,
+   446.1784,
+   514.9888,
+   580.0638,
+   514.7575,
+   545.6829,
+   512.4988,
+   511.0569,
+   479.8891,
+   440.2681,
+   473.4995,
+   491.2277,
+   481.4822,
+   490.2806,
+   525.1911,
+   527.8657,
+   450.0446,
+   551.9844,
+   489.4509,
+   524.5429,
+   476.2488,
+   515.5654,
+   543.1993,
+   627.6279,
+   584.3475,
+   547.6903,
+   508.1727
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.100006103515625,
+    "max": 168.56793212890625,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1,
+     448,
+     448
+    ],
+    "sha256": "07ca82f23715aa279ae6f18cb35740e290abd5c916ed1ff2f3f629c55606d444",
+    "mean": 15.565037897616929,
+    "std": 16.279946048816196,
+    "sample_pos": [
+     24061,
+     24693,
+     49386,
+     50018,
+     74079,
+     74711,
+     99404,
+     100036,
+     124729,
+     125361,
+     149422,
+     150054,
+     174747,
+     175379,
+     199440,
+     200072
+    ],
+    "sample": [
+     13.657302856445312,
+     13.604522705078125,
+     13.695388793945312,
+     13.262481689453125,
+     13.425399780273438,
+     13.487060546875,
+     13.346023559570312,
+     13.341110229492188,
+     13.000076293945312,
+     13.178207397460938,
+     12.867385864257812,
+     12.938644409179688,
+     13.065216064453125,
+     12.607864379882812,
+     13.31866455078125,
+     13.62933349609375
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-06T15:31:09.212328+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": null,
+ "stderr_fallback_lines": []
+}

@@ -1,0 +1,43 @@
+{
+ "model": "edsr",
+ "cell": "tflite",
+ "tflite": "litert-community/EDSR-x4-LiteRT@670eaa25a390/edsr.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    3,
+    512,
+    512
+   ],
+   "max_abs": 1.6093254089355469e-06,
+   "mean_abs": 1.8924849117437267e-07,
+   "cos": 0.9999999999999193,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -0.00040372335934080184,
+   "ref_max": 0.981198787689209,
+   "ref_range": 0.9816024899482727,
+   "max_abs_over_range": 1.6394879041314914e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

@@ -1,0 +1,54 @@
+{
+ "model": "ppocr_rec_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/PP-OCRv5-LiteRT@f4bcc36c8191/ppocr_rec_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "FAIL",
+ "fails": [
+  "serving_default_output_0_output: argmax agreement 39/40"
+ ],
+ "reason_candidate": "argmax flips where the reference margin between top-1 and top-2 is small (see flipped_ref_margin_median)",
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    40,
+    18385
+   ],
+   "max_abs": 0.3990342319011688,
+   "mean_abs": 2.5722111088933955e-06,
+   "cos": 0.9948906797894366,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 5.735577294477652e-24,
+   "ref_max": 0.9999865293502808,
+   "ref_range": 0.9999865293502808,
+   "max_abs_over_range": 0.39903960722394183,
+   "argmax": {
+    "positions": 40,
+    "counted": 40,
+    "agree": 39,
+    "rate": 0.975,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": 0.13878801465034485,
+    "ref_margin_median": 0.998213129438227
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

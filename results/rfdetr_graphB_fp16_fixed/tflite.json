@@ -1,0 +1,73 @@
+{
+ "model": "rfdetr_graphB_fp16_fixed",
+ "cell": "tflite",
+ "tflite": "litert-community/RF-DETR-Nano-LiteRT@de052d53117a/rfdetr_graphB_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  },
+  {
+   "onnx": "serving_default_output_1_output",
+   "tflite": "serving_default_output_1_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    300,
+    4
+   ],
+   "max_abs": 7.808208465576172e-06,
+   "mean_abs": 1.8709630239754915e-07,
+   "cos": 0.999999999999219,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 0.0009123721392825246,
+   "ref_max": 0.9992725849151611,
+   "ref_range": 0.9983602166175842,
+   "max_abs_over_range": 7.821033265959012e-06
+  },
+  {
+   "name": "serving_default_output_1_output",
+   "shape": [
+    1,
+    300,
+    91
+   ],
+   "max_abs": 2.1457672119140625e-05,
+   "mean_abs": 2.4416859879161847e-06,
+   "cos": 0.9999999999998701,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -12.202555656433105,
+   "ref_max": 2.9734911918640137,
+   "ref_range": 15.176046371459961,
+   "max_abs_over_range": 1.4139171424445484e-06,
+   "argmax": {
+    "positions": 300,
+    "counted": 300,
+    "agree": 300,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 1,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 0.49239885807037354
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

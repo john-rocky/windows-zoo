@@ -1,0 +1,45 @@
+{
+ "model": "metric3d_fp16",
+ "cell": "tflite",
+ "tflite": "mlboydaisuke/Metric3D-v2-LiteRT@4f1d6e6b8fb1/metric3d_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "FAIL",
+ "fails": [
+  "serving_default_output_0_output: cos 0.6976 < 0.99"
+ ],
+ "reason_candidate": "unknown",
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1,
+    448,
+    448
+   ],
+   "max_abs": 163.7813262939453,
+   "mean_abs": 13.3792757263065,
+   "cos": 0.6976390018826959,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 0.5238189697265625,
+   "ref_max": 5.836578369140625,
+   "ref_range": 5.3127593994140625,
+   "max_abs_over_range": 30.827920856346054
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

@@ -9,6 +9,7 @@ committed results/<model>/cpu.json, then reports one of:
              standard deviation of the table's values, and its mean is within 1e-3 x its standard deviation
              (another CPU, another ONNX Runtime build, or an ONNX file rebuilt by tf2onnx)
   DIFFERENT  anything else (the line says which output and by how much)
+  not run    ONNX Runtime's CPU EP did not run the file, neither in the table nor for you (yolact)
   inputs differ / missing   your input .npz is not the table's, or a file is not there
 Exit 0 when no model is DIFFERENT, inputs differ or missing.
 """
@@ -32,8 +33,13 @@ def load_json(p):
 
 
 def check(src, m):
-    table = ((load_json(os.path.join(HERE, "results", m, "cpu.json")) or {}).get("first_pass") or {})
+    rec = load_json(os.path.join(HERE, "results", m, "cpu.json")) or {}
+    table = rec.get("first_pass") or {}
     mine = load_json(os.path.join(src, "runs", "first", m, "cpu.json"))
+    if rec.get("status") == "ERROR":
+        if mine is not None and mine.get("status") == "OK":
+            return "DIFFERENT", "your CPU EP ran this file; in the table it did not run"
+        return "not run", "ONNX Runtime's CPU EP did not run this file in the table" + ("" if mine is None else " or for you")
     if not table.get("output_stats") or mine is None or mine.get("status") != "OK":
         return "missing", "no table record" if not table.get("output_stats") else "no OK run of yours"
     if mine.get("input_sha256") != table.get("input_sha256"):
@@ -72,7 +78,7 @@ def main():
         count[state] = count.get(state, 0) + 1
         print(f"{m}: {state} ({why})", flush=True)
     print(", ".join(f"{k} {v}" for k, v in sorted(count.items())))
-    sys.exit(0 if set(count) <= {"identical", "close"} else 1)
+    sys.exit(0 if set(count) <= {"identical", "close", "not run"} else 1)
 
 
 if __name__ == "__main__":

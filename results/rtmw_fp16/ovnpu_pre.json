@@ -1,0 +1,623 @@
+{
+ "model": "rtmw_fp16",
+ "cell": "ovnpu_pre",
+ "status": "FAIL",
+ "table": {
+  "ms": 8.132849998219172,
+  "ms_first_pass": 21.064300002763048,
+  "load_ms": 40.67379999833065,
+  "load_ms_first_pass": 99.11500000453088,
+  "compile_ms": 9599.021300004097,
+  "gate": "quiet"
+ },
+ "first_pass": {
+  "model": "rtmw_fp16",
+  "cell": "ovnpu_pre",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:45:52.725140+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "rtmw_fp16",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "first",
+   "--phase",
+   "run",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "5cab873f4fd5a6436bab7e49bae887625e5e9885940ced559fc55d75b1681a06",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     256,
+     192
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "2352010000000000",
+   "counter_luid": "0x00000000_0x00015223",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\rtmw_fp16.blob",
+   "bytes": 68116616,
+   "sha256": "a0c5b1a6d6e47c00b8cff290f1ef43af0a1b3a7da2640d66791f339daddd42fb"
+  },
+  "load_ms": 99.11500000453088,
+  "execution_devices": "NPU",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     133,
+     384
+    ],
+    "type": "<Type: 'float32'>"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     133,
+     512
+    ],
+    "type": "<Type: 'float32'>"
+   }
+  ],
+  "first_run_ms": 56.43029999919236,
+  "warmup": 5,
+  "ms": {
+   "median": 21.064300002763048,
+   "p10": 17.04069999686908,
+   "p90": 28.909599990583956,
+   "min": 14.759600002435036,
+   "max": 29.901200003223494,
+   "n": 30
+  },
+  "ms_all": [
+   17.9516,
+   17.0407,
+   15.8631,
+   15.0552,
+   18.2224,
+   18.6133,
+   18.6777,
+   28.6233,
+   25.3996,
+   22.0453,
+   29.9012,
+   20.0833,
+   17.058,
+   17.7983,
+   28.9096,
+   24.1333,
+   25.1129,
+   26.4504,
+   25.92,
+   29.8127,
+   26.1323,
+   25.9243,
+   25.1309,
+   25.1138,
+   19.824,
+   14.7596,
+   17.7703,
+   29.3395,
+   18.7672,
+   18.2519
+  ],
+  "first_vs_last_max_abs": NaN,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": NaN,
+    "max": NaN,
+    "nan": 51072,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     133,
+     384
+    ],
+    "sha256": "3e53ac5994a2f4708994683ac33e3c0fca04e30c22a685b72c747ca509c187d6",
+    "mean": NaN,
+    "std": NaN,
+    "sample_pos": [
+     3848,
+     7696,
+     7827,
+     11675,
+     15654,
+     19502,
+     19633,
+     23481,
+     27460,
+     31308,
+     35287,
+     39135,
+     39266,
+     43114,
+     47093,
+     50941
+    ],
+    "sample": [
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": NaN,
+    "max": NaN,
+    "nan": 68096,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     133,
+     512
+    ],
+    "sha256": "43c583f6d214ea7ffff0d876ed68bb7eaa81d81656da11f1070190192769828c",
+    "mean": NaN,
+    "std": NaN,
+    "sample_pos": [
+     2478,
+     6457,
+     10436,
+     16893,
+     20872,
+     24851,
+     31308,
+     35287,
+     39266,
+     41744,
+     45723,
+     49702,
+     53681,
+     56159,
+     60138,
+     64117
+    ],
+    "sample": [
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00015223/neural": 530.02
+  },
+  "ended": "2026-11-06T15:45:58.654167+09:00"
+ },
+ "compile": {
+  "model": "rtmw_fp16",
+  "cell": "ovnpu_pre",
+  "phase": "compile",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T15:45:31.495881+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "rtmw_fp16",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "first",
+   "--phase",
+   "compile"
+  ],
+  "status": "OK",
+  "input_sha256": "5cab873f4fd5a6436bab7e49bae887625e5e9885940ced559fc55d75b1681a06",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     256,
+     192
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "2352010000000000",
+   "counter_luid": "0x00000000_0x00015223",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "model_path": "C:\\src\\zoo\\onnx\\rtmw_fp16.onnx",
+  "model_sha256": "936dd1b47438dd6c79ab2ba32418e791a15dd205bf8df14e905243c80ec195b9",
+  "read_ms": 423.9640000014333,
+  "query_ms": 832.0022000116296,
+  "query_model": {
+   "ops": 1391,
+   "supported": 1391,
+   "unsupported_by_type": {}
+  },
+  "compile_ms": 9599.021300004097,
+  "execution_devices": "NPU",
+  "export_ms": 223.8188000046648,
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\rtmw_fp16.blob",
+   "bytes": 68116616
+  },
+  "ended": "2026-11-06T15:45:45.333529+09:00"
+ },
+ "quiet": {
+  "model": "rtmw_fp16",
+  "cell": "ovnpu_pre",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-06T22:33:48.103023+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "openvino": "2026.4.1-22982-e213a147257-releases/2026/4"
+  },
+  "argv": [
+   "--model",
+   "rtmw_fp16",
+   "--cell",
+   "ovnpu_pre",
+   "--pass",
+   "quiet",
+   "--phase",
+   "run",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\rtmw_fp16\\ovnpu_pre.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 5,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 17.4,
+   "state": "quiet",
+   "waited_s": 34,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "5cab873f4fd5a6436bab7e49bae887625e5e9885940ced559fc55d75b1681a06",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     256,
+     192
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) AI Boost",
+   "DEVICE_LUID": "4c3e010000000000",
+   "counter_luid": "0x00000000_0x00013e4c",
+   "NPU_DRIVER_VERSION": "1004841",
+   "NPU_COMPILER_VERSION": "524292",
+   "NPU_COMPILER_TYPE": "CompilerType.PREFER_PLUGIN",
+   "INFERENCE_PRECISION_HINT": "<Type: 'float16'>"
+  },
+  "ov_config": {},
+  "blob": {
+   "path": "C:\\src\\zoo\\blobs\\rtmw_fp16.blob",
+   "bytes": 68116616,
+   "sha256": "a0c5b1a6d6e47c00b8cff290f1ef43af0a1b3a7da2640d66791f339daddd42fb"
+  },
+  "load_ms": 40.67379999833065,
+  "execution_devices": "NPU",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     133,
+     384
+    ],
+    "type": "<Type: 'float32'>"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     133,
+     512
+    ],
+    "type": "<Type: 'float32'>"
+   }
+  ],
+  "first_run_ms": 18.02740000130143,
+  "warmup": 5,
+  "ms": {
+   "median": 8.132849998219172,
+   "p10": 7.51250000030268,
+   "p90": 11.247800001001451,
+   "min": 7.2449999970558565,
+   "max": 11.80229999954463,
+   "n": 30
+  },
+  "ms_all": [
+   11.8023,
+   11.4316,
+   11.2619,
+   11.2478,
+   10.7721,
+   10.2946,
+   10.0945,
+   10.0089,
+   9.8116,
+   9.5699,
+   9.4796,
+   8.8887,
+   8.6268,
+   8.1386,
+   8.0708,
+   7.728,
+   8.8289,
+   8.0955,
+   7.9997,
+   8.1271,
+   7.2714,
+   7.245,
+   8.0254,
+   7.3953,
+   7.5125,
+   7.8391,
+   7.8193,
+   7.7308,
+   7.8797,
+   7.7104
+  ],
+  "first_vs_last_max_abs": NaN,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": NaN,
+    "max": NaN,
+    "nan": 51072,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     133,
+     384
+    ],
+    "sha256": "3e53ac5994a2f4708994683ac33e3c0fca04e30c22a685b72c747ca509c187d6",
+    "mean": NaN,
+    "std": NaN,
+    "sample_pos": [
+     3848,
+     7696,
+     7827,
+     11675,
+     15654,
+     19502,
+     19633,
+     23481,
+     27460,
+     31308,
+     35287,
+     39135,
+     39266,
+     43114,
+     47093,
+     50941
+    ],
+    "sample": [
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": NaN,
+    "max": NaN,
+    "nan": 68096,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     133,
+     512
+    ],
+    "sha256": "43c583f6d214ea7ffff0d876ed68bb7eaa81d81656da11f1070190192769828c",
+    "mean": NaN,
+    "std": NaN,
+    "sample_pos": [
+     2478,
+     6457,
+     10436,
+     16893,
+     20872,
+     24851,
+     31308,
+     35287,
+     39266,
+     41744,
+     45723,
+     49702,
+     53681,
+     56159,
+     60138,
+     64117
+    ],
+    "sample": [
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN,
+     NaN
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x00013e4c/neural": 317.849
+  },
+  "ended": "2026-11-06T22:33:50.576876+09:00"
+ },
+ "parity": {
+  "status": "FAIL",
+  "fails": [
+   "serving_default_output_0_output: 51072 NaN, 0 Inf",
+   "serving_default_output_0_output: cos 0.0000 < 0.99",
+   "serving_default_output_0_output: argmax agreement 0/133",
+   "serving_default_output_1_output: 68096 NaN, 0 Inf",
+   "serving_default_output_1_output: cos 0.0000 < 0.99",
+   "serving_default_output_1_output: argmax agreement 0/133"
+  ],
+  "reason_candidate": "NaN / Inf in a cell that computes in fp16 (overflow candidate)",
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     133,
+     384
+    ],
+    "max_abs": NaN,
+    "mean_abs": NaN,
+    "cos": 0.0,
+    "nan": 51072,
+    "inf": 0,
+    "ref_min": -0.6638963222503662,
+    "ref_max": 0.9855771064758301,
+    "ref_range": 1.6494734287261963,
+    "max_abs_over_range": NaN,
+    "argmax": {
+     "positions": 133,
+     "counted": 133,
+     "agree": 0,
+     "rate": 0.0,
+     "ties_skipped": 0,
+     "classes_from": 0,
+     "flipped_ref_margin_median": 0.0036887526512145996,
+     "ref_margin_median": 0.0036887526512145996
+    }
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     133,
+     512
+    ],
+    "max_abs": NaN,
+    "mean_abs": NaN,
+    "cos": 0.0,
+    "nan": 68096,
+    "inf": 0,
+    "ref_min": -0.8365509510040283,
+    "ref_max": 1.0832405090332031,
+    "ref_range": 1.9197914600372314,
+    "max_abs_over_range": NaN,
+    "argmax": {
+     "positions": 133,
+     "counted": 133,
+     "agree": 0,
+     "rate": 0.0,
+     "ties_skipped": 0,
+     "classes_from": 0,
+     "flipped_ref_margin_median": 0.0027480721473693848,
+     "ref_margin_median": 0.0027480721473693848
+    }
+   }
+  ],
+  "model": "rtmw_fp16",
+  "cell": "ovnpu_pre",
+  "pass": "first",
+  "reference": "cpu",
+  "line": {
+   "cos": 0.99,
+   "argmax": 0.99
+  }
+ },
+ "stderr_fallback_lines": []
+}

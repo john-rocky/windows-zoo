@@ -1,0 +1,43 @@
+{
+ "model": "mlsd_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/M-LSD-tiny-LiteRT@ae7c5698d5bb/mlsd_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    9,
+    256,
+    256
+   ],
+   "max_abs": 0.018951416015625,
+   "mean_abs": 8.689734054121188e-05,
+   "cos": 0.9999999997942778,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -331.0532531738281,
+   "ref_max": 326.4693908691406,
+   "ref_range": 657.5226440429688,
+   "max_abs_over_range": 2.8822453777556193e-05
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

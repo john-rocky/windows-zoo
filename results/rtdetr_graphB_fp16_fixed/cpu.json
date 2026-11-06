@@ -1,0 +1,282 @@
+{
+ "model": "rtdetr_graphB_fp16_fixed",
+ "cell": "cpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 280.45300000007956,
+  "load_ms": 144.97940000001108,
+  "load_ms_first_pass": 144.97940000001108,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "rtdetr_graphB_fp16_fixed",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T18:09:12.410532+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "rtdetr_graphB_fp16_fixed",
+   "--cell",
+   "cpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "2c230c4e683f38935479fd0d1d598f72cfe82f95494dbadf0bbddefe46cddf69",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     8400,
+     256
+    ],
+    "dtype": "float32"
+   },
+   "serving_default_args_1": {
+    "shape": [
+     1,
+     300,
+     256
+    ],
+    "dtype": "float32"
+   },
+   "serving_default_args_2": {
+    "shape": [
+     1,
+     300,
+     4
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\rtdetr_graphB_fp16_fixed.onnx",
+  "model_sha256": "8b640ef467b76eea1f9d2c9081b5eebc2de483f38d10d72412e2870541fc469e",
+  "load_ms": 144.97940000001108,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     300,
+     4
+    ],
+    "type": "tensor(float)"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     300,
+     80
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 205.68629999979748,
+  "placement": {
+   "nodes_by_provider": {
+    "CPUExecutionProvider": 729
+   },
+   "cpu_ops": {
+    "Reshape": 181,
+    "Gemm": 36,
+    "Transpose": 30,
+    "Sigmoid": 4,
+    "FusedGemm": 12,
+    "Add": 57,
+    "MatMul": 6,
+    "Softmax": 6,
+    "Abs": 27,
+    "GlobalMaxPool": 9,
+    "Squeeze": 9,
+    "Mul": 138,
+    "Max": 15,
+    "Div": 12,
+    "ReduceSum": 21,
+    "Sub": 69,
+    "Sqrt": 9,
+    "Reciprocal": 9,
+    "Slice": 44,
+    "Relu": 18,
+    "FusedMatMul": 9,
+    "Concat": 5,
+    "Log": 3
+   },
+   "profile_bytes": 1337510,
+   "graph_nodes": 750
+  },
+  "first_run_ms": 158.6993999999322,
+  "warmup": 5,
+  "ms": {
+   "median": 280.45300000007956,
+   "p10": 110.60939999993025,
+   "p90": 338.99399999995694,
+   "min": 94.8063999999249,
+   "max": 626.1247999998432,
+   "n": 30
+  },
+  "ms_all": [
+   99.9374,
+   121.5084,
+   122.9416,
+   108.325,
+   110.6094,
+   117.192,
+   94.8064,
+   122.6678,
+   138.5794,
+   139.4657,
+   294.4592,
+   294.9121,
+   269.3523,
+   315.3326,
+   322.203,
+   353.3365,
+   319.8176,
+   295.2266,
+   626.1248,
+   236.3615,
+   334.6629,
+   468.8434,
+   299.8837,
+   281.4111,
+   292.2841,
+   307.04,
+   338.994,
+   279.4949,
+   253.1098,
+   262.514
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.00913393497467041,
+    "max": 0.9885387420654297,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     300,
+     4
+    ],
+    "sha256": "7db8a44f6815a1b8cd07eb792ab3194b76bf8668dd17737babb1a163e2a357b6",
+    "mean": 0.30677665770053864,
+    "std": 0.24299052053824843,
+    "sample_pos": [
+     5,
+     10,
+     15,
+     244,
+     249,
+     254,
+     483,
+     488,
+     493,
+     722,
+     727,
+     732,
+     961,
+     966,
+     971,
+     976
+    ],
+    "sample": [
+     0.5682511329650879,
+     0.3052065372467041,
+     0.43979334831237793,
+     0.19351735711097717,
+     0.5503047108650208,
+     0.14523860812187195,
+     0.05390271544456482,
+     0.8365881443023682,
+     0.41106247901916504,
+     0.043604761362075806,
+     0.02524435520172119,
+     0.6976686716079712,
+     0.4891006350517273,
+     0.06137293577194214,
+     0.01661759614944458,
+     0.26612162590026855
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": -10.228666305541992,
+    "max": 2.6139187812805176,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     300,
+     80
+    ],
+    "sha256": "4615d3e08d83e9ce6dff35a3d8f1a1f56456a051112e43185b8f4f810075a150",
+    "mean": -6.062331666429838,
+    "std": 1.0293853745608295,
+    "sample_pos": [
+     8415,
+     8893,
+     9371,
+     9849,
+     10327,
+     10805,
+     11283,
+     11761,
+     20176,
+     20654,
+     21132,
+     21610,
+     22088,
+     22566,
+     23044,
+     23522
+    ],
+    "sample": [
+     -5.68090295791626,
+     -5.153802394866943,
+     -6.553152084350586,
+     -6.749119758605957,
+     -5.268397808074951,
+     -6.102913856506348,
+     -4.950119972229004,
+     -5.6949381828308105,
+     -5.1879425048828125,
+     -4.311899185180664,
+     -5.224177837371826,
+     -5.744410991668701,
+     -5.0814924240112305,
+     -6.39633846282959,
+     -6.439350128173828,
+     -6.516469955444336
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-06T18:09:22.774892+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": null,
+ "stderr_fallback_lines": []
+}

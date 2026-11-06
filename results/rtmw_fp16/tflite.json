@@ -1,0 +1,83 @@
+{
+ "model": "rtmw_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/RTMW-m-WholeBody-LiteRT@6f5203e17199/rtmw_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  },
+  {
+   "onnx": "serving_default_output_1_output",
+   "tflite": "serving_default_output_1_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    133,
+    384
+   ],
+   "max_abs": 8.016824722290039e-06,
+   "mean_abs": 6.250937528887621e-07,
+   "cos": 0.9999999999868009,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -0.6638978123664856,
+   "ref_max": 0.9855767488479614,
+   "ref_range": 1.6494746208190918,
+   "max_abs_over_range": 4.8602292033502556e-06,
+   "argmax": {
+    "positions": 133,
+    "counted": 133,
+    "agree": 133,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 0.0036891698837280273
+   }
+  },
+  {
+   "name": "serving_default_output_1_output",
+   "shape": [
+    1,
+    133,
+    512
+   ],
+   "max_abs": 1.0456889867782593e-05,
+   "mean_abs": 8.05946363688046e-07,
+   "cos": 0.9999999999778821,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -0.8365519642829895,
+   "ref_max": 1.0832397937774658,
+   "ref_range": 1.9197916984558105,
+   "max_abs_over_range": 5.446887741099005e-06,
+   "argmax": {
+    "positions": 133,
+    "counted": 133,
+    "agree": 133,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 0.002747833728790283
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

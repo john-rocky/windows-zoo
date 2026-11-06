@@ -1,0 +1,53 @@
+{
+ "model": "ufld",
+ "cell": "tflite",
+ "tflite": "litert-community/Ultra-Fast-Lane-Detection-LiteRT@00279fd6c85a/ufld.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    201,
+    18,
+    4
+   ],
+   "max_abs": 2.002716064453125e-05,
+   "mean_abs": 1.9878996192971104e-06,
+   "cos": 0.9999999999988852,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -2.888453722000122,
+   "ref_max": 17.64716911315918,
+   "ref_range": 20.53562355041504,
+   "max_abs_over_range": 9.752399577916145e-07,
+   "argmax": {
+    "positions": 72,
+    "counted": 72,
+    "agree": 72,
+    "rate": 1.0,
+    "ties_skipped": 0,
+    "classes_from": 0,
+    "flipped_ref_margin_median": null,
+    "ref_margin_median": 6.906022310256958
+   }
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

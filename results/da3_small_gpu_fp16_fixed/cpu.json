@@ -1,0 +1,206 @@
+{
+ "model": "da3_small_gpu_fp16_fixed",
+ "cell": "cpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 1572.5023999998484,
+  "load_ms": 478.1130999997458,
+  "load_ms_first_pass": 478.1130999997458,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "da3_small_gpu_fp16_fixed",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T18:09:34.635080+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "da3_small_gpu_fp16_fixed",
+   "--cell",
+   "cpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "84de112d1e9ea9af5e2416655c625e2c4c3da55e7f5c01f7eaa3d6972b4c1e52",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     896,
+     504
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\da3_small_gpu_fp16_fixed.onnx",
+  "model_sha256": "8e678f8b980878ffaac506070e9c6995b359c626a9ed31ae00c9de0ed0902a8e",
+  "load_ms": 478.1130999997458,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     896,
+     504
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 682.5095999997757,
+  "placement": {
+   "nodes_by_provider": {
+    "CPUExecutionProvider": 1562
+   },
+   "cpu_ops": {
+    "Conv": 33,
+    "ReorderOutput": 7,
+    "Reshape": 385,
+    "Concat": 54,
+    "Add": 189,
+    "Transpose": 58,
+    "ReduceMean": 90,
+    "Sub": 93,
+    "Mul": 307,
+    "Sqrt": 48,
+    "Reciprocal": 48,
+    "Gemm": 72,
+    "MatMul": 24,
+    "Softmax": 12,
+    "Erf": 12,
+    "Slice": 106,
+    "ReorderInput": 9,
+    "Resize": 3,
+    "Relu": 7,
+    "Upsample": 4,
+    "Exp": 1
+   },
+   "profile_bytes": 2497987,
+   "graph_nodes": 1567
+  },
+  "first_run_ms": 523.7990999999056,
+  "warmup": 5,
+  "ms": {
+   "median": 1572.5023999998484,
+   "p10": 1446.4898000001085,
+   "p90": 1817.9553999998461,
+   "min": 1429.3094999998175,
+   "max": 2024.5153000000755,
+   "n": 30
+  },
+  "ms_all": [
+   1469.6718,
+   1503.6816,
+   1446.4898,
+   1792.303,
+   1625.3781,
+   1477.4932,
+   1568.7911,
+   1527.4155,
+   1517.7919,
+   1452.7724,
+   1580.516,
+   1521.6948,
+   1539.4821,
+   2014.321,
+   1770.8028,
+   1502.7405,
+   1429.3095,
+   1436.8135,
+   1440.6311,
+   2024.5153,
+   1560.9771,
+   1741.1666,
+   1691.023,
+   1698.4088,
+   1817.9554,
+   1696.6184,
+   1900.8038,
+   1636.5215,
+   1650.4538,
+   1576.2137
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.29175764322280884,
+    "max": 1.1828768253326416,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1,
+     896,
+     504
+    ],
+    "sha256": "d0c6a33f17f8b1d820078647c7ba341490c54b49f3f32d80b5470471804774bb",
+    "mean": 0.7941973743326181,
+    "std": 0.2556062924320795,
+    "sample_pos": [
+     25009,
+     50018,
+     75027,
+     100036,
+     125045,
+     150054,
+     175063,
+     200072,
+     225081,
+     250090,
+     275099,
+     300108,
+     325117,
+     350126,
+     375135,
+     400144
+    ],
+    "sample": [
+     0.7528262734413147,
+     0.7580351829528809,
+     0.8436241149902344,
+     0.9491152167320251,
+     1.0864590406417847,
+     1.1359355449676514,
+     1.142415165901184,
+     1.1401114463806152,
+     1.0963349342346191,
+     1.031857967376709,
+     0.8966571688652039,
+     0.7163400650024414,
+     0.5378713607788086,
+     0.5044175982475281,
+     0.4724181294441223,
+     0.44470342993736267
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-06T18:10:32.778722+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": null,
+ "stderr_fallback_lines": []
+}

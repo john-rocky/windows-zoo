@@ -1,0 +1,63 @@
+{
+ "model": "rtdetr_graphA_fp16_fixed",
+ "cell": "tflite",
+ "tflite": "litert-community/RT-DETRv2-S-LiteRT@60f16dbbf37d/rtdetr_graphA_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  },
+  {
+   "onnx": "serving_default_output_1_output",
+   "tflite": "serving_default_output_1_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    8400,
+    80
+   ],
+   "max_abs": 2.6702880859375e-05,
+   "mean_abs": 2.915065735578537e-06,
+   "cos": 0.9999999999998874,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -15.496129035949707,
+   "ref_max": 2.2434003353118896,
+   "ref_range": 17.73952865600586,
+   "max_abs_over_range": 1.50527566865958e-06
+  },
+  {
+   "name": "serving_default_output_1_output",
+   "shape": [
+    1,
+    8400,
+    256
+   ],
+   "max_abs": 7.987022399902344e-06,
+   "mean_abs": 3.9019416126828687e-07,
+   "cos": 0.9999999999987793,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -3.5263912677764893,
+   "ref_max": 3.6511943340301514,
+   "ref_range": 7.177585601806641,
+   "max_abs_over_range": 1.1127728519032868e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

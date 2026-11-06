@@ -10,12 +10,12 @@ Written on 2026-11-06 before the first measurement; changes are listed at the en
 | `cuda32` | onnxruntime-gpu 1.31.1, CUDA EP (CUDA 13 pip wheels) | RTX 5080 Laptop | fp32 ONNX | same |
 | `cuda16` | same | same | fp16 copy (`onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True)`, default op block list, nothing per model) | same (conversion time kept apart) |
 | `ovgpu` | ONNX Runtime 1.31.1 + `onnxruntime-ep-openvino` 1.8.1 | Intel GPU (`ov_device == "GPU.0"`) | fp32 ONNX, the EP's default precision | same, no `cache_dir` |
-| `ovnpu` | same | NPU (`ov_device == "NPU"`) | fp32 ONNX as is, compiled when the session loads (default precision f16) | same, no `cache_dir` = a compile that hits no cache |
+| `ovnpu` | same | NPU (`ov_device == "NPU"`) | fp32 ONNX as is, compiled when the session loads (default precision f16) | same; no `cache_dir`, so the load is a compile that hits no cache |
 | `ovnpu_pre` | OpenVINO 2026.4.1 (pip, no ONNX Runtime) | NPU | `read_model(onnx)` → `compile_model(NPU)` → `export_model` blob = precompiled | `compile_model` time (`compile_ms`; export apart), and in a new process reading the blob + `import_model` (`load_ms`) |
 
 The reference is the `cpu` output. No other NVIDIA EP is used. Precision, threads and streams stay at each
-runtime's defaults; the defaults are written into the JSON (OpenVINO's `INFERENCE_PRECISION_HINT`, ONNX Runtime's
-thread count).
+runtime's defaults. The JSON records a default where the runtime reports it (`INFERENCE_PRECISION_HINT` in the
+`ovnpu_pre` cell); ONNX Runtime's thread count and the OpenVINO EP's precision are not recorded.
 
 ## 2. Inputs (the same file for every cell)
 
@@ -72,14 +72,16 @@ thread count).
 - **Quiet pass**: serial, only the cells that ran in the first pass. Before each unit: whole-CPU load < 15 % (max of
   3 one-second reads), RTX `utilization.gpu` = 0 % and memory.used < 800 MiB, Intel GPU engine utilisation sum < 5 %.
   After 10 minutes without quiet the unit runs anyway and its row carries `gate=timeout` and the readings (such a
-  unit is measured once more at the end). The marker is created only if no other job holds it.
+  unit is measured once more at the end). The marker file that the jobs on this machine share (last bullet) is
+  created only if no other job holds it.
 - The table's speed = the quiet-pass median.
 - Windows build: Windows Update restarted the machine on 2026-11-06 between 17:29 and 17:35 JST (26200.6899 →
   26200.9711; the NPU, Intel GPU and RTX drivers stayed the same). The first pass ran on 26200.6899 except the
   last 31 units of the 13 fixed files (26200.9711); the quiet pass, the table's times, ran on 26200.9711. Times from
   the two builds are not compared: the first-pass times stay in the JSON records only.
-- The RTX runs under a 95 W software power cap: `nvidia-smi` pstate, clocks and power are recorded before and after
-  each CUDA unit. AC power, Windows balanced power mode (unchanged).
+- The RTX runs under a 95 W software power cap; AC power, Windows balanced power mode (unchanged). `nvidia-smi`
+  pstate, clocks, power draw and the software power cap flag are written to `logs\chain_<stream>_<pass>.log` before
+  and after each unit (not to the JSON).
 - The NPU as-is load is called "a compile that hits no cache" only after loading the same model a second and a
   third time in new processes and seeing no speed-up.
 - A free-RAM floor of 4 GB before each unit; an optional marker file lets the scripts wait for other jobs that share
@@ -93,17 +95,20 @@ plus the NPU driver's cache folder stay under 50 GB.
 ## 8. Records
 
 `runs/<pass>/<model>/<cell>.json` per unit (merged into `results/<model>/<cell>.json`): model, cell, pass, status,
-full error text, versions (Python, ONNX Runtime, the OpenVINO EP, OpenVINO, the CUDA / cuDNN wheels, the drivers),
-device name, `load_ms`, `compile_ms`, `first_run_ms`, timing statistics and run count, node placement,
-`query_model`, the quiet-gate readings, the RTX power lines, start and end times, the input sha256, output names and
-shapes, an output fingerprint (sha256, mean, std, 16 fixed sample values) and the parity values.
+full error text, versions (Python, ONNX Runtime, the OpenVINO EP, OpenVINO, the CUDA / cuDNN wheels, the NPU
+driver), device name, `load_ms`, `compile_ms`, `first_run_ms`, timing statistics and run count, node placement,
+`query_model`, the quiet-gate readings (CPU %, RTX utilisation, memory and pstate, Intel GPU %), start and end times,
+the input sha256, output names and shapes, an output fingerprint (sha256, mean, std, 16 fixed sample values) and the
+parity values.
 
 ## 9. The table
 
 Columns: model | Galaxy S26 NPU | X2E NPU | Intel NPU as-is | Intel NPU precompiled | Intel GPU | RTX fp16 | CPU | load
 (Intel NPU as-is / Intel NPU precompiled / X2E as-is) | parity per cell | note. RTX fp32 is in the JSON and the
 parity column. The conclusion is 3 to 5 lines of measured facts: for each of the three findings of the X2 Elite
-and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-example first.
+and Galaxy S26 run (the two chips within a few percent of each other; plain ONNX compiled at load against the
+precompiled form, in load time and layers left on the CPU; two DETR graph-B files slower precompiled), whether it
+holds on the Intel NPU, looking for the counter-example first.
 
 ## Changes
 
@@ -115,20 +120,22 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
   original output order). Models whose class 0 is background or unused (yolact, rfdetr, ssdlite) are counted from
   class 1; ssdlite's class output [1, 6×91, H, W] is split into 6 anchors × 91 classes.
 - 2026-11-06 12:3x JST, after the first end-to-end run (an error, not a number, prompted it): the fp16 copy for
-  `cuda16` is cleaned after `convert_float_to_float16`, for every model. For rtdetr_graphB_fp16 the converter
-  inserted the same Cast (same input, same output name) once per consumer of an fp16 constant, so one tensor had
-  several definitions and ONNX Runtime refused the copy as an invalid model. The cleaning drops a node that repeats
-  an earlier node exactly, renames nodes whose name still repeats, and puts the nodes in dependency order (the
-  converter appends the input Casts at the end). None of this changes the computation; the counts are in each
-  `cuda16` record (`fp16_convert`).
-- 2026-11-06 14:3x JST, after looking at first-pass numbers (marked): the `ovnpu_pre` runner copied every output twice
-  per run (`infer()` already returns copies, and the runner copied them again), which inflates the time of models
-  with large outputs (faceparsing: 20 MB). It now takes the copies `infer()` returns, one host copy as in the other
-  cells. The first-pass `ovnpu_pre` times of the first 11 models in the list (6drepnet to dewarp) were taken before
-  the fix; every quiet-pass time (the table) is after it.
-- 2026-11-06 15:3x JST, before the quiet pass: the quiet gate waits at most 10 minutes (was 60), the cap that the
-  jobs sharing this PC agreed for every timing job; a unit that hits it is measured once more at the end. The
-  marker is now taken only when no one holds it (create-new), never overwritten.
+  `cuda16` is cleaned after `convert_float_to_float16`. For rtdetr_graphB_fp16 the converter inserted the same Cast
+  (same input, same output name) once per consumer of an fp16 constant, so one tensor had several definitions and ONNX
+  Runtime refused the copy as an invalid model. The cleaning drops a node that repeats an earlier node exactly,
+  renames nodes whose name still repeats, and puts the nodes in dependency order (the converter appends the input
+  Casts at the end). None of this changes the computation. The counts are in the `cuda16` record (`fp16_convert`) of
+  every model except places_fp16 and dewarp: their fp16 copies were made in that first run, before this change, and
+  kept (both load as they are; their records say `cached`).
+- 2026-11-06 14:2x JST, after looking at first-pass numbers (so this change is marked as made after seeing numbers):
+  the `ovnpu_pre` runner copied every output twice per run (`infer()` already returns copies, and the runner copied
+  them again), which inflates the time of models with large outputs (faceparsing: 20 MB). It now takes the copies
+  `infer()` returns, one host copy as in the other cells. The first-pass `ovnpu_pre` times of the first 9 models in
+  the list (6drepnet to dmcount) were taken before the fix (placed on the machine at 14:26 JST); every quiet-pass time
+  (the table) is after it.
+- 2026-11-06 15:3x JST, before the quiet pass: the quiet gate waits at most 10 minutes (was 60), the cap used by every
+  timing job on this shared machine; a unit that hits it is measured once more at the end. The marker is now taken
+  only when no one holds it (create-new), never overwritten.
 - 2026-11-06 15:3x JST, after the CPU cell of yolact failed (an error, not a number): ONNX Runtime 1.31.1 cannot load
   yolact.onnx at all (`[ShapeInferenceError] Incompatible dimensions` on an FPN Add), so its CPU reference does not
   exist. For such a model only, the reference is OpenVINO on the CPU in fp32 (`ovcpu`: the same ONNX file,
@@ -137,20 +144,20 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
   each ONNX file is also run against the `.tflite` it was converted from (`convert/check_tflite.py`: the zoo's
   original file in the LiteRT interpreter on the CPU, the same input, the line of section 3). 13 of the 52 files
   compute something else: tf2onnx 1.17.0 drops the bias of every FULLY_CONNECTED layer whose `keep_num_dims` is false
-  and whose input has rank 3 (1 to 24 layers per file; 8 of the 13 fail the line). The table stays on the 52 files
-  (the X2E / S26 columns measured them), with a note on those 13 rows. The same 13 `.tflite` files converted with a
-  one-line fix of that handler (`convert/patch_tf2onnx.py`; `<model>_fixed` in `convert/recipe.json`, without
-  `--continue_on_error` except metric3d, where the gemm rewriter's IndexError remains; it is raised before that
-  rewriter changes the graph) are measured in every cell and both passes, in a second table; they are the files of
-  the Hugging Face repos. A `_fixed` file takes its base model's input; an input built from another graph comes from that
-  graph's `_fixed` file where there is one (the DETR graph B files).
+  and whose input rank is not 2 (1 to 24 layers per file; 8 of the 13 fail the line). The table stays on the 52 files
+  (the X2E / S26 columns measured them), with a note on those 13 rows. The same 13 `.tflite` files are converted
+  again with a one-line fix of that handler (`convert/patch_tf2onnx.py`; `<model>_fixed` in `convert/recipe.json`).
+  They are converted without `--continue_on_error`, except metric3d: there the gemm rewriter's IndexError remains,
+  and it is raised before that rewriter changes the graph. The 13 are measured in every cell and both passes, in a
+  second table; they are the files of the Hugging Face repos. A `_fixed` file takes its base model's input; an input
+  built from another graph comes from that graph's `_fixed` file where there is one (the DETR graph B files).
 - 2026-11-06 19:1x JST, during the quiet pass (a Windows Update restart prompted it, not a number): the first-pass
   times are no longer compared with the quiet pass, because the two passes ran on different Windows builds
   (section 6). The quiet pass was also paused once between two units to let another job on the machine take the
   marker, and resumed with the units already measured kept (`pc/quiet_pass.ps1 -ResumeSince`). The NPU cells of the
-  first 8 models (measured 18:19-18:36 JST) are measured once more after the pass and the table uses those: each of
-  their units passed the gate, but the gate readings between them showed 15-24 % whole-CPU load from an unknown
-  source.
+  first 8 models in the list (6drepnet to dis) are measured once more after the pass, and the table uses those: 15 of
+  their 16 units ran between 18:19 and 18:36 JST, and each passed the gate, but the gate readings between them showed
+  15-30 % whole-CPU load from an unknown source.
 - 2026-11-07 01:1x JST, during the quiet pass (the other jobs on the machine asked for it, not a number): while
   another job waits for the machine, the marker is held for 15 minutes and dropped for 15 minutes (before: dropped for
   90 s every 20 minutes, still the rule when no job waits), and after it is taken back the first unit waits 60 s more

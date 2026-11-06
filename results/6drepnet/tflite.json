@@ -1,0 +1,41 @@
+{
+ "model": "6drepnet",
+ "cell": "tflite",
+ "tflite": "litert-community/6DRepNet-HeadPose-LiteRT@6a7d8fe0ca04/6drepnet.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    6
+   ],
+   "max_abs": 3.814697265625e-06,
+   "mean_abs": 1.7384688059488933e-06,
+   "cos": 0.9999999999999838,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.2727322578430176,
+   "ref_max": 16.229740142822266,
+   "ref_range": 17.502471923828125,
+   "max_abs_over_range": 2.179519145767984e-07
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "model": "cpga_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/CPGA-Net-LowLight-LiteRT@e917b2aff0ee/cpga_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    3,
+    256,
+    256
+   ],
+   "max_abs": 4.762411117553711e-05,
+   "mean_abs": 8.622370846940915e-08,
+   "cos": 0.9999999999999424,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 9.999999717180685e-10,
+   "ref_max": 1.0,
+   "ref_range": 1.0,
+   "max_abs_over_range": 4.762411117553711e-05
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

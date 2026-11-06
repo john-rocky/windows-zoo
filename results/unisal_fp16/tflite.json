@@ -1,0 +1,43 @@
+{
+ "model": "unisal_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/UniSal-Saliency-LiteRT@a699e0f86da9/unisal_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    1,
+    256,
+    256
+   ],
+   "max_abs": 1.9073486328125e-05,
+   "mean_abs": 2.109907010439116e-06,
+   "cos": 0.9999999999998548,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -11.561293601989746,
+   "ref_max": 3.1747820377349854,
+   "ref_range": 14.736075401306152,
+   "max_abs_over_range": 1.2943396263047347e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "model": "dewarp",
+ "cell": "tflite",
+ "tflite": "litert-community/DewarpNet-LiteRT@dfc68e3e462a/dewarp.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    2,
+    128,
+    128
+   ],
+   "max_abs": 2.9802322387695312e-06,
+   "mean_abs": 7.014571667962599e-07,
+   "cos": 0.9999999999983721,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -0.9399759769439697,
+   "ref_max": 0.9616344571113586,
+   "ref_range": 1.9016103744506836,
+   "max_abs_over_range": 1.5672149662258906e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}

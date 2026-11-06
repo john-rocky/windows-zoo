@@ -2,12 +2,12 @@
 
 52 single-graph ONNX files of the [LiteRT zoo](https://github.com/john-rocky/LiteRT-Models)'s vision and audio models
 (a few models are two graphs, such as a detector's encoder and decoder), on every processor of one Windows laptop: the
-Intel NPU (two ways), the Intel GPU, the NVIDIA RTX GPU and the CPU. Each file runs on each processor through ONNX
-Runtime or OpenVINO, its outputs are compared with the CPU's fp32 outputs, and the times sit next to the same 52
-files on a Snapdragon X2 Elite and a Galaxy S26 (Qualcomm AI Hub, measured earlier). Each ONNX file is also checked
-against the `.tflite` it was converted from: 13 of the 52 lose the bias of some FULLY_CONNECTED layers in tf2onnx
-1.17.0, so those 13 are converted again with a one-line fix (`convert/patch_tf2onnx.py`) and measured as
-`<model>_fixed`.
+Intel NPU (compiled at load, and as a precompiled blob), the Intel GPU, the NVIDIA RTX GPU and the CPU. Each file runs
+on each processor through ONNX Runtime or OpenVINO, its outputs are compared with the CPU's fp32 outputs, and the
+times sit next to the same 52 files on a Snapdragon X2 Elite and a Galaxy S26 (Qualcomm AI Hub, measured earlier).
+Each ONNX file is also checked against the `.tflite` it was converted from: 13 of the 52 lose the bias of some
+FULLY_CONNECTED layers in tf2onnx 1.17.0, so those 13 are converted again with a one-line fix
+(`convert/patch_tf2onnx.py`) and measured as `<model>_fixed`.
 
 (results paragraph: written after the quiet pass)
 
@@ -38,10 +38,11 @@ power cap on AC), 31.5 GB RAM, Windows 11 Home build 26200.9711 (the table's tim
 
 ## Reproduce
 
-Windows 11 with an Intel Core Ultra NPU and an NVIDIA GPU, Python 3.12, git, and [uv](https://docs.astral.sh/uv/)
-on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Every script writes into the clone
-(`onnx\`, `inputs\`, `runs\`, `out\`, `parity\`, `prof\`, `logs\`; all ignored by git). To try a few models first, add
-`-Only places_fp16,dewarp` to steps 2, 4 and 5.
+Windows 11 with an Intel Core Ultra NPU and an NVIDIA GPU, Python 3.12, git, and [uv](https://docs.astral.sh/uv/) on
+PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Every script writes into the clone, into
+folders git ignores (`onnx\`, `fp16\`, `blobs\`, `inputs\`, `samples\`, `runs\`, `out\`, `parity\`, `prof\`, `logs\`,
+and the venvs). To try a few models first, add `-Only places_fp16,dewarp` to steps 2, 4 and 5 (dewarp has a cell that
+does not run and one that fails the line).
 
 1. Code and venvs (four venvs, 4.2 GB on disk; versions in `pc\req\`):
 
@@ -51,16 +52,19 @@ on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Ev
    ```
 
 2. Rebuild the ONNX files from the zoo's `.tflite` on Hugging Face (the revisions and sha256 are pinned in
-   `convert\recipe.json`): the 52 measured files with tf2onnx 1.17.0 as it is, and the 13 `_fixed` files with the
-   FULLY_CONNECTED bias fix:
+   `convert\recipe.json`): the 52 measured files with tf2onnx 1.17.0 and the two earlier patches of
+   `convert\patch_tf2onnx.py` (a missing `fused_activation_function` read as NONE; handlers for three TFLite ops), and
+   the 13 `_fixed` files with the FULLY_CONNECTED bias fix as well:
 
    ```powershell
    powershell -ExecutionPolicy Bypass -File pc\convert.ps1
    ```
 
-   The last line of `logs\convert.log` counts the files whose graph hash matches the measured file
+   The line before `convert done` in `logs\convert.log` counts the files whose graph hash matches the measured file
    (`convert\graph_signature.py`: ops, attributes, wiring and weights). tf2onnx does not write the same bytes twice,
-   and for a few models it places a Transpose differently from run to run; step 6 checks those by their outputs.
+   and the graph hash can differ too (cpga_fp16 in `facts_raw/tf2onnx_rebuild_2026-11-06.txt`: the same node and
+   weight counts, with a Reshape after a ReduceMin instead of after a ReduceMax); step 6 checks such files by their
+   outputs.
 
 3. Inputs (downloads the zoo's sample images at the pinned commit):
 
@@ -94,7 +98,8 @@ on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Ev
    ```
 
    `check_cpu.py` says `identical` (same output bytes), `close` (within 1e-3 of an output's standard deviation at 16
-   fixed positions and in the mean) or `DIFFERENT` per model. `git diff results RESULTS_WINDOWS.md` then shows your
+   fixed positions and in the mean) or `DIFFERENT` per model, and `not run` for yolact (ONNX Runtime 1.31.1 cannot
+   load it, here or in the table). `git diff results RESULTS_WINDOWS.md` then shows your
    numbers against the table's.
 
 ## Licences

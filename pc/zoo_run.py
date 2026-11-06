@@ -389,7 +389,7 @@ def run_ov(args, rec, feeds):
 
     def once():
         # infer() hands back a copy of every output (share_outputs=False): one host copy, as an app gets it and as
-        # ONNX Runtime returns them. (Before 2026-11-06 14:3x the runner copied the outputs a second time.)
+        # ONNX Runtime returns them. (Before 2026-11-06 14:26 JST the runner copied the outputs a second time.)
         res = request.infer(feed, share_outputs=False)
         return [np.asarray(res[o]) for o in compiled.outputs]
 

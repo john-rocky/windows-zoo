@@ -1,0 +1,212 @@
+{
+ "model": "metric3d_fp16_fixed",
+ "cell": "cpu",
+ "status": "PASS",
+ "table": {
+  "ms": null,
+  "ms_first_pass": 1400.6543499997406,
+  "load_ms": 744.0559000001485,
+  "load_ms_first_pass": 744.0559000001485,
+  "compile_ms": null,
+  "gate": null
+ },
+ "first_pass": {
+  "model": "metric3d_fp16_fixed",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "first",
+  "tag": "",
+  "started": "2026-11-06T18:10:38.063418+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "metric3d_fp16_fixed",
+   "--cell",
+   "cpu",
+   "--pass",
+   "first",
+   "--profile",
+   "--save-outputs"
+  ],
+  "status": "OK",
+  "input_sha256": "6e52fb9a1f8b028495316b68e60994d06b7dc079354122e1913728569e52f233",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     448,
+     448
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\metric3d_fp16_fixed.onnx",
+  "model_sha256": "05beedc220e804dd418a4e75faa20d001505ef64ca79ae558c30290571b2e185",
+  "load_ms": 744.0559000001485,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     448,
+     448
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "profiled_run_ms": 555.2474999999504,
+  "placement": {
+   "nodes_by_provider": {
+    "CPUExecutionProvider": 2600
+   },
+   "cpu_ops": {
+    "Conv": 128,
+    "ReorderOutput": 118,
+    "Reshape": 363,
+    "Concat": 84,
+    "Add": 403,
+    "Slice": 324,
+    "Transpose": 55,
+    "ReduceMean": 86,
+    "Sub": 117,
+    "Mul": 470,
+    "Sqrt": 44,
+    "Reciprocal": 43,
+    "Gemm": 76,
+    "FusedMatMul": 12,
+    "Softmax": 29,
+    "MatMul": 16,
+    "Tanh": 36,
+    "Resize": 21,
+    "ReorderInput": 76,
+    "Relu": 29,
+    "AveragePool": 12,
+    "Sigmoid": 40,
+    "ReduceSum": 1,
+    "Div": 3,
+    "Exp": 1,
+    "FusedConv": 12,
+    "Pad": 1
+   },
+   "profile_bytes": 4637951,
+   "graph_nodes": 2546
+  },
+  "first_run_ms": 506.00429999985863,
+  "warmup": 5,
+  "ms": {
+   "median": 1400.6543499997406,
+   "p10": 1349.7643000000608,
+   "p90": 1457.1508000003632,
+   "min": 1310.6504000002133,
+   "max": 1712.6741000001857,
+   "n": 30
+  },
+  "ms_all": [
+   1364.5596,
+   1355.7487,
+   1411.1159,
+   1489.8134,
+   1349.7643,
+   1350.9205,
+   1396.9901,
+   1375.2163,
+   1712.6741,
+   1431.8861,
+   1374.1936,
+   1422.258,
+   1369.837,
+   1432.1683,
+   1414.6004,
+   1387.709,
+   1310.6504,
+   1433.8401,
+   1457.1508,
+   1397.526,
+   1391.4453,
+   1338.2245,
+   1403.7827,
+   1434.7139,
+   1412.8369,
+   1409.0781,
+   1458.7441,
+   1314.5145,
+   1351.6297,
+   1418.7594
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.5237884521484375,
+    "max": 5.8365631103515625,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1,
+     448,
+     448
+    ],
+    "sha256": "54517fa4ea2975706178b2765b29910237f17cdffeebf2f873ec1afe82466ae0",
+    "mean": 2.219660116777736,
+    "std": 1.3385836835615463,
+    "sample_pos": [
+     24061,
+     24693,
+     49386,
+     50018,
+     74079,
+     74711,
+     99404,
+     100036,
+     124729,
+     125361,
+     149422,
+     150054,
+     174747,
+     175379,
+     199440,
+     200072
+    ],
+    "sample": [
+     2.165130615234375,
+     5.10296630859375,
+     5.3910675048828125,
+     2.3721771240234375,
+     2.0948028564453125,
+     2.2445526123046875,
+     1.0689544677734375,
+     2.121612548828125,
+     1.749237060546875,
+     1.4894561767578125,
+     1.290985107421875,
+     0.8876495361328125,
+     1.051361083984375,
+     1.0966033935546875,
+     0.8866119384765625,
+     0.8732452392578125
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-06T18:11:30.363119+09:00"
+ },
+ "compile": null,
+ "quiet": null,
+ "parity": null,
+ "stderr_fallback_lines": []
+}

@@ -1,0 +1,273 @@
+{
+ "model": "yunet_fp16",
+ "cell": "tflite",
+ "tflite": "litert-community/YuNet-Face-LiteRT@f08a6874cf8a/yunet_fp16.tflite",
+ "tflite_sha256_ok": true,
+ "onnx_cell": "cpu",
+ "interpreter": "ai-edge-litert 2.2.0",
+ "inputs_paired": "by name",
+ "outputs_paired": [
+  {
+   "onnx": "serving_default_output_0_output",
+   "tflite": "serving_default_output_0_output"
+  },
+  {
+   "onnx": "serving_default_output_1_output",
+   "tflite": "serving_default_output_1_output"
+  },
+  {
+   "onnx": "serving_default_output_2_output",
+   "tflite": "serving_default_output_2_output"
+  },
+  {
+   "onnx": "serving_default_output_3_output",
+   "tflite": "serving_default_output_3_output"
+  },
+  {
+   "onnx": "serving_default_output_4_output",
+   "tflite": "serving_default_output_4_output"
+  },
+  {
+   "onnx": "serving_default_output_5_output",
+   "tflite": "serving_default_output_5_output"
+  },
+  {
+   "onnx": "serving_default_output_6_output",
+   "tflite": "serving_default_output_6_output"
+  },
+  {
+   "onnx": "serving_default_output_7_output",
+   "tflite": "serving_default_output_7_output"
+  },
+  {
+   "onnx": "serving_default_output_8_output",
+   "tflite": "serving_default_output_8_output"
+  },
+  {
+   "onnx": "serving_default_output_9_output",
+   "tflite": "serving_default_output_9_output"
+  },
+  {
+   "onnx": "serving_default_output_10_output",
+   "tflite": "serving_default_output_10_output"
+  },
+  {
+   "onnx": "serving_default_output_11_output",
+   "tflite": "serving_default_output_11_output"
+  }
+ ],
+ "status": "PASS",
+ "fails": [],
+ "reason_candidate": null,
+ "outputs": [
+  {
+   "name": "serving_default_output_0_output",
+   "shape": [
+    1,
+    6400,
+    1
+   ],
+   "max_abs": 4.76837158203125e-07,
+   "mean_abs": 9.012874215841294e-08,
+   "cos": 0.9999999999999867,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 0.3455334007740021,
+   "ref_max": 0.8204449415206909,
+   "ref_range": 0.47491154074668884,
+   "max_abs_over_range": 1.0040546865915462e-06
+  },
+  {
+   "name": "serving_default_output_1_output",
+   "shape": [
+    1,
+    1600,
+    1
+   ],
+   "max_abs": 2.384185791015625e-07,
+   "mean_abs": 6.400048732757568e-08,
+   "cos": 0.9999999999999906,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 0.35257163643836975,
+   "ref_max": 0.8237805962562561,
+   "ref_range": 0.47120895981788635,
+   "max_abs_over_range": 5.059720833697792e-07
+  },
+  {
+   "name": "serving_default_output_2_output",
+   "shape": [
+    1,
+    400,
+    1
+   ],
+   "max_abs": 3.5762786865234375e-07,
+   "mean_abs": 5.1856040954589843e-08,
+   "cos": 0.999999999999991,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 0.37890535593032837,
+   "ref_max": 0.7079446315765381,
+   "ref_range": 0.3290392756462097,
+   "max_abs_over_range": 1.086885047233307e-06
+  },
+  {
+   "name": "serving_default_output_3_output",
+   "shape": [
+    1,
+    6400,
+    1
+   ],
+   "max_abs": 7.152557373046875e-07,
+   "mean_abs": 2.6758658813552748e-08,
+   "cos": 0.9999999999997833,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 2.1854525134035185e-10,
+   "ref_max": 0.9969427585601807,
+   "ref_range": 0.9969427585601807,
+   "max_abs_over_range": 7.174491525849334e-07
+  },
+  {
+   "name": "serving_default_output_4_output",
+   "shape": [
+    1,
+    1600,
+    1
+   ],
+   "max_abs": 1.1026859283447266e-06,
+   "mean_abs": 2.603596112897219e-08,
+   "cos": 0.9999999999994317,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 1.879573718888139e-10,
+   "ref_max": 0.9673262238502502,
+   "ref_range": 0.9673262238502502,
+   "max_abs_over_range": 1.1399318049661714e-06
+  },
+  {
+   "name": "serving_default_output_5_output",
+   "shape": [
+    1,
+    400,
+    1
+   ],
+   "max_abs": 1.6391277313232422e-07,
+   "mean_abs": 2.4482878426823617e-08,
+   "cos": 0.9999999999907175,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": 5.033709626900418e-08,
+   "ref_max": 0.13382382690906525,
+   "ref_range": 0.13382378220558167,
+   "max_abs_over_range": 1.2248403865952578e-06
+  },
+  {
+   "name": "serving_default_output_6_output",
+   "shape": [
+    1,
+    6400,
+    4
+   ],
+   "max_abs": 2.5033950805664062e-06,
+   "mean_abs": 2.724736620507429e-07,
+   "cos": 0.9999999999998479,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.133711338043213,
+   "ref_max": 2.072967052459717,
+   "ref_range": 3.2066783905029297,
+   "max_abs_over_range": 7.80681682322928e-07
+  },
+  {
+   "name": "serving_default_output_7_output",
+   "shape": [
+    1,
+    1600,
+    4
+   ],
+   "max_abs": 2.1457672119140625e-06,
+   "mean_abs": 2.9783468335153885e-07,
+   "cos": 0.9999999999998319,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -0.6906393766403198,
+   "ref_max": 1.9585316181182861,
+   "ref_range": 2.6491708755493164,
+   "max_abs_over_range": 8.099768994588274e-07
+  },
+  {
+   "name": "serving_default_output_8_output",
+   "shape": [
+    1,
+    400,
+    4
+   ],
+   "max_abs": 2.2649765014648438e-06,
+   "mean_abs": 3.4562239306978884e-07,
+   "cos": 0.9999999999998045,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.3002468347549438,
+   "ref_max": 1.9827858209609985,
+   "ref_range": 3.2830326557159424,
+   "max_abs_over_range": 6.89903738094531e-07
+  },
+  {
+   "name": "serving_default_output_9_output",
+   "shape": [
+    1,
+    6400,
+    10
+   ],
+   "max_abs": 2.473592758178711e-06,
+   "mean_abs": 2.7426593533164125e-07,
+   "cos": 0.999999999999823,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.599047303199768,
+   "ref_max": 2.9505698680877686,
+   "ref_range": 4.549617290496826,
+   "max_abs_over_range": 5.436924910905177e-07
+  },
+  {
+   "name": "serving_default_output_10_output",
+   "shape": [
+    1,
+    1600,
+    10
+   ],
+   "max_abs": 2.5033950805664062e-06,
+   "mean_abs": 2.3401699218084105e-07,
+   "cos": 0.9999999999998999,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.1607016324996948,
+   "ref_max": 2.6731112003326416,
+   "ref_range": 3.833812713623047,
+   "max_abs_over_range": 6.529779276047725e-07
+  },
+  {
+   "name": "serving_default_output_11_output",
+   "shape": [
+    1,
+    400,
+    10
+   ],
+   "max_abs": 5.125999450683594e-06,
+   "mean_abs": 5.190436495468021e-07,
+   "cos": 0.9999999999997541,
+   "nan": 0,
+   "inf": 0,
+   "ref_min": -1.5948017835617065,
+   "ref_max": 2.713158130645752,
+   "ref_range": 4.307960033416748,
+   "max_abs_over_range": 1.189890205786807e-06
+  }
+ ],
+ "reference": "the source .tflite in the LiteRT interpreter on the CPU",
+ "line": {
+  "cos": 0.99,
+  "argmax": 0.99
+ }
+}
