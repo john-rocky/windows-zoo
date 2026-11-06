@@ -1,0 +1,528 @@
+{
+ "_about": {
+  "what": "how each of the 52 ONNX files of the table was made from the zoo's HF .tflite (x2e lane, 2026-10-30, onnx_wide.json)",
+  "tools": "tensorflow 2.21.0, tf2onnx 1.17.0 (+ patch_tf2onnx.py), onnx 1.23.2, opset 17; fold_fp16 = fold_deq.py first; continue_on_error = tf2onnx --continue_on_error",
+  "onnx_sha256": "sha256 of the ONNX file the table was measured on",
+  "graph_hash": "graph_signature.py hash of the measured file: ops, attributes, wiring and weights, names and node order ignored (tf2onnx 1.17.0 changes those from run to run)"
+ },
+ "6drepnet": {
+  "repo": "litert-community/6DRepNet-HeadPose-LiteRT",
+  "revision": "6a7d8fe0ca042d1524e3912d3371a61d0af45528",
+  "file": "6drepnet.tflite",
+  "tflite_sha256": "44cc9679a18242fac31c9ad369465caad93a34c721eed3fe0ff003f712769dee",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "7a0ede49b22803e4e6bacbd3549dbde4e4892217022ef63462a974dd452417ea",
+  "graph_hash": "f78b4331e0fd0eb00de7ba3bc40bf9d5902fb57c09edf42a3750e96d87b993c3"
+ },
+ "faceparsing": {
+  "repo": "litert-community/BiSeNet-Face-Parsing-LiteRT",
+  "revision": "62996ba4ebcfd9a44b45f1dd5325dcd7e4f09955",
+  "file": "faceparsing.tflite",
+  "tflite_sha256": "23923022a8f4149fe1f5df5426a18f3a202dd605454539ed33c5d76f3035e907",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "8247c4cfcd7b1656a8d38a38cbfe760403afba5fffd7a8c27710e79bdeb88c2c",
+  "graph_hash": "532365a765c8661513f911797b291fbaeee9b64f7c786c5d5dae6708be663d03"
+ },
+ "cpga_fp16": {
+  "repo": "litert-community/CPGA-Net-LowLight-LiteRT",
+  "revision": "e917b2aff0eeb3ca05209e69ab9b719f46949a72",
+  "file": "cpga_fp16.tflite",
+  "tflite_sha256": "8b125569618cbc342b3c0a095f712dfc899ac739e896208baf13cb1769c4c319",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "2efa5ad1b0d0e60982b42dde4c7cf1e102fad1d7ac0d8b9b5dae4a4905face56",
+  "graph_hash": "ecb482329a2967041570e68a096f4e40bd9f3f2479279e2376c70d6233e09a7f"
+ },
+ "clothseg": {
+  "repo": "litert-community/Cloth-Segmentation-U2Net-LiteRT",
+  "revision": "37e0b75777a6c3dfc7533aeef697aa6136716bfe",
+  "file": "clothseg.tflite",
+  "tflite_sha256": "71b488370fe0ed204a8f7c09332ae4e6e6562c40148caec543c75b4d5153b082",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "e08abc7030c25fb8b5477b6009f9b7705c0d8430d5c3717725ff5d73961f096e",
+  "graph_hash": "4c8bf8f4b92b712a153df707f509cf279733cfe3c780d4b02774f6491cb4b3b9"
+ },
+ "dfine_graphA_fp16": {
+  "repo": "litert-community/D-FINE-S-LiteRT",
+  "revision": "b662bc69f7d8b8278acaf57ca0831e194a0bbed4",
+  "file": "dfine_graphA_fp16.tflite",
+  "tflite_sha256": "9f9bbaa3a063bbc9612f1758e7428fab4427c9d229b02d611023819947891594",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "fdcb173a118098fd7b1d1218010a23c947722d7252f9c346af71ce7cac83f67a",
+  "graph_hash": "82b681c0be48498ed2a17fcfcd32124c0368d522aabbbc69c84c58161c7d042d"
+ },
+ "dfine_graphB_fp16": {
+  "repo": "litert-community/D-FINE-S-LiteRT",
+  "revision": "b662bc69f7d8b8278acaf57ca0831e194a0bbed4",
+  "file": "dfine_graphB_fp16.tflite",
+  "tflite_sha256": "628eb9b3b8be096b57f626c7a0e01403781c3dd37466bea7bcdaf3e63076e45d",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "af07e86b79413782d478dab7b1e8fe6db79e993ae17b7a622554d4ab889d2c39",
+  "graph_hash": "e81a91f9d8300a29f3b3265cb133a654ed75e8e5555f728ead929429a4c4ae46"
+ },
+ "dinov2_s_fp16": {
+  "repo": "litert-community/DINOv2-ViT-S14-LiteRT",
+  "revision": "5b584fb82b9283b0d7baf35dbe8546169a205201",
+  "file": "dinov2_s_fp16.tflite",
+  "tflite_sha256": "c0697093316b777de2c79ed895f74c864136840309ecb2aab6f51cbe0c228e7f",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "8f36d01fe1635da9d09b4958e17a9b43c8b25438a4422e59cab1f4414d506625",
+  "graph_hash": "585c73e9a855a48280860f523d16546fc49d0b5d84251892a06957b8d18dd81b"
+ },
+ "dis": {
+  "repo": "litert-community/DIS-ISNet-LiteRT",
+  "revision": "1b966dbe2f33bd5ca1299cf94fbab59265210b6b",
+  "file": "dis.tflite",
+  "tflite_sha256": "0c3c93b6a2a65e7c69137ec82596944e6bfb97d982c75bab03acb0738dbaa087",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "4101d87d06f48169718b0a6dbe844b0c861b69289493f9ed6fe9e5ec08dda95e",
+  "graph_hash": "990f7c9be2c11ee87790c5f91094f4ef2cd624544f60b8a2146525b2e352f3a9"
+ },
+ "dmcount": {
+  "repo": "litert-community/DM-Count-Crowd-LiteRT",
+  "revision": "5934338595e4d963b9f73f1c5b903bce4abc5b7a",
+  "file": "dmcount.tflite",
+  "tflite_sha256": "1d997cd01b508e512c94f835140fad043eab98f81daa82b713dc22c340e9fad1",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "3e5a6c65a35f68f3115b23483f07cd7f0c1e7ad3c87db39638f1184852d96197",
+  "graph_hash": "d4bee586f4b7cbcbfb389157d13937e4c8caf63a6e02ac576735886d73ab59fd"
+ },
+ "dehazeformer_base": {
+  "repo": "litert-community/DehazeFormer-MCT-LiteRT",
+  "revision": "7249e3942b1a762f0c9691487537f171f10f3f5d",
+  "file": "dehazeformer_base.tflite",
+  "tflite_sha256": "ebd9756d55fbcf519a2887bfcef3b85788fec67fd81eb1642539fb8afa7c001e",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "2f9b492cbfa009342ff770127467c222a2ede17af49997bc4df9cfc05bf91c82",
+  "graph_hash": "a35d9daf7cca3e3e02d2862d221d51afeb6930e9dc0a3ab87235d5403137ed13"
+ },
+ "dewarp": {
+  "repo": "litert-community/DewarpNet-LiteRT",
+  "revision": "dfc68e3e462a6eb7eb8c4dbbff4049e3bd3cc9e3",
+  "file": "dewarp.tflite",
+  "tflite_sha256": "0f72fc016f50bd16cc2055e0b499a4317702ed81b3ff6672fd9affe0bad6d064",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "4dde2be5fa86a4b4b1dd870b0ba89dc5da6e2165b90992c13a96450935eb04c2",
+  "graph_hash": "f98651a404e61458da6687c4f7d3f1b3aa38adf2948691bedecb2a01786f8c60"
+ },
+ "edsr": {
+  "repo": "litert-community/EDSR-x4-LiteRT",
+  "revision": "670eaa25a390838226c7e3e61b0dd1ea4e5bc3ba",
+  "file": "edsr.tflite",
+  "tflite_sha256": "77fdb8655436844e94187ce6675f5c8c73ed5bf3080327d8ebe96e15da829bde",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "4d42e33b403ba0ef711843b78124dbd3df9b991ed5c6e3196ef6c5bde9cdd7b6",
+  "graph_hash": "77ca1def766e3f202b38db6b8d8baf69746ba260ceaf4796e37237c4cda39767"
+ },
+ "style_mosaic_fp16": {
+  "repo": "litert-community/Fast-Neural-Style-LiteRT",
+  "revision": "1a697a4af21a3a133b710d1ec8e2d7a7bd918594",
+  "file": "style_mosaic_fp16.tflite",
+  "tflite_sha256": "dc6fe40fd4da73b2b9ad585dba20264f2b863ed587d33dc7ab6bd493c8af5911",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "fa49f475fc42ee4beffd7fb0f619cbf70f799de371c23bb29ba39bc02acda642",
+  "graph_hash": "cb47f0f51860ed29efc498f10f9f066aab2819acab914fbd6e46ab2a046b7023"
+ },
+ "hsemotion_b0_fp16": {
+  "repo": "litert-community/HSEmotion-B0-LiteRT",
+  "revision": "0da19dcc4e0c7fb426f099247d89bc28f9fe089f",
+  "file": "hsemotion_b0_fp16.tflite",
+  "tflite_sha256": "8a59e85cd96aefa39752a75c9cba7f1b3dd38ae3bf98d8ea2835e12b0dbf3735",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "b947b48e39c1b947660645045543cafabc4d9cfbc591cbffe2b28be8da2ff5d0",
+  "graph_hash": "5efb6b416e594ddb5edb6918b459075e70e48d36052c3cd80965af28e1b6ab03"
+ },
+ "gaze_fp16": {
+  "repo": "litert-community/L2CS-Gaze360-LiteRT",
+  "revision": "f0c19a658e0a67c913e5704b051378200021e85d",
+  "file": "gaze_fp16.tflite",
+  "tflite_sha256": "b16a8158ec0e252ee105e717177149655a60b71c8a1eccd97b873bf640c2a13d",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "14ba2bd0ea00f09c23f5a04b672b5e202b9723343beb773d8bb61ed06d2ab939",
+  "graph_hash": "1430d3772cde1e69b8eb3cec5a99835925b5ab27432aa7f6d100b33115b3673f"
+ },
+ "mlsd_fp16": {
+  "repo": "litert-community/M-LSD-tiny-LiteRT",
+  "revision": "ae7c5698d5bbef1976aa5a1f7ad7b9b28d324e3c",
+  "file": "mlsd_fp16.tflite",
+  "tflite_sha256": "e5da930ae4a0dacd7725b0126a1d1481eaac3b3f537000f7f981461d1b1305f2",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "73d41b40feb169e88bfa6428c5a4b2c735069d9848538f6d47535483a50c3537",
+  "graph_hash": "f5bb0c58b6c00fab2bcf80c09167e349ded0fbaa1f743f461f97344c361bbdff"
+ },
+ "migan_fp16": {
+  "repo": "litert-community/MI-GAN-512-Places2-LiteRT",
+  "revision": "179a35d8e8a518f6253f9c42fc9b412c6438cf7c",
+  "file": "migan_fp16.tflite",
+  "tflite_sha256": "ef53f8dca69e5ce29629441128322c4d9a0a527b2a043703e0ab497f2463c25f",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "2877b94fe9753e8496a1560bef5d534e6debe0f55a260bd46b7b1705c2e28c3a",
+  "graph_hash": "9bbe1b8f960781ba615fa84203b097827a7c44d78be5a31f93d88e5accf83bf4"
+ },
+ "modnet": {
+  "repo": "litert-community/MODNet-LiteRT",
+  "revision": "4d5bd22bde15c8ae5e215ca4799513844979a431",
+  "file": "modnet.tflite",
+  "tflite_sha256": "f7d1e9eca9562abddb60e4b0a3ed0c29441ef09cd621954978f1613914cc64bc",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "062f6d9f76a43ec14b67376a2da77d604e9f0968cf835fa190e654875e3fc090",
+  "graph_hash": "8f05ca107f8cb4aafae20eba33cd928002ef8e55984fba7a5e42d36a04a04b68"
+ },
+ "movinet_a0_stream": {
+  "repo": "litert-community/MoViNet-A0-Stream-LiteRT",
+  "revision": "a21743c58801227b8265f47b136cb096fe22989d",
+  "file": "movinet_a0_stream.tflite",
+  "tflite_sha256": "0565d6e2173caf3e144e6a0a6461edfef9dc5cccacf9a093f311f8a8f05434c8",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "65afaf7f1f9f1ea3f200162e9b3c6b907ae27bfb246d3b6f789469ea98346928",
+  "graph_hash": "61ba1f2507dbbe1df7feebf46c218b1396a9c0358012d6c501a4f7ca9bd4614a"
+ },
+ "nafnet_fp16": {
+  "repo": "litert-community/NAFNet-GoPro-width32-LiteRT",
+  "revision": "84fa01bda5ea09a562e83fa1863b951453b5ccf0",
+  "file": "nafnet_fp16.tflite",
+  "tflite_sha256": "8e749782f7c8a6e462ba7b457724edd089216fa3a25f9d5f83d0caaae7158507",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "9e3e1699ffddf39a17a9572ef7da7030da6b96827f681b60e59c041a5523d6e3",
+  "graph_hash": "0b6d854f8b04ff47b1a02bb5c3dde432bb601d5bfdcd75820b801086b3501657"
+ },
+ "nafnet_sidd_width32_fp16": {
+  "repo": "litert-community/NAFNet-SIDD-width32-LiteRT",
+  "revision": "59984b5234b24ccf2f324ce0ac49cd640b9d5b2c",
+  "file": "nafnet_sidd_width32_fp16.tflite",
+  "tflite_sha256": "f8fbaa422411683c53e802cf7cc7cf9be0a0de00886ad4af057232e26b172a0c",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "a9ca266868fad47ce1d19ae2677809e8e69a3c131afbe54ba24c431fe0dc069a",
+  "graph_hash": "97797da3aeab22dd8c8952fc4b17ec15579a91c0a0fd6f23cb77d6eb81a3327d"
+ },
+ "pidnet_s": {
+  "repo": "litert-community/PIDNet-S-Cityscapes-LiteRT",
+  "revision": "3d79fd7a49278c81649fbe180091f96feead56fd",
+  "file": "pidnet_s.tflite",
+  "tflite_sha256": "9f11e66b223eefb9a35ca70bf1451b6a0104623e4c178e422f7cf3eb72eace26",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "7cada1105aff00210052e531f7a4bec18b81bc6d1e868a1b27c246aefb54ca64",
+  "graph_hash": "dc522116567fbb7655021bb1b35eb93f38524d406e7f2d2bbf0b96d649d3a74b"
+ },
+ "ppocr_det_fp16": {
+  "repo": "litert-community/PP-OCRv5-LiteRT",
+  "revision": "f4bcc36c81910abb1acf2401d07a570e6fa37a32",
+  "file": "ppocr_det_fp16.tflite",
+  "tflite_sha256": "b635b1d7f0e171a19beda7e8f386a62d4f0a3a1c46ed42a09603a902f2059ccc",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "6a6a9e4b650cb0cf9cdbce27febbef80da03a03cff04f228fb98daced51b0dc5",
+  "graph_hash": "e8d38ac657f0da3334f475ec7f0775639aa7db8177545f7388c6d62f204bea5b"
+ },
+ "ppocr_rec_fp16": {
+  "repo": "litert-community/PP-OCRv5-LiteRT",
+  "revision": "f4bcc36c81910abb1acf2401d07a570e6fa37a32",
+  "file": "ppocr_rec_fp16.tflite",
+  "tflite_sha256": "ef7bb5aba20a1717101f0f112dd8cb1ed8b043ebaf96af05a395c6905ca66456",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "75e18c231a575f10b238495960a110b282294219ae4e4ecbc90b4727783b020f",
+  "graph_hash": "b2028819c6883949e0479d4b320cb02a46963582d5e6363e3aacb22f6584e105"
+ },
+ "places_fp16": {
+  "repo": "litert-community/Places365-ResNet18-LiteRT",
+  "revision": "84c7567db15cf832bbeae925a0e53ddc3df9008a",
+  "file": "places_fp16.tflite",
+  "tflite_sha256": "8eb6c7ee5ec21be435d6d11f24bd68e13199bb457ff4c01fb07bde213f289d39",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "9c48bb0b2dd6ad719a769a55ec1e53191db846bc849127b52dd75e98fafd3097",
+  "graph_hash": "44d43e912c74bc368952a1896b94d45060344f99d27d2287c7bf8cca5454953b"
+ },
+ "plantnet": {
+  "repo": "litert-community/PlantNet-300K-ResNet18-LiteRT",
+  "revision": "54f7b14eda047a73bc1f3c9cacb16b14e2146acc",
+  "file": "plantnet.tflite",
+  "tflite_sha256": "6f59f046c6a86593713aca76a3ab7bb55b520265eb66f5a77a114e450b1ccbf5",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "53bbc7d65df5ce97eeffd7b49443fcd1a9849ce66c3c2171387a07dd42a2917e",
+  "graph_hash": "2375eba11c66200477c2e9c4ae6074b3adabec5ac2145bb1c190b63d5a6a1def"
+ },
+ "rfdetr_graphA_fp16": {
+  "repo": "litert-community/RF-DETR-Nano-LiteRT",
+  "revision": "de052d53117ab26ccae6718713628ab6fe1683c5",
+  "file": "rfdetr_graphA_fp16.tflite",
+  "tflite_sha256": "de71a9c0c3fb2e1c617f3a79b2ce3541ea33b7ceb9bd5e7edd752b067efe33a1",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "d6bc14344bcb8073fd7fb3d8aa9c82bf1f2666b436139df4e5d857c074bc573c",
+  "graph_hash": "84306955990a0e599ad04e18c6670c9d3ddaddb80286c9a35d22fa2375b6f1e5"
+ },
+ "rfdetr_graphB_fp16": {
+  "repo": "litert-community/RF-DETR-Nano-LiteRT",
+  "revision": "de052d53117ab26ccae6718713628ab6fe1683c5",
+  "file": "rfdetr_graphB_fp16.tflite",
+  "tflite_sha256": "ced9a6b29f8196c6d66c9864a11f4fd2d7e23bb5ab2d0d83f49101f85321fc86",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "59b0e54a91a329515aa50b0bf3500e3f983c55b6d227f381eb81c683e0ae4ccf",
+  "graph_hash": "9078f6fd92a153d6b0d61821c93d9eb73fcf32aaa92ce6614fb1655df5bc52f4"
+ },
+ "rtdetr_graphA_fp16": {
+  "repo": "litert-community/RT-DETRv2-S-LiteRT",
+  "revision": "60f16dbbf37d9b17a6cba5a057f1f27cd5ac4181",
+  "file": "rtdetr_graphA_fp16.tflite",
+  "tflite_sha256": "b604c6a6907549cf173133f39d503da96a0a737eab8f62e716419075a3323034",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "f7c4a6cb3af2a03bdc0c2efc0b4dcff81b4463fe60955f9379f708a31471a64c",
+  "graph_hash": "60a94105154d87dfcdba898205fc68dace59a46f0dedc8ee7ad5c08d7dd451db"
+ },
+ "rtdetr_graphB_fp16": {
+  "repo": "litert-community/RT-DETRv2-S-LiteRT",
+  "revision": "60f16dbbf37d9b17a6cba5a057f1f27cd5ac4181",
+  "file": "rtdetr_graphB_fp16.tflite",
+  "tflite_sha256": "fef385321b21a637652b06e70bb80a7d41768e9e2332cebaa86a24af5c9190b8",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "4e057bf254c87e28508b7850a6f4b5da24fcc42fbbac9125d4dcccb1470f9d51",
+  "graph_hash": "54df0729af5e2d8bb735db59b1ff6e65ba9bbf74d7d03b44e03cd210216868f5"
+ },
+ "rtm_animal_fp16": {
+  "repo": "litert-community/RTMPose-Animal-AP10K-LiteRT",
+  "revision": "1daee634c9db6889268124735374e6a9c1c2fc7b",
+  "file": "rtm_animal_fp16.tflite",
+  "tflite_sha256": "7fbfc03239cebc1f657efab722849bc9b30d36d3d4371118aed2aaf4041e742f",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "401a657ea5aefcef95ebf321fe62906fb9d9322a484e26dd2bb0b4f49438a91f",
+  "graph_hash": "1b896922a6f7e21cefff33069d8735735d1974c66606beddd5b666b459f5b7eb"
+ },
+ "rtm_face_fp16": {
+  "repo": "litert-community/RTMPose-Face-WFLW-LiteRT",
+  "revision": "064ec3a623667ef50e3963d4721390b4e6f237f3",
+  "file": "rtm_face_fp16.tflite",
+  "tflite_sha256": "652788790a2dac0ff117e5bc33c17eeb7048fd7ac0e6642e98b9fb60e65e24c7",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "bb05d3ccf0625eb1b0279f61ca3e57f8ea97b0ce57b738d7fac8c1a568d67428",
+  "graph_hash": "4b57125525b775a128ed182a4c261028ba68a258cef095eb595486a7476641a7"
+ },
+ "rtmhand_fp16": {
+  "repo": "litert-community/RTMPose-Hand-LiteRT",
+  "revision": "df8c0805d04910fc7ff02800e43fdda38a415309",
+  "file": "rtmhand_fp16.tflite",
+  "tflite_sha256": "8b48a941de7b6f5ac61b43bb68b18f253bc651e0bcbc89a6d11bb5a5f9288160",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "d67dd75c36113cc9ce085b087a1cd7a23f65f30b0687b161cd4c708f040df136",
+  "graph_hash": "1385ceba2c34a740e1902c64bae9aeb1064e677e75aded3634314543246cba3d"
+ },
+ "rtmpose_s_fp16": {
+  "repo": "litert-community/RTMPose-s-LiteRT",
+  "revision": "9cc07fa96de442bcc568f2cbb442e94fbfe4dac2",
+  "file": "rtmpose_s_fp16.tflite",
+  "tflite_sha256": "89f2d5c921bd824a39b37fc718550909cbb60d90e1cba48aa88b3ef71fab631d",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "6c802b86a0f976f700afc336916a6db593df098b11568803e96d749ef6c8b9f3",
+  "graph_hash": "e261ce45fb4d4ea2ff3c2e20322ddac3463e5019a62ae5a2d9383904396701c3"
+ },
+ "rtmw_fp16": {
+  "repo": "litert-community/RTMW-m-WholeBody-LiteRT",
+  "revision": "6f5203e1719985be16e9ec8c1929968722d0b2ed",
+  "file": "rtmw_fp16.tflite",
+  "tflite_sha256": "66f79625d2054dfc5021fa22b38f0b76a1d5f7111cc790d5d9b65ee04a5985d6",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "936dd1b47438dd6c79ab2ba32418e791a15dd205bf8df14e905243c80ec195b9",
+  "graph_hash": "d911d4d9535b9275ed5f02f9a8515f136cfc43e93e3d7fc4371c362439a2b3d3"
+ },
+ "sinet": {
+  "repo": "litert-community/SINet-V2-Camouflage-LiteRT",
+  "revision": "3863d70a7f738df7d5421a72b1408631b8b5ecd6",
+  "file": "sinet.tflite",
+  "tflite_sha256": "1f8b8b6ae40a0e7988c12f1feb291b90bdf6c6ecfeba4025dd11a2f8cac6b94d",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "f642ca17d68b7bcd359a2087c333665062f49875f1c26eeceb8938b6898c6434",
+  "graph_hash": "676e25b4877842d5d0edaa4734e39d24c164eb5569383493872f1e61681a829c"
+ },
+ "portrait": {
+  "repo": "litert-community/U2Net-Portrait-Sketch-LiteRT",
+  "revision": "5c4f635ba46762a37f8a7c9f511855d0e984b322",
+  "file": "portrait.tflite",
+  "tflite_sha256": "83d7f0d698682eee2380cf09643560aabeacf30c0bd8083dc07ce47071afdc7d",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "21583a62c262134c1e975b79f2d13eaa24f7e81b945847feb59cd2fc0d678057",
+  "graph_hash": "679a79aa6e229283103c5d054c9fe07b66685f16e0ef5afb2bd9f0fa9fe59cd5"
+ },
+ "ufld": {
+  "repo": "litert-community/Ultra-Fast-Lane-Detection-LiteRT",
+  "revision": "00279fd6c85a654452754f56021ce336fb70e38f",
+  "file": "ufld.tflite",
+  "tflite_sha256": "b2e42bfb65c7d629d30744d5200d66e93f77e8c9fc5ed786f9dd041ef9c231b6",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "860ec2b28849f7cd95b272a3a988bd7c0d27b0c91a2a9e8ada2e12b96e6560fd",
+  "graph_hash": "75fa69a300714516fe40e93db03dbcc39ffcee98bef9b26f84c4ad6e209427cb"
+ },
+ "unisal_fp16": {
+  "repo": "litert-community/UniSal-Saliency-LiteRT",
+  "revision": "a699e0f86da9adc73d2fbf210a673870bfef8b72",
+  "file": "unisal_fp16.tflite",
+  "tflite_sha256": "60121fd9701d474e130f7ac6c2a45bdf48390c6157f640ff5ac01f22f7a0fe65",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "046c6a149c3deaa53b28a8bf2182ec4692f9d4e1414b7ee5f7d14d2aa6a49a47",
+  "graph_hash": "85419a67d161c69de64663e9792cc49cf3d5aa0ca8dabc99eafcc9b0e48ba95c"
+ },
+ "vrwkv_s_fp16": {
+  "repo": "litert-community/Vision-RWKV-S-LiteRT",
+  "revision": "184992fed3c7bb2761220287bcd0a496959e4e39",
+  "file": "vrwkv_s_fp16.tflite",
+  "tflite_sha256": "8015269594520f50e4ce6fb3bf4812a79ec5414fc66373370f5e2739ef545b4d",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "12184150736b7ec227a0a98ca6fa70ab69c8894ecb9cba800ce2537c6d75aaed",
+  "graph_hash": "209c36531b83ad883b3f07279b42c8802d00d630c73070373cb053e35536d0fa"
+ },
+ "yolact": {
+  "repo": "litert-community/YOLACT-ResNet50-LiteRT",
+  "revision": "3ecb14b9c4635cd87b515e1d12201c2c1631e19c",
+  "file": "yolact.tflite",
+  "tflite_sha256": "39aa8e5027e6638cfa3c9025854a9d3e5e95121a3bcebd926ab08973d32d0910",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "414d1e9ad7c8e9075e0f285ae794307beaa5befe785b5fda22f1e0cc7cfb6eed",
+  "graph_hash": "9376bd9efef23660126dfcad2a1a1983260db66ab8d0359040b87f9e99c7bea3"
+ },
+ "yunet_fp16": {
+  "repo": "litert-community/YuNet-Face-LiteRT",
+  "revision": "f08a6874cf8a1ba9c08ad7a7b9b11231a53b36c9",
+  "file": "yunet_fp16.tflite",
+  "tflite_sha256": "ced5f52bef6e76ad4a66d1055b2b404336ceafbae8eeac8fed6aa9c7b2e4d776",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "898c94029107b6199d2e9c1b3ac2a5603542219d47b2622fa03fb0df4d0ef74d",
+  "graph_hash": "b53f92f8a0d396129c590f0747eb8fcc8143abaab8400f0875b8d4eef7dbbaa5"
+ },
+ "ormbg": {
+  "repo": "litert-community/ormbg-LiteRT",
+  "revision": "8dfdacc4ebceafd4d55195fdbd3baf8470610518",
+  "file": "ormbg.tflite",
+  "tflite_sha256": "f6e359cf35c55e7bf216eb3141f6d76828667a5e8e67a929f53e9f7f38fae030",
+  "fold_fp16": false,
+  "continue_on_error": false,
+  "onnx_sha256": "2690a9ba100433374b8787c7c4d3946ca5b9494bb5b993b6c5a27f12599ce1d9",
+  "graph_hash": "45e8a17845b219ba60a518882f0666bbf76621f20fe5db88185450eac166887b"
+ },
+ "w2v2_frontend_fp16": {
+  "repo": "litert-community/wav2vec2-keyword-spotting",
+  "revision": "4f30d050bc1999fbac8ec1b161232fe59d2827ed",
+  "file": "w2v2_frontend_fp16.tflite",
+  "tflite_sha256": "3ea55a43a61b8ca57b2663a9e0d33f92cde669fe0bbd1fcbf5daa1570a6cd54e",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "51645678a786b40dad1834d998943b95488858f5181b4cdf5f8822db6095ce63",
+  "graph_hash": "1a7077ae0f6e6e4b6251fa3f921dded1e37cc2305d6bf85fd37cf1b425a34488"
+ },
+ "w2v2_head_fp16": {
+  "repo": "litert-community/wav2vec2-keyword-spotting",
+  "revision": "4f30d050bc1999fbac8ec1b161232fe59d2827ed",
+  "file": "w2v2_head_fp16.tflite",
+  "tflite_sha256": "8a397899a1cc9d948aca3512a56b14a14347cb9cf9d51f486ff926d8819f010c",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "d314e168a377e5f8b5daebe9a7704afc61d681d6534ac3ea2ccb5db5968e1eb9",
+  "graph_hash": "cdf2a7c99c7cd7ef1a6f0a0688e583694a38cbf8a49ba99057b7b93c88e27c79"
+ },
+ "dac_16khz_deconly_zs_fp16": {
+  "repo": "mlboydaisuke/DAC-16kHz-LiteRT",
+  "revision": "376f41e9b4e68ec1ad3088946d5d648fc77a9d45",
+  "file": "dac_16khz_deconly_zs_fp16.tflite",
+  "tflite_sha256": "052ebafe8f4a687b6c2ff73622bf25889eb74e9ccd31058a1e4910abc3cdfcb3",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "965d11e2e7a38094249e44926ca18cf5e3a0caff2eb093842cc35ebfae3ee2a4",
+  "graph_hash": "dc09f109914d0712811b9f3ece8339f472c273a0381dbe3d5f924df83704c028"
+ },
+ "dac_16khz_encoder_fp16": {
+  "repo": "mlboydaisuke/DAC-16kHz-LiteRT",
+  "revision": "376f41e9b4e68ec1ad3088946d5d648fc77a9d45",
+  "file": "dac_16khz_encoder_fp16.tflite",
+  "tflite_sha256": "b32e86c670856e2ed45dbd885dfcf38650e6078c86facd165cb2e234d3499101",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "544231058e78b9228b00a6bfd3f451ea45e561acb46423d7f6c24ac229eac732",
+  "graph_hash": "8ffe361e8d299b7472415e608705360e2e6d8bb9cbb0058cabd1a84bdac4c050"
+ },
+ "da3_small_gpu_fp16": {
+  "repo": "mlboydaisuke/Depth-Anything-3-Small-LiteRT",
+  "revision": "15344dc67dca2065dbb5fa625c5e8e6e5a228b57",
+  "file": "da3_small_gpu_fp16.tflite",
+  "tflite_sha256": "e170369a72ba1bba7486a4d2de555639fccd0595a9bb5b5349f7733ed4aebd1f",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "cc6e601dc4bf355016df58b03915f732fcf7e5499acc3e65f1ca6eeb07caeac2",
+  "graph_hash": "ce8c64c11632929ea19a603d112744a9258e3d9141f0c5703b33491af9368605"
+ },
+ "metric3d_fp16": {
+  "repo": "mlboydaisuke/Metric3D-v2-LiteRT",
+  "revision": "4f1d6e6b8fb131bc3f3bbe94860a056b8b5d433e",
+  "file": "metric3d_fp16.tflite",
+  "tflite_sha256": "5cf30fee327626708bab0f1962c0f1506ff05558ce4e374ca99188d693422db0",
+  "fold_fp16": true,
+  "continue_on_error": true,
+  "onnx_sha256": "ccde5da9c6c751bab40dd98285fc05706881b0667663f64f6b7850f89c6c414e",
+  "graph_hash": "412fb15524bf026ea4b9c299449c91699c0abd93106f6d03a3224a2da735da42"
+ },
+ "sam2_decoder": {
+  "repo": "mlboydaisuke/SAM2-hiera-tiny-LiteRT",
+  "revision": "8736e24606f7edf62e34cb8ef950546e49df7eff",
+  "file": "sam2_decoder.tflite",
+  "tflite_sha256": "f00e15545c887e20a2886cb88f6afab92ceb8e35a81e9fbf67629cf1de56902d",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "456c6c524b1e4f2b17742d967e9835a2379ecce2f488fd9f2aaffef7b37bf831",
+  "graph_hash": "4f3169611d80961d1307efb78eba40d6d55d3daabfbaf66369d8f2923f9cf629"
+ },
+ "sam2_encoder": {
+  "repo": "mlboydaisuke/SAM2-hiera-tiny-LiteRT",
+  "revision": "8736e24606f7edf62e34cb8ef950546e49df7eff",
+  "file": "sam2_encoder.tflite",
+  "tflite_sha256": "433d488bbf13116bf45f51e98efdfd2c047c48aa2693366079a1fdf73b101b1d",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "2377332c91031aa842d01d7bd53c1e3b772a2310d9c2925aed2b11e74fb59b4f",
+  "graph_hash": "9ae686d4849f86cd0bbfd25cf2677b719bc9e48dcd9925b4c582b8ae386396fc"
+ },
+ "ssdlite_mobilenetv3_320_fp16": {
+  "repo": "mlboydaisuke/ssdlite320-mobilenetv3-litert",
+  "revision": "271fe5d3c37b48ac598b1fd2b2125e168f23a9e6",
+  "file": "ssdlite_mobilenetv3_320_fp16.tflite",
+  "tflite_sha256": "09eec933e68dffd87476b335e85176dc313ca95e11e7171eb3c9706ee3e0ac7c",
+  "fold_fp16": true,
+  "continue_on_error": false,
+  "onnx_sha256": "7c1c91204ef93596989e9eb7050e506af58b8629e049c849325296418c3db889",
+  "graph_hash": "4402e2383abf978bdfee8ef8ac95f3df137144d93fd9b9fded92c0d2ff5e7ca1"
+ }
+}

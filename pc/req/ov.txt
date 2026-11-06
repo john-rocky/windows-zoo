@@ -1,0 +1,4 @@
+numpy==2.5.4
+openvino==2026.4.1
+openvino-telemetry==2025.2.0
+pillow==13.0.0

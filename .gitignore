@@ -1,0 +1,24 @@
+# raw pulls from the PC and scratch (regenerable)
+pc_pull/
+__pycache__/
+*.npz
+*.onnx
+*.blob
+.DS_Store
+pc/local.ps1
+# working folders the scripts make in the repo root (the root is the parent of pc\)
+.venv-*/
+onnx/
+fp16/
+blobs/
+inputs/
+samples/
+runs/
+out/
+parity/
+logs/
+freeze.*.txt
+setup.log
+*.done
+progress.txt
+pull.tar

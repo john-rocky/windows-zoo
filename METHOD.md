@@ -1,0 +1,109 @@
+# Method and pass line
+
+Written on 2026-11-06 before the first measurement; changes are listed at the end with their time and reason.
+
+## 1. Cells (one model × one runtime × one processor)
+
+| cell | runtime | processor | model form | load time |
+|---|---|---|---|---|
+| `cpu` | ONNX Runtime 1.31.1, CPU EP | CPU | the fp32 ONNX file | wall time of `InferenceSession()` |
+| `cuda32` | onnxruntime-gpu 1.31.1, CUDA EP (CUDA 13 pip wheels) | RTX 5080 Laptop | fp32 ONNX | same |
+| `cuda16` | same | same | fp16 copy (`onnxruntime.transformers.float16.convert_float_to_float16(keep_io_types=True)`, default op block list, nothing per model) | same (conversion time kept apart) |
+| `ovgpu` | ONNX Runtime 1.31.1 + `onnxruntime-ep-openvino` 1.8.1 | Intel GPU (`ov_device == "GPU.0"`) | fp32 ONNX, the EP's default precision | same, no `cache_dir` |
+| `ovnpu` | same | NPU (`ov_device == "NPU"`) | fp32 ONNX as is, compiled when the session loads (default precision f16) | same, no `cache_dir` = a compile that hits no cache |
+| `ovnpu_pre` | OpenVINO 2026.4.1 (pip, no ONNX Runtime) | NPU | `read_model(onnx)` → `compile_model(NPU)` → `export_model` blob = precompiled | `compile_model` time (`compile_ms`; export apart), and in a new process reading the blob + `import_model` (`load_ms`) |
+
+The reference is the `cpu` output. No other NVIDIA EP is used. Precision, threads and streams stay at each
+runtime's defaults; the defaults are written into the JSON (OpenVINO's `INFERENCE_PRECISION_HINT`, ONNX Runtime's
+thread count).
+
+## 2. Inputs (the same file for every cell)
+
+- `pc/make_inputs.py` writes `inputs/<model>.npz` and their sha256.
+- Images: the sample files of the zoo's app folders in `john-rocky/LiteRT-Models` at commit
+  `96e0bc1f7965bedc17b36ab1ea5403e79e513cf1` (`<dir>/app/src/main/assets/`). A model whose folder has no sample
+  borrows the sample of a folder with similar content (written in `pc/inputs_spec.json`). Resize and normalisation
+  follow the zoo app's code (`pc/inputs_spec.json`, with the source path and line).
+- Audio: the app's bundled `test_audio.bin`.
+- Inputs that take another graph's output (the DETR graph B files, w2v2_head, the DAC decoder, sam2_decoder) are
+  built from the upstream model's `cpu` output, joined the way the app joins them (numpy ports of the app's top-300
+  selection and host MLP, the RVQ, the SAM2 point embedding). Recurrent states (movinet) start at the app's initial
+  values.
+- An input whose normalisation neither the code nor the card fixes would get uniform [0, 1) noise with a seed per
+  model, marked "unverified normalisation" in the notes; none of the 52 needed it.
+
+## 3. Pass line (per output, against the `cpu` output)
+
+- Values: max|Δ|, mean|Δ|, cosine similarity (float64 over all elements), NaN / Inf counts. Class-score outputs
+  (`argmax_outputs` in `pc/inputs_spec.json`) also get the top-1 agreement per position; positions where the
+  reference's top-1 and top-2 are exactly equal are not counted.
+- **PASS** = every output has cos ≥ 0.99, no NaN / Inf, and every class-score output keeps ≥ 0.99 of its top-1
+  positions (a single-position classifier must match).
+- **FAIL** = any of these broken. The JSON names the broken outputs, their values and a candidate reason (fp16
+  overflow when the reference exceeds 65,504, top-1 flips at small reference margins, and so on; a candidate is
+  written as a candidate).
+- **ERROR** = the cell did not run (conversion, compile, session, run, or the 30-minute timeout), with the full
+  error text and the versions.
+
+## 4. Timing
+
+- One unit = one process: load → first run (its outputs are saved, `first_run_ms`) → 5 warmup runs → 30 timed
+  runs. The table shows the median of the 30 (p10 / p90 / min / max are recorded). A unit whose first run takes more
+  than 3 s does 2 warmup + 10 timed runs (written in the JSON).
+- `time.perf_counter()` around `session.run()` (ONNX Runtime) or `infer()` (OpenVINO), with host numpy inputs and
+  host outputs: the copies between host and device are included (the time an app sees). No IO binding.
+- Determinism: the max|Δ| between the first and the last run's outputs is recorded.
+
+## 5. Nodes left on the CPU
+
+- `ovnpu` / `ovgpu`: one profiled run (ONNX Runtime `enable_profiling`) in the same session, counting graph nodes
+  per provider (the OpenVINO EP's subgraphs and the nodes left on `CPUExecutionProvider`). Profiling stops with
+  `end_profiling()` before the timed runs.
+- `ovnpu_pre`: the ops that `Core.query_model(model, "NPU")` does not claim. The whole model is compiled for the
+  `NPU` device (no HETERO or AUTO device), so the compile passes or fails; a failure is recorded with its text.
+
+## 6. Two passes
+
+- **First pass**: the NPU stream (`ovnpu`, then `ovnpu_pre`) and the RTX stream (`cuda32`, then `cuda16`) run at the
+  same time as two detached jobs, then the Intel GPU stream (`ovgpu`) and the CPU stream (`cpu`). Parity and the
+  first timing come from this pass (`first_pass` in the JSON; not the table's timing).
+- **Quiet pass**: serial, only the cells that ran in the first pass. Before each unit: whole-CPU load < 15 % (max of
+  3 one-second reads), RTX `utilization.gpu` = 0 % and memory.used < 800 MiB, Intel GPU engine utilisation sum < 5 %.
+  After 60 minutes without quiet the unit runs anyway and its row carries `gate=timeout` and the readings.
+- The table's speed = the quiet-pass median. The difference from the first pass is reported per model and cell.
+- The RTX runs under a 95 W software power cap: `nvidia-smi` pstate, clocks and power are recorded before and after
+  each CUDA unit. AC power, Windows balanced power mode (unchanged).
+- The NPU as-is load is called "a compile that hits no cache" only after loading the same model a second and a
+  third time in new processes and seeing no speed-up.
+- A free-RAM floor of 4 GB before each unit; an optional marker file lets the scripts wait for other jobs that share
+  the machine (`pc/local.ps1`, not in the repo).
+
+## 7. Cache and disk
+
+OpenVINO's `CACHE_DIR` and the EP's `cache_dir` are not used for measuring. Blobs go to `blobs/`. The working folder
+plus the NPU driver's cache folder stay under 50 GB.
+
+## 8. Records
+
+`runs/<pass>/<model>/<cell>.json` per unit (merged into `results/<model>/<cell>.json`): model, cell, pass, status,
+full error text, versions (Python, ONNX Runtime, the OpenVINO EP, OpenVINO, the CUDA / cuDNN wheels, the drivers),
+device name, `load_ms`, `compile_ms`, `first_run_ms`, timing statistics and run count, node placement,
+`query_model`, the quiet-gate readings, the RTX power lines, start and end times, the input sha256, output names and
+shapes, an output fingerprint (sha256, mean, std, 16 fixed sample values) and the parity values.
+
+## 9. The table
+
+Columns: model | Galaxy S26 NPU | X2E NPU | Intel NPU as-is | Intel NPU precompiled | Intel GPU | RTX fp16 | CPU | load
+(Intel NPU as-is / Intel NPU precompiled / X2E as-is) | parity per cell | note. RTX fp32 is in the JSON and the
+parity column. The conclusion is 3 to 5 lines of measured facts: for each of the three findings of the X2 Elite
+and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-example first.
+
+## Changes
+
+- 2026-11-06 10:5x JST, before any measurement: image geometry changed from "resize only" to the zoo app's own
+  geometry per model (stretch, centre square crop, 3:4 crop, white or black letterbox, short side 256 then centre
+  224, text-line crop), because the app code (with path and line) became available; the inputs fed by another graph
+  follow the app's joining code; audio = the app's `test_audio.bin`.
+- Same time: class-score outputs are picked by output shape, not by output index (tf2onnx does not keep the
+  original output order). Models whose class 0 is background or unused (yolact, rfdetr, ssdlite) are counted from
+  class 1; ssdlite's class output [1, 6×91, H, W] is split into 6 anchors × 91 classes.

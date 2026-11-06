@@ -1,0 +1,16 @@
+flatbuffers==25.12.19
+ml-dtypes==0.6.0
+numpy==2.5.4
+nvidia-cublas==13.10.0.20
+nvidia-cuda-nvrtc==13.5.37
+nvidia-cuda-runtime==13.5.37
+nvidia-cudnn-cu13==9.28.0.42
+nvidia-cufft==12.5.0.14
+nvidia-curand==10.4.5.25
+nvidia-nvjitlink==13.5.37
+onnx==1.23.2
+onnxruntime-gpu[cuda,cudnn]==1.31.1
+packaging==26.3
+pillow==13.0.0
+protobuf==7.36.2
+typing-extensions==4.16.0

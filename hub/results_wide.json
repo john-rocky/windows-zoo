@@ -1,0 +1,1963 @@
+{
+  "6drepnet|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 198028,
+    "infer_us": 1298,
+    "job": "jg92k0dwp",
+    "message": "",
+    "peak_mem_bytes": 155541504,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 61
+    },
+    "warm_load_us": 171292
+  },
+  "6drepnet|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1569031,
+    "infer_us": 1265,
+    "job": "jg92klemp",
+    "message": "",
+    "peak_mem_bytes": 33341440,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 61
+    },
+    "warm_load_us": 519297
+  },
+  "6drepnet|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 368708,
+    "infer_us": 1274,
+    "job": "j5wz8w435",
+    "message": "",
+    "peak_mem_bytes": 33652736,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 61
+    },
+    "warm_load_us": 242467
+  },
+  "clothseg|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 283812,
+    "infer_us": 47842,
+    "job": "jgnqo0kkg",
+    "message": "",
+    "peak_mem_bytes": 151937024,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 368
+    },
+    "warm_load_us": 228481
+  },
+  "clothseg|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 13532842,
+    "infer_us": 51668,
+    "job": "jp37xn0xg",
+    "message": "",
+    "peak_mem_bytes": 80277504,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 368
+    },
+    "warm_load_us": 498652
+  },
+  "clothseg|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 406921,
+    "infer_us": 72525,
+    "job": "j5mkoe8dp",
+    "message": "",
+    "peak_mem_bytes": 80338944,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 368
+    },
+    "warm_load_us": 313303
+  },
+  "cpga_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 139809,
+    "infer_us": 3777,
+    "job": "jp44mn38p",
+    "message": "",
+    "peak_mem_bytes": 156655616,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 130
+    },
+    "warm_load_us": 129036
+  },
+  "cpga_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 2124817,
+    "infer_us": 4019,
+    "job": "jgnqo0vvg",
+    "message": "",
+    "peak_mem_bytes": 35995648,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 141
+    },
+    "warm_load_us": 421306
+  },
+  "cpga_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 364544,
+    "infer_us": 3786,
+    "job": "j57nk29vp",
+    "message": "",
+    "peak_mem_bytes": 35995648,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 130
+    },
+    "warm_load_us": 252746
+  },
+  "da3_small_gpu_fp16|S26|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: QAIRT converter failed with exit code 1",
+    "status": "NOT_SUBMITTED"
+  },
+  "da3_small_gpu_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 53425946,
+    "infer_us": 128542,
+    "job": "jgd48njzg",
+    "message": "",
+    "peak_mem_bytes": 71753728,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 2,
+      "NPU": 1464
+    },
+    "warm_load_us": 556722
+  },
+  "da3_small_gpu_fp16|X2E|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: QAIRT converter failed with exit code 1",
+    "status": "NOT_SUBMITTED"
+  },
+  "dac_16khz_deconly_zs_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 418464,
+    "infer_us": 150212,
+    "job": "jgowoz7kp",
+    "message": "",
+    "peak_mem_bytes": 124981248,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 359
+    },
+    "warm_load_us": 396469
+  },
+  "dac_16khz_deconly_zs_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 88338430,
+    "infer_us": 159350,
+    "job": "j5mkoeowp",
+    "message": "",
+    "peak_mem_bytes": 102125568,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 4,
+      "NPU": 313
+    },
+    "warm_load_us": 617825
+  },
+  "dac_16khz_deconly_zs_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 522850,
+    "infer_us": 155576,
+    "job": "jpy2qzylg",
+    "message": "",
+    "peak_mem_bytes": 33058816,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 359
+    },
+    "warm_load_us": 471042
+  },
+  "dac_16khz_encoder_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 299459,
+    "infer_us": 70309,
+    "job": "jgjyod6eg",
+    "message": "",
+    "peak_mem_bytes": 155357184,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 339
+    },
+    "warm_load_us": 286044
+  },
+  "dac_16khz_encoder_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 24796437,
+    "infer_us": 74744,
+    "job": "jp8r626xg",
+    "message": "",
+    "peak_mem_bytes": 32374784,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 281
+    },
+    "warm_load_us": 448787
+  },
+  "dac_16khz_encoder_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 449964,
+    "infer_us": 69640,
+    "job": "jpvmeqyrp",
+    "message": "",
+    "peak_mem_bytes": 32493568,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 339
+    },
+    "warm_load_us": 372224
+  },
+  "dehazeformer_base|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 1022572,
+    "infer_us": 125499,
+    "job": "jp37xn63g",
+    "message": "",
+    "peak_mem_bytes": 142913536,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2507
+    },
+    "warm_load_us": 954037
+  },
+  "dehazeformer_base|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "job": "jgnqo00vg",
+    "message": "The process ended because it exceeded the maximum execution time. Consult the runtime log for more details.",
+    "status": "FAILED"
+  },
+  "dehazeformer_base|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1196394,
+    "infer_us": 130572,
+    "job": "jgl8o4ljp",
+    "message": "",
+    "peak_mem_bytes": 101593088,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2507
+    },
+    "warm_load_us": 1099001
+  },
+  "dewarp|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 231095,
+    "infer_us": 4763,
+    "job": "jpex8ed7g",
+    "message": "",
+    "peak_mem_bytes": 156667904,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 334
+    },
+    "warm_load_us": 207738
+  },
+  "dewarp|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 6260864,
+    "infer_us": 24359,
+    "job": "jgowozjkp",
+    "message": "",
+    "peak_mem_bytes": 170737664,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 19,
+      "NPU": 434
+    },
+    "warm_load_us": 1570511
+  },
+  "dewarp|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 343236,
+    "infer_us": 5036,
+    "job": "jgjyozv7g",
+    "message": "",
+    "peak_mem_bytes": 34279424,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 334
+    },
+    "warm_load_us": 264090
+  },
+  "dfine_graphA_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 158647,
+    "infer_us": 15184,
+    "job": "j5mkoqxyp",
+    "message": "",
+    "peak_mem_bytes": 186351616,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 427
+    },
+    "warm_load_us": 156222
+  },
+  "dfine_graphA_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 5628782,
+    "infer_us": 17930,
+    "job": "jp44mn71p",
+    "message": "",
+    "peak_mem_bytes": 178569216,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 2,
+      "NPU": 438
+    },
+    "warm_load_us": 475073
+  },
+  "dfine_graphA_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 351908,
+    "infer_us": 13630,
+    "job": "jpxr3nojp",
+    "message": "",
+    "peak_mem_bytes": 108953600,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 427
+    },
+    "warm_load_us": 284381
+  },
+  "dfine_graphB_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 235791,
+    "infer_us": 446809,
+    "job": "jpvme067p",
+    "message": "",
+    "peak_mem_bytes": 166203392,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 860
+    },
+    "warm_load_us": 237762
+  },
+  "dfine_graphB_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 62606267,
+    "infer_us": 174337,
+    "job": "jprdo6r7g",
+    "message": "",
+    "peak_mem_bytes": 49418240,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 966
+    },
+    "warm_load_us": 563430
+  },
+  "dfine_graphB_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 456851,
+    "infer_us": 576645,
+    "job": "jp37xvjxg",
+    "message": "",
+    "peak_mem_bytes": 49668096,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 860
+    },
+    "warm_load_us": 352391
+  },
+  "dinov2_s_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 253105,
+    "infer_us": 60029,
+    "job": "jp2d4xer5",
+    "message": "",
+    "peak_mem_bytes": 160149504,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 757
+    },
+    "warm_load_us": 242190
+  },
+  "dinov2_s_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 64427967,
+    "infer_us": 64305,
+    "job": "jgzy82dzp",
+    "message": "",
+    "peak_mem_bytes": 37969920,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 878
+    },
+    "warm_load_us": 516977
+  },
+  "dinov2_s_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 430096,
+    "infer_us": 56224,
+    "job": "jprdo6w0g",
+    "message": "",
+    "peak_mem_bytes": 38473728,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 757
+    },
+    "warm_load_us": 307215
+  },
+  "dis|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 262143,
+    "infer_us": 19174,
+    "job": "jp09d469p",
+    "message": "",
+    "peak_mem_bytes": 166187008,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 360
+    },
+    "warm_load_us": 228676
+  },
+  "dis|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 9279993,
+    "infer_us": 21517,
+    "job": "j5q1z067g",
+    "message": "",
+    "peak_mem_bytes": 56508416,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 361
+    },
+    "warm_load_us": 456550
+  },
+  "dis|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 371139,
+    "infer_us": 21533,
+    "job": "jpy2qzm8g",
+    "message": "",
+    "peak_mem_bytes": 56770560,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 360
+    },
+    "warm_load_us": 271490
+  },
+  "dmcount|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 181427,
+    "infer_us": 8872,
+    "job": "jgk0ov8w5",
+    "message": "",
+    "peak_mem_bytes": 158220288,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 55
+    },
+    "warm_load_us": 164755
+  },
+  "dmcount|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1505429,
+    "infer_us": 11377,
+    "job": "jgd48nxkg",
+    "message": "",
+    "peak_mem_bytes": 37228544,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 53
+    },
+    "warm_load_us": 423055
+  },
+  "dmcount|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 363911,
+    "infer_us": 11416,
+    "job": "jp8r621kg",
+    "message": "",
+    "peak_mem_bytes": 37625856,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 55
+    },
+    "warm_load_us": 242286
+  },
+  "edsr|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 178606,
+    "infer_us": 9434,
+    "job": "jpvmeqdkp",
+    "message": "",
+    "peak_mem_bytes": 161271808,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 84
+    },
+    "warm_load_us": 148960
+  },
+  "edsr|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 12351332,
+    "infer_us": 110247,
+    "job": "jp44mnnqp",
+    "message": "",
+    "peak_mem_bytes": 1019924480,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 2,
+      "NPU": 90
+    },
+    "warm_load_us": 672174
+  },
+  "edsr|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 347068,
+    "infer_us": 10570,
+    "job": "jgowoz8qp",
+    "message": "",
+    "peak_mem_bytes": 40591360,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 84
+    },
+    "warm_load_us": 256133
+  },
+  "faceparsing|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 192765,
+    "infer_us": 3907,
+    "job": "jgd48n2rg",
+    "message": "",
+    "peak_mem_bytes": 158478336,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 100
+    },
+    "warm_load_us": 144323
+  },
+  "faceparsing|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 2110497,
+    "infer_us": 5208,
+    "job": "j57nky3qp",
+    "message": "",
+    "peak_mem_bytes": 111325184,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 3,
+      "NPU": 111
+    },
+    "warm_load_us": 1432315
+  },
+  "faceparsing|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 353752,
+    "infer_us": 4217,
+    "job": "jp117268p",
+    "message": "",
+    "peak_mem_bytes": 104812544,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 100
+    },
+    "warm_load_us": 263329
+  },
+  "gaze_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 184013,
+    "infer_us": 2951,
+    "job": "jgd48n3rg",
+    "message": "",
+    "peak_mem_bytes": 155611136,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 131
+    },
+    "warm_load_us": 162225
+  },
+  "gaze_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 2953015,
+    "infer_us": 3355,
+    "job": "jpvmeq07p",
+    "message": "",
+    "peak_mem_bytes": 36040704,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 131
+    },
+    "warm_load_us": 431831
+  },
+  "gaze_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 358935,
+    "infer_us": 3336,
+    "job": "jp1172j8p",
+    "message": "",
+    "peak_mem_bytes": 36466688,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 131
+    },
+    "warm_load_us": 262180
+  },
+  "hsemotion_b0_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 189469,
+    "infer_us": 436,
+    "job": "j5wz8w735",
+    "message": "",
+    "peak_mem_bytes": 155680768,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 261
+    },
+    "warm_load_us": 135856
+  },
+  "hsemotion_b0_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1121110,
+    "infer_us": 558,
+    "job": "jp09d432p",
+    "message": "",
+    "peak_mem_bytes": 33591296,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 293
+    },
+    "warm_load_us": 424567
+  },
+  "hsemotion_b0_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 333467,
+    "infer_us": 563,
+    "job": "jgzy82mop",
+    "message": "",
+    "peak_mem_bytes": 33918976,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 261
+    },
+    "warm_load_us": 295205
+  },
+  "metric3d_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 318145,
+    "infer_us": 82242,
+    "job": "jg92k078p",
+    "message": "",
+    "peak_mem_bytes": 127918080,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2385
+    },
+    "warm_load_us": 298615
+  },
+  "metric3d_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 73035050,
+    "infer_us": 117182,
+    "job": "jpxr39d1p",
+    "message": "",
+    "peak_mem_bytes": 261746688,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 3,
+      "NPU": 2418
+    },
+    "warm_load_us": 616081
+  },
+  "metric3d_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 476207,
+    "infer_us": 84145,
+    "job": "j5wz8w0m5",
+    "message": "",
+    "peak_mem_bytes": 40407040,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2385
+    },
+    "warm_load_us": 370969
+  },
+  "migan_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 203167,
+    "infer_us": 17116,
+    "job": "j5mkoemdp",
+    "message": "",
+    "peak_mem_bytes": 166363136,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 364
+    },
+    "warm_load_us": 185626
+  },
+  "migan_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 23726863,
+    "infer_us": 72971,
+    "job": "jgd48nekg",
+    "message": "",
+    "peak_mem_bytes": 516243456,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 14,
+      "NPU": 443
+    },
+    "warm_load_us": 1302574
+  },
+  "migan_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 385003,
+    "infer_us": 18501,
+    "job": "jpxr3943p",
+    "message": "",
+    "peak_mem_bytes": 44228608,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 364
+    },
+    "warm_load_us": 293813
+  },
+  "mlsd_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 135189,
+    "infer_us": 1309,
+    "job": "jp44mn18p",
+    "message": "",
+    "peak_mem_bytes": 158908416,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 89
+    },
+    "warm_load_us": 127810
+  },
+  "mlsd_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1514033,
+    "infer_us": 1587,
+    "job": "jgzy82ozp",
+    "message": "",
+    "peak_mem_bytes": 43814912,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 89
+    },
+    "warm_load_us": 516201
+  },
+  "mlsd_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 342019,
+    "infer_us": 1602,
+    "job": "j57nk24vp",
+    "message": "",
+    "peak_mem_bytes": 44158976,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 89
+    },
+    "warm_load_us": 247861
+  },
+  "modnet|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 207799,
+    "infer_us": 8861,
+    "job": "jprdo600g",
+    "message": "",
+    "peak_mem_bytes": 161144832,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 584
+    },
+    "warm_load_us": 145277
+  },
+  "modnet|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 6633755,
+    "infer_us": 9762,
+    "job": "jgd48nelg",
+    "message": "",
+    "peak_mem_bytes": 39858176,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 603
+    },
+    "warm_load_us": 424693
+  },
+  "modnet|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 354761,
+    "infer_us": 8305,
+    "job": "jgnqo0nkg",
+    "message": "",
+    "peak_mem_bytes": 40198144,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 584
+    },
+    "warm_load_us": 260344
+  },
+  "movinet_a0_stream|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 159529,
+    "infer_us": 1113,
+    "job": "j5wz82ez5",
+    "message": "",
+    "peak_mem_bytes": 159002624,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 440
+    },
+    "warm_load_us": 132665
+  },
+  "movinet_a0_stream|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 2036283,
+    "infer_us": 1141,
+    "job": "jgzy821xp",
+    "message": "",
+    "peak_mem_bytes": 41644032,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 495
+    },
+    "warm_load_us": 392354
+  },
+  "movinet_a0_stream|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 370688,
+    "infer_us": 1293,
+    "job": "jgzy8o3zp",
+    "message": "",
+    "peak_mem_bytes": 41848832,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 440
+    },
+    "warm_load_us": 262206
+  },
+  "nafnet_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 225201,
+    "infer_us": 18331,
+    "job": "jpy2qzx8g",
+    "message": "",
+    "peak_mem_bytes": 158564352,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2055
+    },
+    "warm_load_us": 204145
+  },
+  "nafnet_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 47943915,
+    "infer_us": 36053,
+    "job": "jprdo62eg",
+    "message": "",
+    "peak_mem_bytes": 240234496,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 4,
+      "NPU": 2139
+    },
+    "warm_load_us": 497348
+  },
+  "nafnet_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 413903,
+    "infer_us": 19064,
+    "job": "jp2d4xwr5",
+    "message": "",
+    "peak_mem_bytes": 37064704,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2055
+    },
+    "warm_load_us": 288369
+  },
+  "nafnet_sidd_width32_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 233102,
+    "infer_us": 25450,
+    "job": "jp8r62xkg",
+    "message": "",
+    "peak_mem_bytes": 158617600,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2055
+    },
+    "warm_load_us": 216393
+  },
+  "nafnet_sidd_width32_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 38475396,
+    "infer_us": 43493,
+    "job": "j56mr2z7p",
+    "message": "",
+    "peak_mem_bytes": 240324608,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 4,
+      "NPU": 2139
+    },
+    "warm_load_us": 536891
+  },
+  "nafnet_sidd_width32_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 387239,
+    "infer_us": 25952,
+    "job": "jp09d4j9p",
+    "message": "",
+    "peak_mem_bytes": 37183488,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 2055
+    },
+    "warm_load_us": 325665
+  },
+  "ormbg|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 241208,
+    "infer_us": 18945,
+    "job": "jgk0ov0n5",
+    "message": "",
+    "peak_mem_bytes": 143413248,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 359
+    },
+    "warm_load_us": 215559
+  },
+  "ormbg|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 8709156,
+    "infer_us": 21243,
+    "job": "jpex8o41g",
+    "message": "",
+    "peak_mem_bytes": 56553472,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 360
+    },
+    "warm_load_us": 459888
+  },
+  "ormbg|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 508835,
+    "infer_us": 21157,
+    "job": "jp8r62rog",
+    "message": "",
+    "peak_mem_bytes": 56741888,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 359
+    },
+    "warm_load_us": 355887
+  },
+  "pidnet_s|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 171041,
+    "infer_us": 5128,
+    "job": "j5q1z0yng",
+    "message": "",
+    "peak_mem_bytes": 169848832,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 219
+    },
+    "warm_load_us": 144033
+  },
+  "pidnet_s|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 4433273,
+    "infer_us": 5473,
+    "job": "jgjyod28g",
+    "message": "",
+    "peak_mem_bytes": 56328192,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 237
+    },
+    "warm_load_us": 563946
+  },
+  "pidnet_s|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 361827,
+    "infer_us": 5532,
+    "job": "jgk0ov4w5",
+    "message": "",
+    "peak_mem_bytes": 56426496,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 219
+    },
+    "warm_load_us": 247019
+  },
+  "places_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 162259,
+    "infer_us": 544,
+    "job": "jpex8o7og",
+    "message": "",
+    "peak_mem_bytes": 155308032,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 54
+    },
+    "warm_load_us": 143789
+  },
+  "places_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 770019,
+    "infer_us": 498,
+    "job": "jgnqo03mg",
+    "message": "",
+    "peak_mem_bytes": 33165312,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 55
+    },
+    "warm_load_us": 416371
+  },
+  "places_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 323516,
+    "infer_us": 501,
+    "job": "jgjyodrvg",
+    "message": "",
+    "peak_mem_bytes": 33550336,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 54
+    },
+    "warm_load_us": 243800
+  },
+  "plantnet|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 153906,
+    "infer_us": 525,
+    "job": "j5wz8wl35",
+    "message": "",
+    "peak_mem_bytes": 155656192,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 51
+    },
+    "warm_load_us": 135500
+  },
+  "plantnet|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 851941,
+    "infer_us": 481,
+    "job": "jp09d4lep",
+    "message": "",
+    "peak_mem_bytes": 33239040,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 51
+    },
+    "warm_load_us": 411167
+  },
+  "plantnet|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 359462,
+    "infer_us": 484,
+    "job": "jgzy82lop",
+    "message": "",
+    "peak_mem_bytes": 33804288,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 51
+    },
+    "warm_load_us": 240404
+  },
+  "portrait|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 230658,
+    "infer_us": 18518,
+    "job": "jgzy82zop",
+    "message": "",
+    "peak_mem_bytes": 161009664,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 369
+    },
+    "warm_load_us": 209076
+  },
+  "portrait|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 7098348,
+    "infer_us": 21149,
+    "job": "j56mr237p",
+    "message": "",
+    "peak_mem_bytes": 39649280,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 374
+    },
+    "warm_load_us": 1316721
+  },
+  "portrait|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 446353,
+    "infer_us": 21127,
+    "job": "jpex8o6og",
+    "message": "",
+    "peak_mem_bytes": 37969920,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 369
+    },
+    "warm_load_us": 312036
+  },
+  "ppocr_det_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 165089,
+    "infer_us": 7048,
+    "job": "j56mr276p",
+    "message": "",
+    "peak_mem_bytes": 163848192,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 555
+    },
+    "warm_load_us": 146932
+  },
+  "ppocr_det_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 13862914,
+    "infer_us": 32321,
+    "job": "j5wz8w3j5",
+    "message": "",
+    "peak_mem_bytes": 186216448,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 8,
+      "NPU": 625
+    },
+    "warm_load_us": 543638
+  },
+  "ppocr_det_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 389141,
+    "infer_us": 7236,
+    "job": "jgl8o4xjp",
+    "message": "",
+    "peak_mem_bytes": 41902080,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 555
+    },
+    "warm_load_us": 318417
+  },
+  "ppocr_rec_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 167801,
+    "infer_us": 3771,
+    "job": "jgowozrqp",
+    "message": "",
+    "peak_mem_bytes": 155566080,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 596
+    },
+    "warm_load_us": 148315
+  },
+  "ppocr_rec_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 4683327,
+    "infer_us": 4129,
+    "job": "jp44mnvlp",
+    "message": "",
+    "peak_mem_bytes": 40955904,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 646
+    },
+    "warm_load_us": 413607
+  },
+  "ppocr_rec_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 329666,
+    "infer_us": 4086,
+    "job": "jp37xn93g",
+    "message": "",
+    "peak_mem_bytes": 41046016,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 596
+    },
+    "warm_load_us": 261794
+  },
+  "rfdetr_graphA_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 215273,
+    "infer_us": 14636,
+    "job": "jp1172n8p",
+    "message": "",
+    "peak_mem_bytes": 162115584,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 1449
+    },
+    "warm_load_us": 196442
+  },
+  "rfdetr_graphA_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 24875687,
+    "infer_us": 14677,
+    "job": "jgl8o43lp",
+    "message": "",
+    "peak_mem_bytes": 38281216,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 1480
+    },
+    "warm_load_us": 468541
+  },
+  "rfdetr_graphA_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 381662,
+    "infer_us": 15178,
+    "job": "jg92k0zwp",
+    "message": "",
+    "peak_mem_bytes": 38502400,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 1449
+    },
+    "warm_load_us": 270166
+  },
+  "rfdetr_graphB_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 165810,
+    "infer_us": 17000,
+    "job": "j57nk2evp",
+    "message": "",
+    "peak_mem_bytes": 155185152,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 396
+    },
+    "warm_load_us": 145579
+  },
+  "rfdetr_graphB_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 9618153,
+    "infer_us": 17551,
+    "job": "jgowoz3dp",
+    "message": "",
+    "peak_mem_bytes": 40931328,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 3,
+      "NPU": 427
+    },
+    "warm_load_us": 534053
+  },
+  "rfdetr_graphB_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 373045,
+    "infer_us": 19683,
+    "job": "jgd48ndrg",
+    "message": "",
+    "peak_mem_bytes": 33894400,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 396
+    },
+    "warm_load_us": 251823
+  },
+  "rtdetr_graphA_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 231150,
+    "infer_us": 13875,
+    "job": "jpxr39l3p",
+    "message": "",
+    "peak_mem_bytes": 162312192,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 308
+    },
+    "warm_load_us": 169777
+  },
+  "rtdetr_graphA_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 4346687,
+    "infer_us": 18497,
+    "job": "j57nk2drp",
+    "message": "",
+    "peak_mem_bytes": 178409472,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 2,
+      "NPU": 318
+    },
+    "warm_load_us": 528572
+  },
+  "rtdetr_graphA_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 379138,
+    "infer_us": 14115,
+    "job": "jp44mny8p",
+    "message": "",
+    "peak_mem_bytes": 108728320,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 308
+    },
+    "warm_load_us": 294793
+  },
+  "rtdetr_graphB_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 256581,
+    "infer_us": 464071,
+    "job": "jgnqo0zkg",
+    "message": "",
+    "peak_mem_bytes": 132452352,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 705
+    },
+    "warm_load_us": 217907
+  },
+  "rtdetr_graphB_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 120125598,
+    "infer_us": 137940,
+    "job": "j5mkoezqp",
+    "message": "",
+    "peak_mem_bytes": 49635328,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 755
+    },
+    "warm_load_us": 1343176
+  },
+  "rtdetr_graphB_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 476033,
+    "infer_us": 604608,
+    "job": "j5mkoe0dp",
+    "message": "",
+    "peak_mem_bytes": 49672192,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 705
+    },
+    "warm_load_us": 407900
+  },
+  "rtm_animal_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 163947,
+    "infer_us": 857,
+    "job": "jpy2qzo8g",
+    "message": "",
+    "peak_mem_bytes": 156561408,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 281
+    },
+    "warm_load_us": 145338
+  },
+  "rtm_animal_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1043408,
+    "infer_us": 945,
+    "job": "jp09d4rep",
+    "message": "",
+    "peak_mem_bytes": 33730560,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 277
+    },
+    "warm_load_us": 418958
+  },
+  "rtm_animal_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 348256,
+    "infer_us": 942,
+    "job": "jp2d4xrr5",
+    "message": "",
+    "peak_mem_bytes": 34086912,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 281
+    },
+    "warm_load_us": 232418
+  },
+  "rtm_face_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 176267,
+    "infer_us": 1393,
+    "job": "jp8r62ekg",
+    "message": "",
+    "peak_mem_bytes": 156168192,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 281
+    },
+    "warm_load_us": 158392
+  },
+  "rtm_face_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1299930,
+    "infer_us": 1436,
+    "job": "j56mr217p",
+    "message": "",
+    "peak_mem_bytes": 34013184,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 277
+    },
+    "warm_load_us": 406842
+  },
+  "rtm_face_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 332503,
+    "infer_us": 1435,
+    "job": "jp09d4m9p",
+    "message": "",
+    "peak_mem_bytes": 34086912,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 281
+    },
+    "warm_load_us": 262127
+  },
+  "rtmhand_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 203749,
+    "infer_us": 866,
+    "job": "j5q1z0lng",
+    "message": "",
+    "peak_mem_bytes": 156651520,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 281
+    },
+    "warm_load_us": 145674
+  },
+  "rtmhand_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1133195,
+    "infer_us": 960,
+    "job": "jgzy8276p",
+    "message": "",
+    "peak_mem_bytes": 33800192,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 277
+    },
+    "warm_load_us": 418706
+  },
+  "rtmhand_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 590611,
+    "infer_us": 963,
+    "job": "jgk0ov2w5",
+    "message": "",
+    "peak_mem_bytes": 34357248,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 281
+    },
+    "warm_load_us": 337583
+  },
+  "rtmpose_s_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 152767,
+    "infer_us": 360,
+    "job": "j56mr286p",
+    "message": "",
+    "peak_mem_bytes": 155672576,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 222
+    },
+    "warm_load_us": 133335
+  },
+  "rtmpose_s_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 790289,
+    "infer_us": 421,
+    "job": "jp11728lp",
+    "message": "",
+    "peak_mem_bytes": 33349632,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 218
+    },
+    "warm_load_us": 412128
+  },
+  "rtmpose_s_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 444785,
+    "infer_us": 437,
+    "job": "jgl8o4yjp",
+    "message": "",
+    "peak_mem_bytes": 33652736,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 222
+    },
+    "warm_load_us": 243157
+  },
+  "rtmw_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 203470,
+    "infer_us": 2195,
+    "job": "jgowozlqp",
+    "message": "",
+    "peak_mem_bytes": 156114944,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 437
+    },
+    "warm_load_us": 187036
+  },
+  "rtmw_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 2297346,
+    "infer_us": 3041,
+    "job": "jpxr3979p",
+    "message": "",
+    "peak_mem_bytes": 40198144,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 3,
+      "NPU": 443
+    },
+    "warm_load_us": 441520
+  },
+  "rtmw_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 337846,
+    "infer_us": 2149,
+    "job": "jp37xnz3g",
+    "message": "",
+    "peak_mem_bytes": 36028416,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 437
+    },
+    "warm_load_us": 273666
+  },
+  "sam2_decoder|S26|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: QAIRT converter failed with exit code 1",
+    "status": "NOT_SUBMITTED"
+  },
+  "sam2_decoder|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "job": "j57nk2znp",
+    "message": "Failed to profile the model: Failed to finalize QNN graph. Error: QNN_COMMON_ERROR_MEM_ALLOC: Memory allocation related error., Code: 1002",
+    "status": "FAILED"
+  },
+  "sam2_decoder|X2E|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: QAIRT converter failed with exit code 1",
+    "status": "NOT_SUBMITTED"
+  },
+  "sam2_encoder|S26|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: QAIRT converter failed with exit code 1",
+    "status": "NOT_SUBMITTED"
+  },
+  "sam2_encoder|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 139866291,
+    "infer_us": 191091,
+    "job": "jp44mkrqp",
+    "message": "",
+    "peak_mem_bytes": 183205888,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 1,
+      "NPU": 839
+    },
+    "warm_load_us": 1279363
+  },
+  "sam2_encoder|X2E|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: QAIRT converter failed with exit code 1",
+    "status": "NOT_SUBMITTED"
+  },
+  "sinet|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 189800,
+    "infer_us": 2977,
+    "job": "jgjyod3vg",
+    "message": "",
+    "peak_mem_bytes": 156475392,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 683
+    },
+    "warm_load_us": 180303
+  },
+  "sinet|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 6462763,
+    "infer_us": 2719,
+    "job": "jp2d4x7m5",
+    "message": "",
+    "peak_mem_bytes": 34398208,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 554
+    },
+    "warm_load_us": 484097
+  },
+  "sinet|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 472376,
+    "infer_us": 2842,
+    "job": "jpvmeq2kp",
+    "message": "",
+    "peak_mem_bytes": 34570240,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 683
+    },
+    "warm_load_us": 361634
+  },
+  "ssdlite_mobilenetv3_320_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 150504,
+    "infer_us": 688,
+    "job": "jgd48nyzg",
+    "message": "",
+    "peak_mem_bytes": 156483584,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 244
+    },
+    "warm_load_us": 129764
+  },
+  "ssdlite_mobilenetv3_320_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1273413,
+    "infer_us": 742,
+    "job": "jp117262p",
+    "message": "",
+    "peak_mem_bytes": 40112128,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 254
+    },
+    "warm_load_us": 427863
+  },
+  "ssdlite_mobilenetv3_320_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 337367,
+    "infer_us": 743,
+    "job": "jp1172k7p",
+    "message": "",
+    "peak_mem_bytes": 40452096,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 244
+    },
+    "warm_load_us": 222127
+  },
+  "style_mosaic_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 155423,
+    "infer_us": 6623,
+    "job": "jpex8ozog",
+    "message": "",
+    "peak_mem_bytes": 157716480,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 399
+    },
+    "warm_load_us": 132437
+  },
+  "style_mosaic_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 2165953,
+    "infer_us": 10722,
+    "job": "jprdo68vg",
+    "message": "",
+    "peak_mem_bytes": 103985152,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 2,
+      "NPU": 388
+    },
+    "warm_load_us": 1359009
+  },
+  "style_mosaic_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 387127,
+    "infer_us": 7607,
+    "job": "jgjyod7vg",
+    "message": "",
+    "peak_mem_bytes": 36229120,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 399
+    },
+    "warm_load_us": 240906
+  },
+  "ufld|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 278101,
+    "infer_us": 2600,
+    "job": "jg92k0owp",
+    "message": "",
+    "peak_mem_bytes": 146501632,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 55
+    },
+    "warm_load_us": 233508
+  },
+  "ufld|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 2766464,
+    "infer_us": 2636,
+    "job": "jgjyod08g",
+    "message": "",
+    "peak_mem_bytes": 36679680,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 55
+    },
+    "warm_load_us": 465592
+  },
+  "ufld|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 353261,
+    "infer_us": 2589,
+    "job": "j5wz8wy35",
+    "message": "",
+    "peak_mem_bytes": 37007360,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 55
+    },
+    "warm_load_us": 332968
+  },
+  "unisal_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 155981,
+    "infer_us": 19290,
+    "job": "jgd48n6rg",
+    "message": "",
+    "peak_mem_bytes": 148770816,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 132
+    },
+    "warm_load_us": 135308
+  },
+  "unisal_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1078897,
+    "infer_us": 20152,
+    "job": "jg92k03vp",
+    "message": "",
+    "peak_mem_bytes": 35684352,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 1,
+      "NPU": 138
+    },
+    "warm_load_us": 1327346
+  },
+  "unisal_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 349037,
+    "infer_us": 19485,
+    "job": "jp1172o8p",
+    "message": "",
+    "peak_mem_bytes": 33861632,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 132
+    },
+    "warm_load_us": 241624
+  },
+  "vrwkv_s_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 322974,
+    "infer_us": 75990,
+    "job": "jp2d4xdq5",
+    "message": "",
+    "peak_mem_bytes": 156536832,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 1398
+    },
+    "warm_load_us": 264899
+  },
+  "vrwkv_s_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 91673695,
+    "infer_us": 75498,
+    "job": "jg92k09lp",
+    "message": "",
+    "peak_mem_bytes": 34066432,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 1434
+    },
+    "warm_load_us": 547579
+  },
+  "vrwkv_s_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 449853,
+    "infer_us": 76932,
+    "job": "jgjyodyvg",
+    "message": "",
+    "peak_mem_bytes": 34398208,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 1398
+    },
+    "warm_load_us": 353800
+  },
+  "w2v2_frontend_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 168073,
+    "infer_us": 11942,
+    "job": "jgl8o4qmp",
+    "message": "",
+    "peak_mem_bytes": 154779648,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 133
+    },
+    "warm_load_us": 149629
+  },
+  "w2v2_frontend_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 7599761,
+    "infer_us": 13612,
+    "job": "jg92k08lp",
+    "message": "",
+    "peak_mem_bytes": 32096256,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 122
+    },
+    "warm_load_us": 482094
+  },
+  "w2v2_frontend_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 371875,
+    "infer_us": 11317,
+    "job": "j5q1z01og",
+    "message": "",
+    "peak_mem_bytes": 32411648,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 133
+    },
+    "warm_load_us": 274702
+  },
+  "w2v2_head_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 335697,
+    "infer_us": 4658,
+    "job": "jp37xnrng",
+    "message": "",
+    "peak_mem_bytes": 117207040,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 832
+    },
+    "warm_load_us": 275578
+  },
+  "w2v2_head_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 6669565,
+    "infer_us": 4417,
+    "job": "jp09d4k6p",
+    "message": "",
+    "peak_mem_bytes": 33554432,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 878
+    },
+    "warm_load_us": 453352
+  },
+  "w2v2_head_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 366832,
+    "infer_us": 4571,
+    "job": "j56mr20yp",
+    "message": "",
+    "peak_mem_bytes": 33587200,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 832
+    },
+    "warm_load_us": 303917
+  },
+  "yolact|S26|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: Qualcomm AI Hub Workbench has detected an issue with the uploaded ONNX model: [ShapeInferenceError] Inference error(s): (op_type:Add, node name: __main__.Wrap/yolact.Yolact_n/yolact.FPN_fpn;3): [ShapeInferenceError] Incompatible dimensions\n(op_type:Conv, node name: __main__.Wrap/yolact.Yolact_n/yolact.FPN_fpn;;__main__.Wrap/yolact.Yolact_n/backbone.ResNetBackbone_backbone/torch.nn.modules.container.Sequential_2/backbone.Bottleneck_0/torch.nn.modules.activation.ReLU_relu;;__main__",
+    "status": "NOT_SUBMITTED"
+  },
+  "yolact|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "job": "jpxr39e1p",
+    "message": "Failed to profile the model: Node (__main__.Wrap/yolact.Yolact_n/yolact.FPN_fpn;3) Op (Add) [ShapeInferenceError] Incompatible dimensions",
+    "status": "FAILED"
+  },
+  "yolact|X2E|pqo|npu": {
+    "job": null,
+    "message": "compile FAILED: Qualcomm AI Hub Workbench has detected an issue with the uploaded ONNX model: [ShapeInferenceError] Inference error(s): (op_type:Add, node name: __main__.Wrap/yolact.Yolact_n/yolact.FPN_fpn;3): [ShapeInferenceError] Incompatible dimensions\n(op_type:Conv, node name: __main__.Wrap/yolact.Yolact_n/yolact.FPN_fpn;;__main__.Wrap/yolact.Yolact_n/backbone.ResNetBackbone_backbone/torch.nn.modules.container.Sequential_2/backbone.Bottleneck_0/torch.nn.modules.activation.ReLU_relu;;__main__",
+    "status": "NOT_SUBMITTED"
+  },
+  "yunet_fp16|S26|pqo|npu": {
+    "device": "Samsung Galaxy S26 (Family)",
+    "first_load_us": 140225,
+    "infer_us": 1295,
+    "job": "jp09d49np",
+    "message": "",
+    "peak_mem_bytes": 158683136,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 112
+    },
+    "warm_load_us": 127536
+  },
+  "yunet_fp16|X2E|onnx|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 1108501,
+    "infer_us": 2038,
+    "job": "jp2d4x345",
+    "message": "",
+    "peak_mem_bytes": 54059008,
+    "status": "SUCCESS",
+    "units": {
+      "CPU": 2,
+      "NPU": 123
+    },
+    "warm_load_us": 1371286
+  },
+  "yunet_fp16|X2E|pqo|npu": {
+    "device": "Snapdragon X2 Elite CRD",
+    "first_load_us": 464637,
+    "infer_us": 1324,
+    "job": "jpy2qz2lg",
+    "message": "",
+    "peak_mem_bytes": 41242624,
+    "status": "SUCCESS",
+    "units": {
+      "NPU": 112
+    },
+    "warm_load_us": 293145
+  }
+}

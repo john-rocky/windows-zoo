@@ -1,0 +1,1073 @@
+{
+ "_about": {
+  "zoo_commit": "96e0bc1f7965bedc17b36ab1ea5403e79e513cf1",
+  "zoo_repo": "https://github.com/john-rocky/LiteRT-Models",
+  "sample_path": "<sample>/app/src/main/assets/{test_image.jpg|sample.jpg|test_image.png}",
+  "norm": {
+   "imagenet": "(x/255 - [0.485,0.456,0.406]) / [0.229,0.224,0.225]",
+   "unit": "x/255",
+   "minus1to1": "x/127.5 - 1",
+   "minus_half": "x/255 - 0.5",
+   "raw255": "x",
+   "mmpose255": "(x - [123.675,116.28,103.53]) / [58.395,57.12,57.375]",
+   "yolact_bgr": "BGR, (x - [103.94,116.78,123.68]) / [57.38,57.12,58.40]"
+  },
+  "geometry": {
+   "stretch": "resize to (W, H)",
+   "center_square": "centre square crop, then resize",
+   "center_3x4": "centre crop to W:H = 3:4, then resize",
+   "letterbox_white": "keep the aspect, pad white",
+   "letterbox_black": "keep the aspect, pad black",
+   "short256_center224": "short side to 256, centre crop 224",
+   "line_crop48": "crop box, height 48 keeping the aspect (width <= 320), left-aligned, the rest raw 0"
+  },
+  "source": "read from the zoo's Android code by an Explore agent on 2026-11-06 (every input carries its path:line); spot-checked by hand: places365, migan, vrwkv, dewarp, sam2 decoder layout, the D-FINE graph A -> B glue"
+ },
+ "6drepnet": {
+  "sample": "tddfa",
+  "sample_owner": "borrowed (face)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:sixdrepnet/app/src/main/java/com/sixdrepnet/HeadPoseEstimator.kt:32-33,57-66"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "output [1,6] = 6D rotation regression"
+ },
+ "faceparsing": {
+  "sample": "rtmface",
+  "sample_owner": "borrowed (face)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:faceparsing/app/src/main/java/com/faceparsing/FaceParser.kt:30-31,57-66"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     19,
+     512,
+     512
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": ""
+ },
+ "cpga_fp16": {
+  "sample": "lowlight",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:lowlight/app/src/main/java/com/lowlight/LowLightEnhancer.kt:34-38"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "clothseg": {
+  "sample": "rtmpose",
+  "sample_owner": "borrowed (person)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "minus1to1",
+    "order": "RGB",
+    "evidence": "zoo:clothseg/app/src/main/java/com/clothseg/ClothSegmenter.kt:56-61"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     4,
+     768,
+     768
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": ""
+ },
+ "dfine_graphA_fp16": {
+  "sample": "dfine",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:dfine/app/src/main/java/com/dfine/DFine.kt:158-163"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "outputs: enc_class [1,8400,80], memory*2 [1,8400,256]; the app selects the top 300 (not an argmax)"
+ },
+ "dfine_graphB_fp16": {
+  "sample": null,
+  "sample_owner": "graph A output",
+  "inputs": [
+   {
+    "index": "all",
+    "kind": "detr_b",
+    "upstream": "dfine_graphA_fp16",
+    "host_params": "dfine/app/src/main/assets/host_params.bin",
+    "evidence": "zoo:dfine/app/src/main/java/com/dfine/DFine.kt:83-92,117-124,164-194"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     300,
+     80
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": "memory = graph A memory / 2 (not masked); target = LayerNorm(Linear(valid*memory)) of the top-300 proposals by max class logit; ref = bbox MLP(target) + anchors (host_params.bin)"
+ },
+ "dinov2_s_fp16": {
+  "sample": "dinov2",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:dinov2/app/src/main/java/com/dinov2/Dinov2Features.kt:31-32,51-61"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "dis": {
+  "sample": "dinov2",
+  "sample_owner": "borrowed (object)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "minus_half",
+    "order": "RGB",
+    "evidence": "zoo:dis/app/src/main/java/com/dis/CutoutSegmenter.kt:54-59"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "dmcount": {
+  "sample": "yunet",
+  "sample_owner": "borrowed (people)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:crowdcount/app/src/main/java/com/crowdcount/CrowdCounter.kt:29-30,54-63"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "dehazeformer_base": {
+  "sample": "saliency",
+  "sample_owner": "borrowed (hazy landscape)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "minus1to1",
+    "order": "RGB",
+    "evidence": "zoo:dehaze/app/src/main/java/com/dehaze/Dehazer.kt:64-72"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "dewarp": {
+  "sample": "ppocr",
+  "sample_owner": "borrowed (document)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "unit",
+    "order": "BGR",
+    "evidence": "zoo:dewarp/app/src/main/java/com/dewarp/DocumentDewarper.kt:62-67"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "edsr": {
+  "sample": "metric3d",
+  "sample_owner": "borrowed",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:edsr/app/src/main/java/com/edsr/Upscaler.kt:52-61"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "style_mosaic_fp16": {
+  "sample": "neuralstyle",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "raw255",
+    "order": "RGB",
+    "evidence": "zoo:neuralstyle/app/src/main/java/com/neuralstyle/StyleTransfer.kt:41-48"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "hsemotion_b0_fp16": {
+  "sample": "hsemotion",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:hsemotion/app/src/main/java/com/hsemotion/EmotionClassifier.kt:28-29,56-87"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     8
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": "the app crops the detected face; the sample is already a face crop, so the whole image is used"
+ },
+ "gaze_fp16": {
+  "sample": "gaze",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:gaze/app/src/main/java/com/gaze/GazeEstimator.kt:24-25,40-47"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "outputs = softmax over 90 bins; the app takes the expectation, not an argmax"
+ },
+ "mlsd_fp16": {
+  "sample": "mlsd",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "mlsd4",
+    "geometry": "center_square",
+    "evidence": "zoo:mlsd/app/src/main/java/com/mlsd/MlsdDetector.kt:25,46-51"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "ch0-2 = RGB x/127.5-1, ch3 = constant 1/127.5-1"
+ },
+ "migan_fp16": {
+  "sample": "migan",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "migan4",
+    "geometry": "center_square",
+    "mask": "erase the centre square (side = H/4)",
+    "evidence": "zoo:migan/app/src/main/java/com/migan/MiganInpainter.kt:39-45"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "ch0 = mask - 0.5 (1 keep / 0 erase), ch1-3 = (RGB x/127.5-1)*mask; the app's mask comes from strokes, here a fixed centre square"
+ },
+ "modnet": {
+  "sample": "rtmpose",
+  "sample_owner": "borrowed (person)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "minus1to1",
+    "order": "RGB",
+    "evidence": "zoo:modnet/app/src/main/java/com/modnet/Matter.kt:63-68"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "movinet_a0_stream": {
+  "sample": "rtmpose",
+  "sample_owner": "borrowed (person)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:movinet/app/src/main/java/com/movinet/ActionRecognizer.kt:114-125"
+   },
+   {
+    "index": "1..44",
+    "kind": "zeros",
+    "evidence": "zoo:movinet/app/src/main/java/com/movinet/ActionRecognizer.kt:73-82"
+   },
+   {
+    "index": "45,46",
+    "kind": "ones",
+    "evidence": "zoo:movinet/app/src/main/java/com/movinet/ActionRecognizer.kt:43-44,72,88-89 (1/N with N = 1, and the constant one)"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     600
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": "first frame: every state is zero, the two [1,1,1,1] inputs are 1.0"
+ },
+ "nafnet_fp16": {
+  "sample": "nafnet",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:nafnet/app/src/main/java/com/nafnet/NafnetRestorer.kt:38-42"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "nafnet_sidd_width32_fp16": {
+  "sample": "nafnet",
+  "sample_owner": "own (same app)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:nafnet/app/src/main/java/com/nafnet/NafnetRestorer.kt:38-42"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "pidnet_s": {
+  "sample": "mlsd",
+  "sample_owner": "borrowed (city)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:pidnet/app/src/main/java/com/pidnet/Segmenter.kt:30-31,58-68"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     19,
+     128,
+     128
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": ""
+ },
+ "ppocr_det_fp16": {
+  "sample": "ppocr",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "letterbox_white",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:ppocr/app/src/main/java/com/ppocr/PpocrDetector.kt:22-23,45-49"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "ppocr_rec_fp16": {
+  "sample": "ppocr",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "line_crop48",
+    "crop": [
+     30,
+     200,
+     430,
+     260
+    ],
+    "norm": "minus1to1",
+    "order": "RGB",
+    "evidence": "zoo:ppocr/app/src/main/java/com/ppocr/PpocrRecognizer.kt:46-50; ppocr/app/src/main/java/com/ppocr/MainActivity.kt:151-164"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     40,
+     18385
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": "a fixed crop of the first text line, height 48 keeping the aspect (width <= 320), left-aligned; the rest of the width is raw 0 = -1.0"
+ },
+ "places_fp16": {
+  "sample": "places365",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:places365/app/src/main/java/com/places365/PlacesClassifier.kt:24-25,47-51"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     365
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": ""
+ },
+ "plantnet": {
+  "sample": "nima",
+  "sample_owner": "borrowed (room with plants)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:plantnet/app/src/main/java/com/plantnet/PlantClassifier.kt:28-29,54-69"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     1081
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": "no plant photo among the zoo samples"
+ },
+ "rfdetr_graphA_fp16": {
+  "sample": "dfine",
+  "sample_owner": "borrowed (COCO-like scene)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:rfdetr/app/src/main/java/com/rfdetr/RfDetr.kt:36-37,70-77"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "outputs: enc_class [1,576,91], enc_coord [1,576,4], memory [1,576,256]"
+ },
+ "rfdetr_graphB_fp16": {
+  "sample": null,
+  "sample_owner": "graph A output",
+  "inputs": [
+   {
+    "index": "all",
+    "kind": "rfdetr_b",
+    "upstream": "rfdetr_graphA_fp16",
+    "evidence": "zoo:rfdetr/app/src/main/java/com/rfdetr/RfDetr.kt:81-101"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     300,
+     91
+    ],
+    "axis": 2,
+    "start": 1
+   }
+  ],
+  "notes": "memory = graph A memory; ref = enc_coord rows of the top-300 proposals by max class logit; class 0 is unused (skipped in the argmax)"
+ },
+ "rtdetr_graphA_fp16": {
+  "sample": "rtdetr",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:rtdetr/app/src/main/java/com/rtdetr/RtDetr.kt:44,156-161"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "rtdetr_graphB_fp16": {
+  "sample": null,
+  "sample_owner": "graph A output",
+  "inputs": [
+   {
+    "index": "all",
+    "kind": "detr_b",
+    "upstream": "rtdetr_graphA_fp16",
+    "host_params": "rtdetr/app/src/main/assets/host_params.bin",
+    "evidence": "zoo:rtdetr/app/src/main/java/com/rtdetr/RtDetr.kt:81-90,115-122,162-192"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     300,
+     80
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": "as dfine_graphB_fp16"
+ },
+ "rtm_animal_fp16": {
+  "sample": "rtmanimal",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "mmpose255",
+    "order": "RGB",
+    "evidence": "zoo:rtmanimal/app/src/main/java/com/rtmanimal/RtmAnimalPoseEstimator.kt:25-26,43-47"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": ""
+ },
+ "rtm_face_fp16": {
+  "sample": "rtmface",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "mmpose255",
+    "order": "RGB",
+    "evidence": "zoo:rtmface/app/src/main/java/com/rtmface/RtmFaceEstimator.kt:24-25,42-46"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     98,
+     512
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": ""
+ },
+ "rtmhand_fp16": {
+  "sample": "rtmhand",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "mmpose255",
+    "order": "RGB",
+    "evidence": "zoo:rtmhand/app/src/main/java/com/rtmhand/RtmHandEstimator.kt:25-26,43-47"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     21,
+     512
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": ""
+ },
+ "rtmpose_s_fp16": {
+  "sample": "rtmpose",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_3x4",
+    "norm": "mmpose255",
+    "order": "RGB",
+    "evidence": "zoo:rtmpose/app/src/main/java/com/rtmpose/RtmPoseEstimator.kt:29-30,48-52"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     17,
+     384
+    ],
+    "axis": 2
+   },
+   {
+    "shape": [
+     1,
+     17,
+     512
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": ""
+ },
+ "rtmw_fp16": {
+  "sample": "rtmw",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_3x4",
+    "norm": "mmpose255",
+    "order": "RGB",
+    "evidence": "zoo:rtmw/app/src/main/java/com/rtmw/RtmwEstimator.kt:25-26,42-46"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     133,
+     384
+    ],
+    "axis": 2
+   },
+   {
+    "shape": [
+     1,
+     133,
+     512
+    ],
+    "axis": 2
+   }
+  ],
+  "notes": ""
+ },
+ "sinet": {
+  "sample": "rtmanimal",
+  "sample_owner": "borrowed (animal)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:common/kotlin/ImageTensor.kt:46-47,68-75,89-111"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "portrait": {
+  "sample": "rtmface",
+  "sample_owner": "borrowed (face)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:portrait/app/src/main/java/com/portrait/PortraitSketcher.kt:26-27,53-59"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "ufld": {
+  "sample": "dfine",
+  "sample_owner": "borrowed (outdoor; no road photo among the samples)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:ufld/app/src/main/java/com/ufld/LaneDetector.kt:36-37,60-69"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     201,
+     18,
+     4
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": ""
+ },
+ "unisal_fp16": {
+  "sample": "saliency",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:saliency/app/src/main/java/com/saliency/SaliencyPredictor.kt:21-22,37-41"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "vrwkv_s_fp16": {
+  "sample": "vrwkv",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "short256_center224",
+    "norm": "mmpose255",
+    "order": "RGB",
+    "evidence": "zoo:vrwkv/app/src/main/java/com/vrwkv/VrwkvClassifier.kt:26-28,62-79"
+   },
+   {
+    "index": 1,
+    "kind": "vrwkv_dist",
+    "evidence": "zoo:vrwkv/app/src/main/java/com/vrwkv/VrwkvClassifier.kt:39-45"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     1000
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": "dist[t,i] = |t-i| (exact, not random)"
+ },
+ "yolact": {
+  "sample": "dfine",
+  "sample_owner": "borrowed (COCO-like scene)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "yolact_bgr",
+    "order": "BGR",
+    "evidence": "zoo:yolact/app/src/main/java/com/yolact/YolactSegmenter.kt:38-39,78-88"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     19248,
+     81
+    ],
+    "axis": 2,
+    "start": 1
+   }
+  ],
+  "notes": "conf is a softmax incl. background; argmax over classes 1..80"
+ },
+ "yunet_fp16": {
+  "sample": "yunet",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "letterbox_black",
+    "norm": "raw255",
+    "order": "BGR",
+    "evidence": "zoo:yunet/app/src/main/java/com/yunet/FaceDetector.kt:45-49"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "ormbg": {
+  "sample": "rtmpose",
+  "sample_owner": "borrowed (person)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "unit",
+    "order": "RGB",
+    "evidence": "zoo:ormbg/app/src/main/java/com/ormbg/BgRemover.kt:55-60"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "w2v2_frontend_fp16": {
+  "sample": "wav2vec2-kws/app/src/main/assets/test_audio.bin",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "audio_bin",
+    "evidence": "zoo:wav2vec2-kws/app/src/main/java/com/w2vkws/MainActivity.kt:66,132-134"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "16000 float32 LE, the app's bundled test input"
+ },
+ "w2v2_head_fp16": {
+  "sample": null,
+  "sample_owner": "frontend output",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "upstream",
+    "upstream": "w2v2_frontend_fp16",
+    "output": 0,
+    "evidence": "zoo:wav2vec2-kws/app/src/main/java/com/w2vkws/Wav2Vec2Kws.kt:59-61"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "shape": [
+     1,
+     12
+    ],
+    "axis": 1
+   }
+  ],
+  "notes": ""
+ },
+ "dac_16khz_deconly_zs_fp16": {
+  "sample": null,
+  "sample_owner": "encoder output through the RVQ",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "dac_zq",
+    "upstream": "dac_16khz_encoder_fp16",
+    "rvq": "dac/app/src/main/assets/dac_rvq.bin",
+    "evidence": "zoo:dac/app/src/main/java/com/dac/DacRVQ.kt:15-18,52-103; dac/app/src/main/java/com/dac/DacCodec.kt:53-58"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "z_q = RVQ.decode(RVQ.encode(encoder output)), 12 codebooks, as the app"
+ },
+ "dac_16khz_encoder_fp16": {
+  "sample": "dac/app/src/main/assets/test_audio.bin",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "audio_bin",
+    "evidence": "zoo:dac/app/src/main/java/com/dac/MainActivity.kt:49,54-55"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "16000 float32 LE, the app's bundled test input"
+ },
+ "da3_small_gpu_fp16": {
+  "sample": "nima",
+  "sample_owner": "borrowed (room)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "letterbox_black",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:da3/app/src/main/java/com/da3/DA3Predictor.kt:27-28,55-76"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "metric3d_fp16": {
+  "sample": "metric3d",
+  "sample_owner": "own",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "center_square",
+    "norm": "mmpose255",
+    "order": "RGB",
+    "evidence": "zoo:metric3d/app/src/main/java/com/metric3d/MetricDepth.kt:29-30,45-49"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "sam2_decoder": {
+  "sample": null,
+  "sample_owner": "encoder output + one point",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "sam2_dec",
+    "upstream": "sam2_encoder",
+    "point": [
+     512,
+     512
+    ],
+    "prompt_bin": "hf:mlboydaisuke/SAM2-hiera-tiny-LiteRT@8736e24606f7edf62e34cb8ef950546e49df7eff/sam2_prompt.bin",
+    "evidence": "zoo:sam2/app/src/main/java/com/sam2/Sam2Segmenter.kt:59-64,86-114"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": "[image_embed 1048576 | sparse 512 | fpn0 2097152 | fpn1 1048576]; sparse = one positive point at (512, 512) + the not-a-point token"
+ },
+ "sam2_encoder": {
+  "sample": "dinov2",
+  "sample_owner": "borrowed (object)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "imagenet",
+    "order": "RGB",
+    "evidence": "zoo:sam2/app/src/main/java/com/sam2/Sam2Segmenter.kt:27-28,75-83"
+   }
+  ],
+  "argmax_outputs": [],
+  "notes": ""
+ },
+ "ssdlite_mobilenetv3_320_fp16": {
+  "sample": "dfine",
+  "sample_owner": "borrowed (COCO-like scene)",
+  "inputs": [
+   {
+    "index": 0,
+    "kind": "image",
+    "geometry": "stretch",
+    "norm": "minus1to1",
+    "order": "RGB",
+    "evidence": "zoo:ssdlite/app/src/main/java/com/ssdlite/SSDLiteDetector.kt:28,142-156"
+   }
+  ],
+  "argmax_outputs": [
+   {
+    "channels": 546,
+    "axis": 1,
+    "ssd_anchors": [
+     6,
+     91
+    ],
+    "start": 1
+   }
+  ],
+  "notes": "cls outputs [1,546,H,W] = 6 anchors x 91 classes; argmax over classes 1..90 per anchor and cell"
+ }
+}
