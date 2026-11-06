@@ -5,7 +5,8 @@
 aihub/results_wide.json = the Qualcomm AI Hub records of the same 52 files on a Snapdragon X2 Elite and a Galaxy S26
 (one profile job per model x device x form, 2026-10-30; a byte copy of the earlier runs' results_wide.json).
 
-Speed = the quiet-pass median (METHOD.md section 6); a cell without a quiet number shows the first-pass median with *.
+Speed = the quiet-pass median (METHOD.md section 6); a cell without a quiet-pass number shows "-" (the first-pass
+times ran on another Windows build and stay in the JSON records).
 The conclusion lines are written by hand into CONCLUSION.md and copied in (only measured facts).
 """
 
@@ -33,8 +34,6 @@ def ms_text(r):
     t = r["table"]
     if t.get("ms") is not None:
         return f"{t['ms']:.2f}", t["ms"]
-    if t.get("ms_first_pass") is not None:
-        return f"{t['ms_first_pass']:.2f}*", t["ms_first_pass"]
     return "-", None
 
 
@@ -139,7 +138,8 @@ def main():
         "Stealth 16 AI+ (Core Ultra 9 386H with Intel AI Boost NPU and Intel Graphics, RTX 5080 Laptop GPU, Windows 11 "
         "build 26200.9711). "
         "Times are medians of 30 runs (10 when one run takes more than 3 s) from host memory to host memory (copies "
-        "included), taken one cell at a time on a quiet machine; * = first-pass number (no quiet re-run). Each ONNX file "
+        "included), taken one cell at a time, each after the CPU, the RTX and the Intel GPU went idle (METHOD.md section "
+        "6); - = no quiet-pass number. Each ONNX file "
         "is also run against the `.tflite` it was converted from (`convert/check_tflite.py`): 13 of the 52 drop biases of "
         "FULLY_CONNECTED layers in tf2onnx 1.17.0 (the note says so), and their fixed files are in the second table. "
         "The X2E / S26 columns are Qualcomm AI Hub's "
@@ -153,7 +153,8 @@ def main():
     legend = [
         "",
         "Columns: Intel NPU as-is = ONNX Runtime 1.31.1 + OpenVINO EP 1.8.1 on the NPU, the plain ONNX compiled at load; "
-        "(CPU n) = n graph nodes left on the CPU EP. Intel NPU precompiled = OpenVINO 2026.4.1 `compile_model` → "
+        "(CPU n) = n graph nodes left on the CPU EP (in the X2E / S26 columns: n layers that AI Hub placed on the CPU). "
+        "Intel NPU precompiled = OpenVINO 2026.4.1 `compile_model` → "
         "`export_model` blob, loaded with `import_model`. Intel GPU = OpenVINO EP on the Intel iGPU (the EP's default precision). "
         "RTX fp16 = ONNX Runtime CUDA EP on an fp16 copy of the model (`convert_float_to_float16`, I/O kept fp32). CPU = "
         "ONNX Runtime CPU EP fp32 = the parity reference.",

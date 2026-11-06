@@ -62,9 +62,8 @@ does not run and one that fails the line).
 
    The line before `convert done` in `logs\convert.log` counts the files whose graph hash matches the measured file
    (`convert\graph_signature.py`: ops, attributes, wiring and weights). tf2onnx does not write the same bytes twice,
-   and the graph hash can differ too (cpga_fp16 in `facts_raw/tf2onnx_rebuild_2026-11-06.txt`: the same node and
-   weight counts, with a Reshape after a ReduceMin instead of after a ReduceMax); step 6 checks such files by their
-   outputs.
+   and from run to run it can also build a graph with another hash (cpga_fp16 did once: the same node and weight
+   counts, with a Reshape after a ReduceMin instead of after a ReduceMax); step 6 checks such files by their outputs.
 
 3. Inputs (downloads the zoo's sample images at the pinned commit):
 
