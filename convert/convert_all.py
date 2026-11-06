@@ -1,4 +1,5 @@
-"""Rebuild the 52 ONNX files from the zoo's .tflite files on Hugging Face (the recipe of the x2e lane, recipe.json).
+"""Rebuild the ONNX files from the zoo's .tflite files on Hugging Face (recipe.json: the 52 measured files of the x2e
+lane, and the 13 <model>_fixed files converted with the FULLY_CONNECTED bias fix of patch_tf2onnx.py).
 
     python convert_all.py --out <dir> [--model m ...]
 
@@ -86,8 +87,11 @@ def main():
         cmd = [sys.executable, "-m", "tf2onnx.convert", "--tflite", tfl, "--output", dst, "--opset", "17"]
         if r["continue_on_error"]:
             cmd.append("--continue_on_error")
+        # patch_tf2onnx.py's FULLY_CONNECTED bias fix is on only for the <model>_fixed entries; off rebuilds the measured files
+        env = dict(os.environ, ZOO_FC_BIAS_FIX="1" if r.get("fc_bias_fix") else "0")
+        row["recipe"]["fc_bias_fix"] = bool(r.get("fc_bias_fix"))
         with open(os.path.join(a.out, m + ".log"), "w", encoding="utf-8") as lf:
-            row["tf2onnx_rc"] = subprocess.call(cmd, stdout=lf, stderr=subprocess.STDOUT)
+            row["tf2onnx_rc"] = subprocess.call(cmd, stdout=lf, stderr=subprocess.STDOUT, env=env)
         row["seconds"] = round(time.time() - t0, 1)
         if os.path.exists(dst):
             row["onnx_sha256"] = sha256(dst)

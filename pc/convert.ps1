@@ -3,7 +3,7 @@
 # Needs .venv-tf: run setup_venvs.ps1 with $env:ZOO_WITH_CONVERT = "1". Log = <root>\logs\convert.log
 param([string]$Models = "", [string]$Only = "")
 . "$PSScriptRoot\common.ps1"
-if (-not $Models) { $Models = "$PSScriptRoot\models52.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
+if (-not $Models) { $Models = "$PSScriptRoot\models.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
 $log = "$Root\logs\convert.log"
 New-Item -ItemType Directory -Force "$Root\logs", "$Root\onnx" | Out-Null
 $py = "$Root\.venv-tf\Scripts\python.exe"

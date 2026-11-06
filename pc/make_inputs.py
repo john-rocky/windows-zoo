@@ -305,6 +305,15 @@ def main():
     ap.add_argument("--model", nargs="*")
     a = ap.parse_args()
     spec = json.load(open(a.spec, encoding="utf-8"))
+    # <model>_fixed (models.txt) = the same .tflite converted with the FULLY_CONNECTED bias fix: the base model's input,
+    # and an input built from an upstream graph comes from that graph's _fixed file when there is one
+    listed = [l.strip() for l in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "models.txt")) if l.strip()]
+    for fm in [m for m in listed if m.endswith("_fixed") and m not in spec]:
+        e = json.loads(json.dumps(spec[fm[: -len("_fixed")]]))
+        for i in e["inputs"]:
+            if i.get("upstream") and i["upstream"] + "_fixed" in listed:
+                i["upstream"] += "_fixed"
+        spec[fm] = e
     fetch = Fetch(a.root, spec["_about"]["zoo_commit"])
     models = [m for m in spec if not m.startswith("_")]
     if a.model:

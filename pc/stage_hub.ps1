@@ -3,7 +3,7 @@
 # Log = <root>\logs\stage_hub.log
 param([string]$Models = "", [string]$Only = "")
 . "$PSScriptRoot\common.ps1"
-if (-not $Models) { $Models = "$PSScriptRoot\models52.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
+if (-not $Models) { $Models = "$PSScriptRoot\models.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
 $log = "$Root\logs\stage_hub.log"
 New-Item -ItemType Directory -Force "$Root\logs" | Out-Null
 $list = Get-Content $Models | Where-Object { $_.Trim() -ne "" -and -not $_.StartsWith("#") }

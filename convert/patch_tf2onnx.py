@@ -5,7 +5,13 @@
 2. tflite_handlers/tfl_x2e_extra.py (copied from this folder's tfl_x2e_extra.py) + its import in tflite_handlers/__init__.py:
    handlers for TFL_GELU, TFL_RELU_0_TO_1, TFL_RELU_N1_TO_1, which tf2onnx otherwise leaves unconverted.
 
-Both are upstream issue/PR candidates (onnx/tensorflow-onnx)."""
+3. tflite_handlers/tfl_math.py, TFL_FULLY_CONNECTED: when keep_num_dims is false and the input has rank > 2, the
+   handler inserts a Reshape and rewrites the node's inputs as [reshaped input, weights], dropping the bias (input 2),
+   so the `len(node.input) == 3` branch never adds it (13 of the 52 zoo files lose 1 to 24 biases). The patch keeps
+   the bias. ZOO_FC_BIAS_FIX=0 in the environment restores the old behaviour, to rebuild the files the table
+   measured (convert_all.py sets it from recipe.json).
+
+All three are upstream issue/PR candidates (onnx/tensorflow-onnx)."""
 
 import os
 import shutil
@@ -62,4 +68,15 @@ replace_once(
     tfl_x2e_extra,
 )""",
     "tflite_handlers import tfl_x2e_extra",
+)
+
+replace_once(
+    os.path.join(PKG, "tfl_math.py"),
+    """            ctx.replace_inputs(node, [reshape_node.output[0], node.input[1]])
+""",
+    """            # windows-zoo fix: keep the bias (input 2); ZOO_FC_BIAS_FIX=0 drops it as tf2onnx 1.17.0 does
+            keep = None if __import__("os").environ.get("ZOO_FC_BIAS_FIX", "1") != "0" else 2
+            ctx.replace_inputs(node, [reshape_node.output[0]] + node.input[1:keep])
+""",
+    "tfl_math FULLY_CONNECTED keeps its bias when keep_num_dims is false",
 )

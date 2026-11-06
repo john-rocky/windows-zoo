@@ -3,7 +3,7 @@
 # Log = <root>\logs\first_pass.log, end marker <root>\first_pass.done, parity log <root>\logs\compare_first.log
 param([string]$Models = "", [string]$Only = "")
 . "$PSScriptRoot\common.ps1"
-if (-not $Models) { $Models = "$PSScriptRoot\models52.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
+if (-not $Models) { $Models = "$PSScriptRoot\models.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
 $log = "$Root\logs\first_pass.log"
 New-Item -ItemType Directory -Force "$Root\logs" | Out-Null
 Remove-Item "$Root\first_pass.done" -ErrorAction SilentlyContinue

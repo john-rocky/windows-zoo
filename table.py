@@ -15,7 +15,7 @@ import os
 import statistics
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-MODELS = [l.strip() for l in open(os.path.join(HERE, "pc", "models52.txt")) if l.strip()]
+MODELS = [l.strip() for l in open(os.path.join(HERE, "pc", "models.txt")) if l.strip()]
 CELLS = ["ovnpu", "ovnpu_pre", "ovgpu", "cuda16", "cuda32", "cpu"]
 CODE = {"ovnpu": "a", "ovnpu_pre": "p", "ovgpu": "g", "cuda16": "h", "cuda32": "f"}
 
@@ -67,7 +67,20 @@ def main():
         cpu = (r.get("units") or {}).get("CPU", 0)
         return f"{r['infer_us'] / 1000:.2f}" + (f" (CPU {cpu})" if cpu else ""), r["infer_us"] / 1000, r.get("first_load_us")
 
-    rows = []
+    recipe = json.load(open(os.path.join(HERE, "convert", "recipe.json"), encoding="utf-8"))
+
+    def tflite_note(m):
+        t = load(m, "tflite")
+        if t is None:
+            return None
+        if t.get("status") == "PASS":
+            c = min((o["cos"] for o in t.get("outputs", []) if "cos" in o), default=None)
+            return f"ONNX vs .tflite: PASS, cos ≥ {c:.4f}" if c is not None and c < 0.9999 else None
+        if t.get("status") == "FAIL":
+            return f"ONNX vs .tflite: FAIL ({'; '.join(f.replace('serving_default_', '') for f in t.get('fails', []))[:90]})"
+        return f"ONNX vs .tflite: {t.get('status')} ({str(t.get('error', ''))[:60]})"
+
+    rows, fixed_rows = [], []
     for m in MODELS:
         R = {c: load(m, c) for c in CELLS}
         s26, _, _ = hub(m, "S26", "pqo")
@@ -103,16 +116,32 @@ def main():
         for c in ("ovnpu", "ovnpu_pre", "ovgpu"):
             if R[c] and R[c]["status"] != "ERROR" and not ran_on_device(R[c]):
                 notes.append(f"{c}: no engine time on its device in the process counters")
+        tn = tflite_note(m)
+        if tn:
+            notes.insert(0, tn)
+        if m.endswith("_fixed"):
+            base = m[: -len("_fixed")]
+            n = (recipe.get(m) or {}).get("fc_biases_restored")
+            notes.insert(0, f"{base} with {n} FULLY_CONNECTED biases restored" if n else f"{base}, fixed conversion")
+            fixed_rows.append(f"| {m} | {cols['ovnpu']} | {cols['ovnpu_pre']} | {cols['ovgpu']} | {cols['cuda16']} | {cols['cpu']} | "
+                              f"{' / '.join(loads[:2])} | {par} | {'; '.join(notes)} |")
+            continue
+        if m + "_fixed" in MODELS:
+            notes.insert(0, f"this file drops {(recipe.get(m + '_fixed') or {}).get('fc_biases_restored', '?')} "
+                            f"FULLY_CONNECTED biases (tf2onnx 1.17.0); fixed file: {m}_fixed below")
         rows.append(f"| {m} | {s26} | {x2e} | {cols['ovnpu']} | {cols['ovnpu_pre']} | {cols['ovgpu']} | {cols['cuda16']} | {cols['cpu']} | "
                     f"{' / '.join(loads)} | {par} | {'; '.join(notes)} |")
 
     concl = open(os.path.join(HERE, "CONCLUSION.md"), encoding="utf-8").read().strip() if os.path.exists(os.path.join(HERE, "CONCLUSION.md")) else "(conclusion pending)"
     head = [
         "# Vision zoo on one Windows laptop: Intel NPU, Intel GPU, RTX, CPU — next to Snapdragon X2 Elite and Galaxy S26\n",
-        "52 single-graph ONNX files of the LiteRT zoo (the same files as the X2 Elite / Galaxy S26 columns), run on an MSI "
+        "52 single-graph ONNX files of LiteRT-Models (the same files as the X2 Elite / Galaxy S26 columns), run on an MSI "
         "Stealth 16 AI+ (Core Ultra 9 386H with Intel AI Boost NPU and Intel Graphics, RTX 5080 Laptop GPU, Windows 11). "
-        "Times are medians of 30 runs from host memory to host memory (copies included), taken one cell at a time on a quiet "
-        "machine; * = first-pass number (no quiet re-run). The X2E / S26 columns are Qualcomm AI Hub's "
+        "Times are medians of 30 runs (10 when one run takes more than 3 s) from host memory to host memory (copies "
+        "included), taken one cell at a time on a quiet machine; * = first-pass number (no quiet re-run). Each ONNX file "
+        "is also run against the `.tflite` it was converted from (`convert/check_tflite.py`): 13 of the 52 drop biases of "
+        "FULLY_CONNECTED layers in tf2onnx 1.17.0 (the note says so), and their fixed files are in the second table. "
+        "The X2E / S26 columns are Qualcomm AI Hub's "
         "`estimated_inference_time` of the precompiled QNN form (one profile job per cell, 2026-10-30, "
         "`aihub/results_wide.json`): AI Hub's own timer on the device, not this repo's host-to-host timer.\n",
         concl + "\n",
@@ -124,16 +153,25 @@ def main():
         "",
         "Columns: Intel NPU as-is = ONNX Runtime 1.31.1 + OpenVINO EP 1.8.1 on the NPU, the plain ONNX compiled at load; "
         "(CPU n) = n graph nodes left on the CPU EP. Intel NPU precompiled = OpenVINO 2026.4.1 `compile_model` → "
-        "`export_model` blob, loaded with `import_model`. Intel GPU = OpenVINO EP on the Intel iGPU (default precision f16). "
+        "`export_model` blob, loaded with `import_model`. Intel GPU = OpenVINO EP on the Intel iGPU (the EP's default precision). "
         "RTX fp16 = ONNX Runtime CUDA EP on an fp16 copy of the model (`convert_float_to_float16`, I/O kept fp32). CPU = "
         "ONNX Runtime CPU EP fp32 = the parity reference.",
         "Parity (against the CPU EP fp32 outputs, PLAN.md section 3): a = Intel NPU as-is, p = precompiled, g = Intel GPU, "
         "h = RTX fp16, f = RTX fp32; P = PASS (every output cos ≥ 0.99, no NaN / Inf, class argmax kept ≥ 0.99), "
         "F = FAIL, E = ERROR (did not run; error in the note).",
     ]
+    fixed = []
+    if fixed_rows:
+        fixed = ["", "## The 13 fixed files", "",
+                 "The same `.tflite` files converted with the FULLY_CONNECTED bias fix (`convert/patch_tf2onnx.py`), measured "
+                 "the same way on this laptop. These are the files of the Hugging Face repos; the X2E / S26 columns above were "
+                 "measured on the files without the fix.", "",
+                 "| model | Intel NPU as-is ms | Intel NPU precompiled ms | Intel GPU ms | RTX fp16 ms | CPU ms | "
+                 "load s: Intel NPU as-is / Intel NPU precompiled | parity | note |",
+                 "|---|---|---|---|---|---|---|---|---|"] + fixed_rows
     with open(os.path.join(HERE, "RESULTS_WINDOWS.md"), "w", encoding="utf-8") as f:
-        f.write("\n".join(head + rows + legend) + "\n")
-    print(f"{len(rows)} rows")
+        f.write("\n".join(head + rows + fixed + legend) + "\n")
+    print(f"{len(rows)} rows, {len(fixed_rows)} fixed rows")
 
 
 if __name__ == "__main__":

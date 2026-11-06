@@ -18,7 +18,7 @@ import subprocess
 HERE = os.path.dirname(os.path.abspath(__file__))
 PULL = os.path.join(HERE, "pc_pull")
 CELLS = ["cpu", "cuda32", "cuda16", "ovgpu", "ovnpu", "ovnpu_pre", "ovcpu"]  # ovcpu = fallback reference (yolact)
-MODELS = [l.strip() for l in open(os.path.join(HERE, "pc", "models52.txt")) if l.strip()]
+MODELS = [l.strip() for l in open(os.path.join(HERE, "pc", "models.txt")) if l.strip()]
 
 
 def pull():
@@ -88,6 +88,13 @@ def main():
             os.makedirs(od, exist_ok=True)
             with open(os.path.join(od, c + ".json"), "w", encoding="utf-8") as f:
                 json.dump(rec, f, indent=1, ensure_ascii=False)
+            n += 1
+        tfl = load(os.path.join(src, "parity", "tflite", m + ".json"))  # convert/check_tflite.py: the ONNX file vs its .tflite
+        if tfl is not None:
+            od = os.path.join(HERE, "results", m)
+            os.makedirs(od, exist_ok=True)
+            with open(os.path.join(od, "tflite.json"), "w", encoding="utf-8") as f:
+                json.dump({"model": m, "cell": "tflite", **tfl}, f, indent=1, ensure_ascii=False)
             n += 1
     print(f"wrote {n} files under results/")
 

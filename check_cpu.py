@@ -65,7 +65,7 @@ def main():
     ap.add_argument("--src", required=True, help="your root: the folder with runs/ and out/")
     ap.add_argument("--model", nargs="*")
     a = ap.parse_args()
-    models = a.model or [l.strip() for l in open(os.path.join(HERE, "pc", "models52.txt")) if l.strip()]
+    models = a.model or [l.strip() for l in open(os.path.join(HERE, "pc", "models.txt")) if l.strip()]
     count = {}
     for m in models:
         state, why = check(a.src, m)

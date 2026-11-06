@@ -4,7 +4,7 @@
 # keep its speed after end_profiling?). Log = <root>\logs\quiet_pass.log, end marker <root>\quiet_pass.done
 param([string]$Models = "", [string]$Only = "", [switch]$NoControl)
 . "$PSScriptRoot\common.ps1"
-if (-not $Models) { $Models = "$PSScriptRoot\models52.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
+if (-not $Models) { $Models = "$PSScriptRoot\models.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
 $log = "$Root\logs\quiet_pass.log"
 New-Item -ItemType Directory -Force "$Root\logs" | Out-Null
 Remove-Item "$Root\quiet_pass.done" -ErrorAction SilentlyContinue

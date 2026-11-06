@@ -44,6 +44,8 @@ thread count).
   written as a candidate).
 - **ERROR** = the cell did not run (conversion, compile, session, run, or the 30-minute timeout), with the full
   error text and the versions.
+- The same line compares each ONNX file's CPU output with its source `.tflite` in the LiteRT interpreter
+  (`convert/check_tflite.py`, `results/<model>/tflite.json`): a check of the conversion, not of a runtime.
 
 ## 4. Timing
 
@@ -127,3 +129,13 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
   yolact.onnx at all (`[ShapeInferenceError] Incompatible dimensions` on an FPN Add), so its CPU reference does not
   exist. For such a model only, the reference is OpenVINO on the CPU in fp32 (`ovcpu`: the same ONNX file,
   `INFERENCE_PRECISION_HINT` f32), and the table row says so.
+- 2026-11-06 16:3x JST, after the first pass and before the quiet pass (a missing check prompted it, not a number):
+  each ONNX file is also run against the `.tflite` it was converted from (`convert/check_tflite.py`: the zoo's
+  original file in the LiteRT interpreter on the CPU, the same input, the line of section 3). 13 of the 52 files
+  compute something else: tf2onnx 1.17.0 drops the bias of every FULLY_CONNECTED layer whose `keep_num_dims` is false
+  and whose input has rank 3 (1 to 24 layers per file; 8 of the 13 fail the line). The table stays on the 52 files
+  (the X2E / S26 columns measured them), with a note on those 13 rows. The same 13 `.tflite` files converted with a
+  one-line fix of that handler (`convert/patch_tf2onnx.py`; `<model>_fixed` in `convert/recipe.json`, without
+  `--continue_on_error`) are measured in every cell and both passes, in a second table; they are the files of the
+  Hugging Face repos. A `_fixed` file takes its base model's input; an input built from another graph comes from that
+  graph's `_fixed` file where there is one (the DETR graph B files).

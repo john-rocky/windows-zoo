@@ -8,7 +8,7 @@
 param([Parameter(Mandatory=$true)][string]$Stream, [string]$Pass = "first", [string]$Models = "",
       [switch]$Quiet, [int]$TimeoutMin = 30, [string]$Only = "", [string]$ResumeSince = "")
 . "$PSScriptRoot\common.ps1"
-if (-not $Models) { $Models = "$PSScriptRoot\models52.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
+if (-not $Models) { $Models = "$PSScriptRoot\models.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
 $log = "$Root\logs\chain_${Stream}_$Pass.log"
 New-Item -ItemType Directory -Force "$Root\logs" | Out-Null
 function U([string]$PyKey, [string]$Cell, [string[]]$Flags) { [pscustomobject]@{ py = $PyKey; cell = $Cell; flags = $Flags } }

@@ -1,8 +1,8 @@
 # LICENSES — the 52 models' licences, and whether an OpenVINO IR / NPU blob may go to the Hub
 
 Source: each Hugging Face repo's `cardData.license` and its card's License section, read at the revision in the
-link (HF API, 2026-11-06; raw: `facts_raw/hf_licence_api_2026-11-06.json`, `facts_raw/licence_cards_2026-11-06.json`).
-All 47 repos carry a permissive licence (Apache-2.0 25, MIT 16, BSD-3-Clause 3, BSD-2-Clause 1 — counted per repo).
+link (the HF API and each card, read on 2026-11-06).
+All 45 repos carry a permissive licence (Apache-2.0 25, MIT 16, BSD-3-Clause 3, BSD-2-Clause 1 — counted per repo).
 An NPU blob or an IR is a compiled form of the same weights, so it would carry the repo's licence and its card's
 upstream credit. Training-data terms that a card names (last column) are not read here = unverified.
 

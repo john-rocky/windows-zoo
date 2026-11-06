@@ -4,13 +4,17 @@
 (a few models are two graphs, such as a detector's encoder and decoder), on every processor of one Windows laptop: the
 Intel NPU (two ways), the Intel GPU, the NVIDIA RTX GPU and the CPU. Each file runs on each processor through ONNX
 Runtime or OpenVINO, its outputs are compared with the CPU's fp32 outputs, and the times sit next to the same 52
-files on a Snapdragon X2 Elite and a Galaxy S26 (Qualcomm AI Hub, measured earlier).
+files on a Snapdragon X2 Elite and a Galaxy S26 (Qualcomm AI Hub, measured earlier). Each ONNX file is also checked
+against the `.tflite` it was converted from: 13 of the 52 lose the bias of some FULLY_CONNECTED layers in tf2onnx
+1.17.0, so those 13 are converted again with a one-line fix (`convert/patch_tf2onnx.py`) and measured as
+`<model>_fixed`.
 
 (results paragraph: written after the quiet pass)
 
 - The table: [RESULTS_WINDOWS.md](RESULTS_WINDOWS.md)
 - One JSON per model and cell: [results/](results/) (`results/<model>/<cell>.json`: load time, the run times, node
-  placement, the parity numbers, the error text of a cell that did not run, and the versions)
+  placement, the parity numbers, the error text of a cell that did not run, and the versions;
+  `results/<model>/tflite.json`: the ONNX file against its `.tflite`)
 - How each input is built: [pc/inputs_spec.json](pc/inputs_spec.json) (the zoo's sample images at a pinned commit, the
   app's resize and normalisation)
 - How it was measured and the pass line, written before measuring: [METHOD.md](METHOD.md)
@@ -47,7 +51,8 @@ on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Ev
    ```
 
 2. Rebuild the ONNX files from the zoo's `.tflite` on Hugging Face (the revisions and sha256 are pinned in
-   `convert\recipe.json`):
+   `convert\recipe.json`): the 52 measured files with tf2onnx 1.17.0 as it is, and the 13 `_fixed` files with the
+   FULLY_CONNECTED bias fix:
 
    ```powershell
    powershell -ExecutionPolicy Bypass -File pc\convert.ps1
@@ -78,9 +83,11 @@ on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Ev
    powershell -ExecutionPolicy Bypass -File pc\quiet_pass.ps1
    ```
 
-6. Check your CPU outputs against the table's, then rebuild the results and the table from your runs:
+6. Check each ONNX file against its `.tflite` and your CPU outputs against the table's, then rebuild the results and
+   the table from your runs:
 
    ```powershell
+   .venv-tf\Scripts\python.exe convert\check_tflite.py
    .venv-ort\Scripts\python.exe check_cpu.py --src .
    .venv-ort\Scripts\python.exe merge.py --src .
    .venv-ort\Scripts\python.exe table.py

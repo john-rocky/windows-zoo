@@ -50,3 +50,16 @@ metric3d_fp16
 sam2_decoder
 sam2_encoder
 ssdlite_mobilenetv3_320_fp16
+dfine_graphA_fp16_fixed
+dfine_graphB_fp16_fixed
+gaze_fp16_fixed
+ppocr_rec_fp16_fixed
+places_fp16_fixed
+rfdetr_graphA_fp16_fixed
+rfdetr_graphB_fp16_fixed
+rtdetr_graphA_fp16_fixed
+rtdetr_graphB_fp16_fixed
+w2v2_head_fp16_fixed
+da3_small_gpu_fp16_fixed
+metric3d_fp16_fixed
+sam2_decoder_fixed

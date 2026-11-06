@@ -1,0 +1,469 @@
+{
+ "_about": "Hugging Face metadata of the source repos at the pinned revisions (HF API, 2026-11-06): the card's licence, task and base model",
+ "litert-community/6DRepNet-HeadPose-LiteRT": {
+  "revision": "6a7d8fe0ca042d1524e3912d3371a61d0af45528",
+  "models": [
+   "6drepnet"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-classification",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/BiSeNet-Face-Parsing-LiteRT": {
+  "revision": "62996ba4ebcfd9a44b45f1dd5325dcd7e4f09955",
+  "models": [
+   "faceparsing"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-segmentation",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/CPGA-Net-LowLight-LiteRT": {
+  "revision": "e917b2aff0eeb3ca05209e69ab9b719f46949a72",
+  "models": [
+   "cpga_fp16"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-to-image",
+  "base_model": "Shyandram/CPGA-Net-Pytorch",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/Cloth-Segmentation-U2Net-LiteRT": {
+  "revision": "37e0b75777a6c3dfc7533aeef697aa6136716bfe",
+  "models": [
+   "clothseg"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-segmentation",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/D-FINE-S-LiteRT": {
+  "revision": "b662bc69f7d8b8278acaf57ca0831e194a0bbed4",
+  "models": [
+   "dfine_graphA_fp16",
+   "dfine_graphB_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "object-detection",
+  "base_model": [
+   "ustc-community/dfine-small-coco"
+  ],
+  "base_model_relation": "quantized"
+ },
+ "litert-community/DINOv2-ViT-S14-LiteRT": {
+  "revision": "5b584fb82b9283b0d7baf35dbe8546169a205201",
+  "models": [
+   "dinov2_s_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-feature-extraction",
+  "base_model": "facebook/dinov2-small",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/DIS-ISNet-LiteRT": {
+  "revision": "1b966dbe2f33bd5ca1299cf94fbab59265210b6b",
+  "models": [
+   "dis"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-segmentation",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/DM-Count-Crowd-LiteRT": {
+  "revision": "5934338595e4d963b9f73f1c5b903bce4abc5b7a",
+  "models": [
+   "dmcount"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-to-image",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/DehazeFormer-MCT-LiteRT": {
+  "revision": "7249e3942b1a762f0c9691487537f171f10f3f5d",
+  "models": [
+   "dehazeformer_base"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-to-image",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/DewarpNet-LiteRT": {
+  "revision": "dfc68e3e462a6eb7eb8c4dbbff4049e3bd3cc9e3",
+  "models": [
+   "dewarp"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-to-image",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/EDSR-x4-LiteRT": {
+  "revision": "670eaa25a390838226c7e3e61b0dd1ea4e5bc3ba",
+  "models": [
+   "edsr"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-to-image",
+  "base_model": "eugenesiow/edsr-base",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/Fast-Neural-Style-LiteRT": {
+  "revision": "1a697a4af21a3a133b710d1ec8e2d7a7bd918594",
+  "models": [
+   "style_mosaic_fp16"
+  ],
+  "license": "bsd-3-clause",
+  "pipeline_tag": "image-to-image",
+  "base_model": "pytorch/examples",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/HSEmotion-B0-LiteRT": {
+  "revision": "0da19dcc4e0c7fb426f099247d89bc28f9fe089f",
+  "models": [
+   "hsemotion_b0_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-classification",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/L2CS-Gaze360-LiteRT": {
+  "revision": "f0c19a658e0a67c913e5704b051378200021e85d",
+  "models": [
+   "gaze_fp16"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-classification",
+  "base_model": "Ahmednull/L2CS-Net",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/M-LSD-tiny-LiteRT": {
+  "revision": "ae7c5698d5bbef1976aa5a1f7ad7b9b28d324e3c",
+  "models": [
+   "mlsd_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-segmentation",
+  "base_model": "navervision/mlsd",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/MI-GAN-512-Places2-LiteRT": {
+  "revision": "179a35d8e8a518f6253f9c42fc9b412c6438cf7c",
+  "models": [
+   "migan_fp16"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-to-image",
+  "base_model": "Picsart-AI-Research/MI-GAN",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/MODNet-LiteRT": {
+  "revision": "4d5bd22bde15c8ae5e215ca4799513844979a431",
+  "models": [
+   "modnet"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-segmentation",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/MoViNet-A0-Stream-LiteRT": {
+  "revision": "a21743c58801227b8265f47b136cb096fe22989d",
+  "models": [
+   "movinet_a0_stream"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "video-classification",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/NAFNet-GoPro-width32-LiteRT": {
+  "revision": "84fa01bda5ea09a562e83fa1863b951453b5ccf0",
+  "models": [
+   "nafnet_fp16"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-to-image",
+  "base_model": "megvii-research/NAFNet",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/NAFNet-SIDD-width32-LiteRT": {
+  "revision": "59984b5234b24ccf2f324ce0ac49cd640b9d5b2c",
+  "models": [
+   "nafnet_sidd_width32_fp16"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-to-image",
+  "base_model": "megvii-research/NAFNet",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/PIDNet-S-Cityscapes-LiteRT": {
+  "revision": "3d79fd7a49278c81649fbe180091f96feead56fd",
+  "models": [
+   "pidnet_s"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-segmentation",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/PP-OCRv5-LiteRT": {
+  "revision": "f4bcc36c81910abb1acf2401d07a570e6fa37a32",
+  "models": [
+   "ppocr_det_fp16",
+   "ppocr_rec_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": null,
+  "base_model": [
+   "PaddlePaddle/PP-OCRv5_mobile_det",
+   "PaddlePaddle/PP-OCRv5_mobile_rec"
+  ],
+  "base_model_relation": "quantized"
+ },
+ "litert-community/Places365-ResNet18-LiteRT": {
+  "revision": "84c7567db15cf832bbeae925a0e53ddc3df9008a",
+  "models": [
+   "places_fp16"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-classification",
+  "base_model": "CSAILVision/places365",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/PlantNet-300K-ResNet18-LiteRT": {
+  "revision": "54f7b14eda047a73bc1f3c9cacb16b14e2146acc",
+  "models": [
+   "plantnet"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-classification",
+  "base_model": "cpoisson/plantnet300k-resnet18",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/RF-DETR-Nano-LiteRT": {
+  "revision": "de052d53117ab26ccae6718713628ab6fe1683c5",
+  "models": [
+   "rfdetr_graphA_fp16",
+   "rfdetr_graphB_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "object-detection",
+  "base_model": [
+   "Roboflow/rf-detr-nano"
+  ],
+  "base_model_relation": "quantized"
+ },
+ "litert-community/RT-DETRv2-S-LiteRT": {
+  "revision": "60f16dbbf37d9b17a6cba5a057f1f27cd5ac4181",
+  "models": [
+   "rtdetr_graphA_fp16",
+   "rtdetr_graphB_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "object-detection",
+  "base_model": [
+   "PekingU/rtdetr_v2_r18vd"
+  ],
+  "base_model_relation": "quantized"
+ },
+ "litert-community/RTMPose-Animal-AP10K-LiteRT": {
+  "revision": "1daee634c9db6889268124735374e6a9c1c2fc7b",
+  "models": [
+   "rtm_animal_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "keypoint-detection",
+  "base_model": "open-mmlab/mmpose",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/RTMPose-Face-WFLW-LiteRT": {
+  "revision": "064ec3a623667ef50e3963d4721390b4e6f237f3",
+  "models": [
+   "rtm_face_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "keypoint-detection",
+  "base_model": "open-mmlab/mmpose",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/RTMPose-Hand-LiteRT": {
+  "revision": "df8c0805d04910fc7ff02800e43fdda38a415309",
+  "models": [
+   "rtmhand_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "keypoint-detection",
+  "base_model": "open-mmlab/mmpose",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/RTMPose-s-LiteRT": {
+  "revision": "9cc07fa96de442bcc568f2cbb442e94fbfe4dac2",
+  "models": [
+   "rtmpose_s_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "keypoint-detection",
+  "base_model": "open-mmlab/mmpose",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/RTMW-m-WholeBody-LiteRT": {
+  "revision": "6f5203e1719985be16e9ec8c1929968722d0b2ed",
+  "models": [
+   "rtmw_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "keypoint-detection",
+  "base_model": "open-mmlab/mmpose",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/SINet-V2-Camouflage-LiteRT": {
+  "revision": "3863d70a7f738df7d5421a72b1408631b8b5ecd6",
+  "models": [
+   "sinet"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-segmentation",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/U2Net-Portrait-Sketch-LiteRT": {
+  "revision": "5c4f635ba46762a37f8a7c9f511855d0e984b322",
+  "models": [
+   "portrait"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-to-image",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/Ultra-Fast-Lane-Detection-LiteRT": {
+  "revision": "00279fd6c85a654452754f56021ce336fb70e38f",
+  "models": [
+   "ufld"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-segmentation",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "litert-community/UniSal-Saliency-LiteRT": {
+  "revision": "a699e0f86da9adc73d2fbf210a673870bfef8b72",
+  "models": [
+   "unisal_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-segmentation",
+  "base_model": "rdroste/unisal",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/Vision-RWKV-S-LiteRT": {
+  "revision": "184992fed3c7bb2761220287bcd0a496959e4e39",
+  "models": [
+   "vrwkv_s_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-classification",
+  "base_model": "OpenGVLab/Vision-RWKV",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/YOLACT-ResNet50-LiteRT": {
+  "revision": "3ecb14b9c4635cd87b515e1d12201c2c1631e19c",
+  "models": [
+   "yolact"
+  ],
+  "license": "mit",
+  "pipeline_tag": "image-segmentation",
+  "base_model": "dbolya/yolact-resnet50",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/YuNet-Face-LiteRT": {
+  "revision": "f08a6874cf8a1ba9c08ad7a7b9b11231a53b36c9",
+  "models": [
+   "yunet_fp16"
+  ],
+  "license": "bsd-3-clause",
+  "pipeline_tag": "object-detection",
+  "base_model": "ShiqiYu/libfacedetection",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/ormbg-LiteRT": {
+  "revision": "8dfdacc4ebceafd4d55195fdbd3baf8470610518",
+  "models": [
+   "ormbg"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "image-segmentation",
+  "base_model": "schirrmacher/ormbg",
+  "base_model_relation": "quantized"
+ },
+ "litert-community/wav2vec2-keyword-spotting": {
+  "revision": "4f30d050bc1999fbac8ec1b161232fe59d2827ed",
+  "models": [
+   "w2v2_frontend_fp16",
+   "w2v2_head_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "audio-classification",
+  "base_model": "superb/wav2vec2-base-superb-ks",
+  "base_model_relation": "quantized"
+ },
+ "mlboydaisuke/DAC-16kHz-LiteRT": {
+  "revision": "376f41e9b4e68ec1ad3088946d5d648fc77a9d45",
+  "models": [
+   "dac_16khz_deconly_zs_fp16",
+   "dac_16khz_encoder_fp16"
+  ],
+  "license": "mit",
+  "pipeline_tag": "audio-to-audio",
+  "base_model": null,
+  "base_model_relation": null
+ },
+ "mlboydaisuke/Depth-Anything-3-Small-LiteRT": {
+  "revision": "15344dc67dca2065dbb5fa625c5e8e6e5a228b57",
+  "models": [
+   "da3_small_gpu_fp16"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "depth-estimation",
+  "base_model": "depth-anything/DA3-SMALL",
+  "base_model_relation": "quantized"
+ },
+ "mlboydaisuke/Metric3D-v2-LiteRT": {
+  "revision": "4f1d6e6b8fb131bc3f3bbe94860a056b8b5d433e",
+  "models": [
+   "metric3d_fp16"
+  ],
+  "license": "bsd-2-clause",
+  "pipeline_tag": "depth-estimation",
+  "base_model": "yvanyin/metric3d",
+  "base_model_relation": "quantized"
+ },
+ "mlboydaisuke/SAM2-hiera-tiny-LiteRT": {
+  "revision": "8736e24606f7edf62e34cb8ef950546e49df7eff",
+  "models": [
+   "sam2_decoder",
+   "sam2_encoder"
+  ],
+  "license": "apache-2.0",
+  "pipeline_tag": "mask-generation",
+  "base_model": "facebook/sam2.1-hiera-tiny",
+  "base_model_relation": "quantized"
+ },
+ "mlboydaisuke/ssdlite320-mobilenetv3-litert": {
+  "revision": "271fe5d3c37b48ac598b1fd2b2125e168f23a9e6",
+  "models": [
+   "ssdlite_mobilenetv3_320_fp16"
+  ],
+  "license": "bsd-3-clause",
+  "pipeline_tag": "object-detection",
+  "base_model": null,
+  "base_model_relation": null
+ }
+}

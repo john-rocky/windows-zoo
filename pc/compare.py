@@ -142,7 +142,7 @@ def main():
             print(f"{m}: no reference")
             continue
         ref = np.load(refp, allow_pickle=False)
-        amx = spec.get(m, {}).get("argmax_outputs", [])
+        amx = (spec.get(m) or spec.get(m[: -len("_fixed")] if m.endswith("_fixed") else m, {})).get("argmax_outputs", [])
         for f in sorted(glob.glob(os.path.join(d, "*.npz"))):
             cell = os.path.basename(f)[:-4]
             if cell == ref_name:
