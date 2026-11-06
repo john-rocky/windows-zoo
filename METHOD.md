@@ -67,8 +67,9 @@ runtime's defaults. The JSON records a default where the runtime reports it (`IN
 ## 6. Two passes
 
 - **First pass**: the NPU stream (`ovnpu`, then `ovnpu_pre`) and the RTX stream (`cuda32`, then `cuda16`) run at the
-  same time as two detached jobs, then the Intel GPU stream (`ovgpu`) and the CPU stream (`cpu`). Parity and the
-  first timing come from this pass (`first_pass` in the JSON; not the table's timing).
+  same time as two detached jobs, then the Intel GPU stream (`ovgpu`) and the CPU stream (`cpu`) (`pc/first_pass.ps1`;
+  in this run the Intel GPU and CPU streams started earlier, see the change of 14:5x). Parity and the first timing
+  come from this pass (`first_pass` in the JSON; not the table's timing).
 - **Quiet pass**: serial, only the cells that ran in the first pass. Before each unit: whole-CPU load < 15 % (max of
   3 one-second reads), RTX `utilization.gpu` = 0 % and memory.used < 800 MiB, Intel GPU engine utilisation sum < 5 %.
   After 10 minutes without quiet the unit runs anyway and its row carries `gate=timeout` and the readings (such a
@@ -82,8 +83,10 @@ runtime's defaults. The JSON records a default where the runtime reports it (`IN
 - The RTX runs under a 95 W software power cap; AC power, Windows balanced power mode (unchanged). `nvidia-smi`
   pstate, clocks, power draw and the software power cap flag are written to `logs\chain_<stream>_<pass>.log` before
   and after each unit (not to the JSON).
-- The NPU as-is load is called "a compile that hits no cache" only after loading the same model a second and a
-  third time in new processes and seeing no speed-up.
+- The NPU as-is load is called "a compile that hits no cache" because loading the same file again in new processes
+  stays in the same range (places_fp16 on 2026-11-06: 1,196 ms the first time that day, then 687 to 780 ms in five
+  later processes, two of them with the EP's `cache_dir` set), far above the 13 ms its precompiled blob took to load
+  on the same build.
 - A free-RAM floor of 4 GB before each unit; an optional marker file lets the scripts wait for other jobs that share
   the machine (`pc/local.ps1`, not in the repo).
 
@@ -133,6 +136,11 @@ holds on the Intel NPU, looking for the counter-example first.
   `infer()` returns, one host copy as in the other cells. The first-pass `ovnpu_pre` times of the first 9 models in
   the list (6drepnet to dmcount) were taken before the fix (placed on the machine at 14:26 JST); every quiet-pass time
   (the table) is after it.
+- 2026-11-06 14:5x JST, during the first pass (the NPU stream's long waits for other jobs' markers prompted it, not
+  a number): the Intel GPU and CPU streams were started next to the NPU stream, while the RTX stream had one unit
+  left, instead of after both. After waiting for the marker they ran from 15:20 JST, to 15:36 (Intel GPU) and 15:32
+  (CPU), at the same time as the NPU stream (until 16:43 JST). The first pass's times are not the table's (section
+  6).
 - 2026-11-06 15:3x JST, before the quiet pass: the quiet gate waits at most 10 minutes (was 60), the cap used by every
   timing job on this shared machine; a unit that hits it is measured once more at the end. The marker is now taken
   only when no one holds it (create-new), never overwritten.
