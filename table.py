@@ -43,11 +43,13 @@ def cpu_nodes(r):
     return ((fp.get("placement") or {}).get("nodes_by_provider") or {}).get("CPUExecutionProvider", 0)
 
 
-def ran_on(r, adapter):
-    """Did the process's GPU Engine counters show time on this adapter (npu / intel_igpu / rtx)?"""
+def ran_on_device(r):
+    """Did the process's GPU Engine counters show time on the cell's own adapter (the LUID the record names)?"""
     for part in ("quiet", "first_pass"):
-        e = ((r or {}).get(part) or {}).get("engine_running_ms") or {}
-        if any(k.startswith(adapter + "/") and v > 0 for k, v in e.items()):
+        rec = (r or {}).get(part) or {}
+        luid = (rec.get("device") or {}).get("counter_luid")
+        e = rec.get("engine_running_ms") or {}
+        if luid and any(k.startswith(luid + "/") and v > 0 for k, v in e.items()):
             return True
     return False
 
@@ -95,8 +97,9 @@ def main():
                 notes.append(f"{c} ERROR: {last[0][:90]}")
             elif r and r["status"] == "FAIL":
                 notes.append(f"{c} FAIL: {'; '.join((r.get('parity') or {}).get('fails', []))[:90]}")
-        if R["ovnpu"] and R["ovnpu"]["status"] != "ERROR" and not ran_on(R["ovnpu"], "npu"):
-            notes.append("ovnpu: no NPU engine time in the process counters")
+        for c in ("ovnpu", "ovnpu_pre", "ovgpu"):
+            if R[c] and R[c]["status"] != "ERROR" and not ran_on_device(R[c]):
+                notes.append(f"{c}: no engine time on its device in the process counters")
         rows.append(f"| {m} | {s26} | {x2e} | {cols['ovnpu']} | {cols['ovnpu_pre']} | {cols['ovgpu']} | {cols['cuda16']} | {cols['cpu']} | "
                     f"{' / '.join(loads)} | {par} | {'; '.join(notes)} |")
 

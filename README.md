@@ -71,10 +71,11 @@ on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Ev
    powershell -ExecutionPolicy Bypass -File pc\first_pass.ps1
    ```
 
-5. Quiet pass: the timing in the table, one unit at a time, each after the CPU, the RTX and the Intel GPU go idle:
+5. Quiet pass: the timing in the table, one unit at a time, each after the CPU, the RTX and the Intel GPU go idle
+   (it starts with four short CPU runs of places_fp16 with and without ONNX Runtime profiling, a control):
 
    ```powershell
-   foreach ($s in "N", "R", "G", "C") { powershell -ExecutionPolicy Bypass -File pc\chain.ps1 -Stream $s -Pass quiet -Quiet }
+   powershell -ExecutionPolicy Bypass -File pc\quiet_pass.ps1
    ```
 
 6. Check your CPU outputs against the table's, then rebuild the results and the table from your runs:
