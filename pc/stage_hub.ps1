@@ -1,5 +1,5 @@
 # Stage the per-model Hugging Face repo files (stage_hub.py in .venv-ov) for every model: ONNX, OpenVINO IR, NPU blob,
-# manifest. Export work, not timing: each model waits only for another lane's timing marker (not for a `build` one).
+# manifest. Export work, not timing: each model waits while another lane holds the timing marker.
 # Log = <root>\logs\stage_hub.log
 param([string]$Models = "", [string]$Only = "")
 . "$PSScriptRoot\common.ps1"
@@ -10,7 +10,7 @@ $list = Get-Content $Models | Where-Object { $_.Trim() -ne "" -and -not $_.Start
 if ($Only) { $list = $list | Where-Object { $_ -in ($Only -split ",") } }
 Say $log "stage start pid=$PID models=$($list.Count)"
 foreach ($m in $list) {
-    $null = Wait-Other $log -IgnoreBuild
+    $null = Wait-Other $log
     cmd /c "`"$($Py.ov)`" -u `"$Root\pc\stage_hub.py`" --model $m >> `"$log`" 2>&1"
     Say $log "$m stage exit=$LASTEXITCODE"
 }

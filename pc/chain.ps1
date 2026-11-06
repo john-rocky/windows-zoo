@@ -25,14 +25,14 @@ if ($Pass -ne "first") {  # timing passes: no profiling, no saved outputs, and t
     }
 }
 function Gate {
-    $t0 = Get-Date; $deadline = $t0.AddMinutes(60); $last = ""
+    $t0 = Get-Date; $deadline = $t0.AddMinutes(10); $last = ""
     while ($true) {
         $c = (1..3 | ForEach-Object { Start-Sleep -Seconds 1; CpuPct } | Measure-Object -Maximum).Maximum
         $r = (RtxLine) -split ",\s*"
         $ig = IgpuPct
         $g = @{ cpu_pct_max3 = $c; rtx_util = [int]$r[0]; rtx_mem_mib = [int]$r[1]; rtx_pstate = $r[2]; igpu_util_sum = $ig; waited_s = [int]((Get-Date) - $t0).TotalSeconds; state = "quiet" }
         if ($c -lt 15 -and [int]$r[0] -eq 0 -and [int]$r[1] -lt 800 -and $ig -lt 5) { return $g }
-        if ((Get-Date) -ge $deadline) { $g.state = "timeout"; Say $log "not quiet for 60 min, running: cpu $c rtx $($r[0]) % $($r[1]) MiB igpu $ig"; return $g }
+        if ((Get-Date) -ge $deadline) { $g.state = "timeout"; Say $log "not quiet for 10 min, running: cpu $c rtx $($r[0]) % $($r[1]) MiB igpu $ig"; return $g }
         $t = "not quiet: cpu $c %, rtx $($r[0]) % $($r[1]) MiB, igpu $ig %"
         if ($t -ne $last) { Say $log $t; $last = $t }
         Start-Sleep -Seconds 20
@@ -46,7 +46,7 @@ try {
     foreach ($m in $list) {
         if ($Quiet -and ((Get-Date) - $lastRelease).TotalMinutes -ge 20) {
             # give the other lanes a window: drop the marker for 90 s between models; if one takes it, Wait-Other waits
-            if ($Busy -and (Test-Path $Busy) -and ((Get-Content $Busy -Raw) -like "$Label *")) { Remove-Item $Busy -Force }
+            Release-Busy
             Say $log "marker released for 90 s"
             Start-Sleep -Seconds 90
             $lastRelease = Get-Date
@@ -66,11 +66,11 @@ try {
                 $fj = "$Root\runs\first\$m\$name.json"
                 if (-not (Test-Path $fj) -or -not ((Get-Content $fj -Raw) -match '"status": "OK"')) { Mark $m $name "skip-first-not-ok"; continue }
             }
-            $w = if ($Quiet) { Wait-Other $log } else { Wait-Other $log -IgnoreBuild }
+            $w = Wait-Other $log
             $wr = Wait-Ram $log
             $extra = @()
             if ($Quiet) {
-                if ($Busy) { [IO.File]::WriteAllText($Busy, "$Label $(Get-Date -Format o) (quiet pass, $m $name)") }
+                while (-not (Acquire-Busy "quiet pass, $m $name")) { $w += Wait-Other $log }
                 $g = Gate; $g.other_marker_wait_s = $w; $g.ram_wait_s = $wr; $g.free_ram_gb = FreeRamGB
                 $gf = "$Root\logs\$Pass\$m\$name.gate.json"
                 New-Item -ItemType Directory -Force (Split-Path $gf) | Out-Null
@@ -101,5 +101,5 @@ try {
 } catch {
     Say $log "chain FAILED $_"
 } finally {
-    if ($Quiet -and $Busy -and (Test-Path $Busy) -and ((Get-Content $Busy -Raw) -like "$Label *")) { Remove-Item $Busy -Force }
+    if ($Quiet) { Release-Busy }
 }

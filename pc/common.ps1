@@ -21,19 +21,13 @@ function Mark([string]$Model, [string]$Cell, [string]$State) { Append-Retry $Pro
 # (lanes chain plans back to back and drop the marker between them: about a second between plans, 1-2 minutes for a
 # build; L1 asked for at least a full minute on 11-06).
 # Returns the seconds waited.
-# -IgnoreBuild (jobs that do not time anything: the first pass, conversion, export): a marker line that ends in the
-# word `build` means the other lane uses the PC but is not timing (build, download, export, parity) = do not wait.
-function Wait-Other([string]$Log, [switch]$IgnoreBuild) {
+function Wait-Other([string]$Log) {
     if (-not $Busy) { return 0 }
     $t0 = Get-Date; $last = ""
     while ($true) {
         while (Test-Path $Busy) {
             $text = (Get-Content $Busy -Raw -ErrorAction SilentlyContinue)
             if ($text -and $text.StartsWith($Label)) { return [int]((Get-Date) - $t0).TotalSeconds }
-            if ($IgnoreBuild -and $text -and ($text -match '\bbuild\b')) {
-                if ($text -ne $last) { Say $Log "marker says build, not waiting: $($text.Trim())" }
-                return [int]((Get-Date) - $t0).TotalSeconds
-            }
             $age = ((Get-Date) - (Get-Item $Busy).LastWriteTime).TotalMinutes
             if ($age -ge 120) { Say $Log "marker $([int]$age) min old, not waiting: $text"; return [int]((Get-Date) - $t0).TotalSeconds }
             if ($text -ne $last) { Say $Log "waiting for the marker: $text"; $last = $text }
@@ -48,6 +42,27 @@ function Wait-Other([string]$Log, [switch]$IgnoreBuild) {
         foreach ($i in 1..18) { Start-Sleep -Seconds 10; if (Test-Path $Busy) { $clear = $false; break } }
         if ($clear) { Say $Log "marker absent for 180 s"; return [int]((Get-Date) - $t0).TotalSeconds }
     }
+}
+
+# Take the marker for a timing unit: create it only if no one holds it (CreateNew), or rewrite our own. Returns $true
+# when we hold it; $false when another job took it first (wait for it again).
+function Acquire-Busy([string]$What) {
+    if (-not $Busy) { return $true }
+    $line = "$Label $(Get-Date -Format o) ($What)"
+    if (Test-Path $Busy) {
+        $text = Get-Content $Busy -Raw -ErrorAction SilentlyContinue
+        if ($text -and $text.StartsWith($Label)) { [IO.File]::WriteAllText($Busy, $line); return $true }
+        return $false
+    }
+    try {
+        $fs = [IO.File]::Open($Busy, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::Read)
+        $b = [Text.Encoding]::UTF8.GetBytes($line)
+        $fs.Write($b, 0, $b.Length); $fs.Close()
+        return $true
+    } catch { return $false }
+}
+function Release-Busy {
+    if ($Busy -and (Test-Path $Busy) -and ((Get-Content $Busy -Raw -ErrorAction SilentlyContinue) -like "$Label *")) { Remove-Item $Busy -Force }
 }
 
 function FreeRamGB { [math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB, 1) }

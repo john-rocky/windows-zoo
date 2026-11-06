@@ -13,16 +13,16 @@ if (-not $NoControl) {
     foreach ($i in 1, 2) {
         foreach ($t in "noprof", "prof") {
             $null = Wait-Other $log
-            if ($Busy) { [IO.File]::WriteAllText($Busy, "$Label $(Get-Date -Format o) (quiet pass, profiling control)") }
+            while (-not (Acquire-Busy "quiet pass, profiling control")) { $null = Wait-Other $log }
             $t0 = Get-Date
-            while (((1..3 | ForEach-Object { Start-Sleep -Seconds 1; CpuPct } | Measure-Object -Maximum).Maximum -ge 15) -and ((Get-Date) - $t0).TotalMinutes -lt 30) { Start-Sleep -Seconds 20 }
+            while (((1..3 | ForEach-Object { Start-Sleep -Seconds 1; CpuPct } | Measure-Object -Maximum).Maximum -ge 15) -and ((Get-Date) - $t0).TotalMinutes -lt 10) { Start-Sleep -Seconds 20 }
             $flags = @("--model", "places_fp16", "--cell", "cpu", "--pass", "quiet", "--tag", "control_${t}$i")
             if ($t -eq "prof") { $flags += "--profile" }
             $rc = Run-Unit $Py.ort $flags "$Root\logs\quiet\places_fp16\cpu_control_${t}$i"
             Say $log "control $t$i rc=$rc :: $((Get-Content "$Root\logs\quiet\places_fp16\cpu_control_${t}$i.out" -ErrorAction SilentlyContinue) -join ' | ')"
         }
     }
-    if ($Busy -and (Test-Path $Busy) -and ((Get-Content $Busy -Raw) -like "$Label *")) { Remove-Item $Busy -Force }
+    Release-Busy
 }
 foreach ($s in "N", "R", "G", "C") {
     Say $log "stream $s"
@@ -30,7 +30,7 @@ foreach ($s in "N", "R", "G", "C") {
     cmd /c "powershell -NoProfile -ExecutionPolicy Bypass -File `"$Root\pc\chain.ps1`" -Stream $s -Pass quiet -Quiet -Models `"$Models`" $sel >> `"$log`" 2>&1"
     Say $log "stream $s ended"
 }
-# A unit that ran after 60 minutes without quiet (gate=timeout) is measured once more at the end (METHOD.md section 6)
+# A unit that ran after 10 minutes without quiet (gate=timeout) is measured once more at the end (METHOD.md section 6)
 $streamOf = @{ ovnpu = "N"; ovnpu_pre = "N"; cuda32 = "R"; cuda16 = "R"; ovgpu = "G"; cpu = "C" }
 $again = @{}
 foreach ($g in Get-ChildItem "$Root\logs\quiet" -Recurse -Filter "*.gate.json" -ErrorAction SilentlyContinue) {

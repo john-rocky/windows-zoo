@@ -69,7 +69,8 @@ thread count).
   first timing come from this pass (`first_pass` in the JSON; not the table's timing).
 - **Quiet pass**: serial, only the cells that ran in the first pass. Before each unit: whole-CPU load < 15 % (max of
   3 one-second reads), RTX `utilization.gpu` = 0 % and memory.used < 800 MiB, Intel GPU engine utilisation sum < 5 %.
-  After 60 minutes without quiet the unit runs anyway and its row carries `gate=timeout` and the readings.
+  After 10 minutes without quiet the unit runs anyway and its row carries `gate=timeout` and the readings (such a
+  unit is measured once more at the end). The marker is created only if no other job holds it.
 - The table's speed = the quiet-pass median. The difference from the first pass is reported per model and cell.
 - The RTX runs under a 95 W software power cap: `nvidia-smi` pstate, clocks and power are recorded before and after
   each CUDA unit. AC power, Windows balanced power mode (unchanged).
@@ -119,3 +120,6 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
   with large outputs (faceparsing: 20 MB). It now takes the copies `infer()` returns, one host copy as in the other
   cells. The first-pass `ovnpu_pre` times of the first 11 models in the list (6drepnet to dewarp) were taken before
   the fix; every quiet-pass time (the table) is after it.
+- 2026-11-06 15:3x JST, before the quiet pass: the quiet gate waits at most 10 minutes (was 60), the cap that the
+  jobs sharing this PC agreed for every timing job; a unit that hits it is measured once more at the end. The
+  marker is now taken only when no one holds it (create-new), never overwritten.
