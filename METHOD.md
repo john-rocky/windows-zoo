@@ -73,7 +73,11 @@ thread count).
   3 one-second reads), RTX `utilization.gpu` = 0 % and memory.used < 800 MiB, Intel GPU engine utilisation sum < 5 %.
   After 10 minutes without quiet the unit runs anyway and its row carries `gate=timeout` and the readings (such a
   unit is measured once more at the end). The marker is created only if no other job holds it.
-- The table's speed = the quiet-pass median. The difference from the first pass is reported per model and cell.
+- The table's speed = the quiet-pass median.
+- Windows build: Windows Update restarted the machine on 2026-11-06 between 17:29 and 17:35 JST (26200.6899 →
+  26200.9711; the NPU, Intel GPU and RTX drivers stayed the same). The first pass ran on 26200.6899 except the
+  last 31 units of the 13 fixed files (26200.9711); the quiet pass, the table's times, ran on 26200.9711. Times from
+  the two builds are not compared: the first-pass times stay in the JSON records only.
 - The RTX runs under a 95 W software power cap: `nvidia-smi` pstate, clocks and power are recorded before and after
   each CUDA unit. AC power, Windows balanced power mode (unchanged).
 - The NPU as-is load is called "a compile that hits no cache" only after loading the same model a second and a
@@ -136,6 +140,14 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
   and whose input has rank 3 (1 to 24 layers per file; 8 of the 13 fail the line). The table stays on the 52 files
   (the X2E / S26 columns measured them), with a note on those 13 rows. The same 13 `.tflite` files converted with a
   one-line fix of that handler (`convert/patch_tf2onnx.py`; `<model>_fixed` in `convert/recipe.json`, without
-  `--continue_on_error`) are measured in every cell and both passes, in a second table; they are the files of the
-  Hugging Face repos. A `_fixed` file takes its base model's input; an input built from another graph comes from that
+  `--continue_on_error` except metric3d, where the gemm rewriter's IndexError remains; it is raised before that
+  rewriter changes the graph) are measured in every cell and both passes, in a second table; they are the files of
+  the Hugging Face repos. A `_fixed` file takes its base model's input; an input built from another graph comes from that
   graph's `_fixed` file where there is one (the DETR graph B files).
+- 2026-11-06 19:1x JST, during the quiet pass (a Windows Update restart prompted it, not a number): the first-pass
+  times are no longer compared with the quiet pass, because the two passes ran on different Windows builds
+  (section 6). The quiet pass was also paused once between two units to let another job on the machine take the
+  marker, and resumed with the units already measured kept (`pc/quiet_pass.ps1 -ResumeSince`). The NPU cells of the
+  first 8 models (measured 18:19-18:36 JST) are measured once more after the pass and the table uses those: each of
+  their units passed the gate, but the gate readings between them showed 15-24 % whole-CPU load from an unknown
+  source.

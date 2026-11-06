@@ -2,13 +2,14 @@
 # -Quiet: the optional marker is held per unit and dropped for 90 s every 20 min). First, a control: places_fp16 on
 # the CPU EP without and with ONNX Runtime profiling, alternating, in the same quiet window (does a profiled session
 # keep its speed after end_profiling?). Log = <root>\logs\quiet_pass.log, end marker <root>\quiet_pass.done
-param([string]$Models = "", [string]$Only = "", [switch]$NoControl)
+# -ResumeSince <time>: a restarted pass skips the units it already ran since that time (chain.ps1 -ResumeSince).
+param([string]$Models = "", [string]$Only = "", [switch]$NoControl, [string]$ResumeSince = "")
 . "$PSScriptRoot\common.ps1"
 if (-not $Models) { $Models = "$PSScriptRoot\models.txt" }  # $PSScriptRoot is empty in a param default under PowerShell 5.1 -File
 $log = "$Root\logs\quiet_pass.log"
 New-Item -ItemType Directory -Force "$Root\logs" | Out-Null
 Remove-Item "$Root\quiet_pass.done" -ErrorAction SilentlyContinue
-Say $log "quiet pass start pid=$PID"
+Say $log "quiet pass start pid=$PID$(if ($ResumeSince) { " resume since $ResumeSince" })"
 if (-not $NoControl) {
     foreach ($i in 1, 2) {
         foreach ($t in "noprof", "prof") {
@@ -27,6 +28,7 @@ if (-not $NoControl) {
 foreach ($s in "N", "R", "G", "C") {
     Say $log "stream $s"
     $sel = if ($Only) { "-Only $Only" } else { "" }
+    if ($ResumeSince) { $sel += " -ResumeSince $ResumeSince" }
     cmd /c "powershell -NoProfile -ExecutionPolicy Bypass -File `"$Root\pc\chain.ps1`" -Stream $s -Pass quiet -Quiet -Models `"$Models`" $sel >> `"$log`" 2>&1"
     Say $log "stream $s ended"
 }

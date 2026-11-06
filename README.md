@@ -23,7 +23,7 @@ against the `.tflite` it was converted from: 13 of the 52 lose the bias of some 
 
 MSI Stealth 16 AI+ (B3WI): Intel Core Ultra 9 386H with Intel AI Boost NPU (driver 32.0.100.4841) and Intel
 Graphics (driver 32.0.101.8724), NVIDIA GeForce RTX 5080 Laptop GPU (driver 591.74, runs under a 95 W software
-power cap on AC), 31.5 GB RAM, Windows 11 Home 10.0.26200.
+power cap on AC), 31.5 GB RAM, Windows 11 Home build 26200.9711 (the table's times; the first pass, see METHOD.md §6).
 
 ## Cells
 

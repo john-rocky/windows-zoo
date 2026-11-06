@@ -12,11 +12,13 @@ card: a cell without a quiet-pass number shows "-".
 import argparse
 import json
 import os
+import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATE = "2026-11-06"
 LISTED = [l.strip() for l in open(os.path.join(HERE, "pc", "models.txt")) if l.strip()]
 GITHUB = "https://github.com/john-rocky/windows-zoo"
+HUB_ORG = "mlboydaisuke"  # the proposed Hub owner (decided with the upload)
 EP = "ONNX Runtime 1.31.1 + OpenVINO EP 1.8.1"
 ROWS = [  # cell, processor, runtime, file
     ("ovnpu_pre", "Intel AI Boost NPU", "OpenVINO 2026.4.1", "`npu/` blob (`import_model`)"),
@@ -176,9 +178,10 @@ def card(repo, info, hubx):
     fm += ["tags:", "- openvino", "- onnx", "- intel-npu", "---", ""]
     graphs_txt = models[0] if len(models) == 1 else " and ".join(models)
     blob_ms = []
-    sections, notes_all = [], set()
+    sections, notes_all, Rm = [], set(), {}
     for m in models:
         R, rows, notes = graph_rows(srcs[m], hubx, with_hub=srcs[m] == m)
+        Rm[m] = R
         notes_all |= notes
         t = timing(R.get("ovnpu_pre"))
         if t:
@@ -213,7 +216,7 @@ def card(repo, info, hubx):
                      f"{fmt_versions(json.loads(next(iter(bcs))))}. If `import_model` refuses a blob on another driver "
                      "or OpenVINO version, compile the IR instead (the commented line in the snippet)."]
     body += ["", "## How it was measured", "",
-             f"MSI Stealth 16 AI+ (Core Ultra 9 386H, RTX 5080 Laptop, Windows 11), {DATE}. Each row is one process: "
+             f"MSI Stealth 16 AI+ (Core Ultra 9 386H, RTX 5080 Laptop, Windows 11 build 26200.9711), {DATE}. Each row is one process: "
              "load, one run, 5 warmup runs, then the median of 30 timed runs (2 warmup + 10 timed runs when one run "
              "takes more than 3 s), numpy input to numpy output, every runtime at its default settings, one process at "
              "a time on an idle machine. Output check: each output against ONNX Runtime's CPU output in fp32 on the "
@@ -222,15 +225,42 @@ def card(repo, info, hubx):
     body += sections
     if notes_all:
         body += [""] + sorted(notes_all)
+    def ort_error(m):  # the last line of the error when the ONNX Runtime + OpenVINO EP NPU session did not load
+        r = (Rm.get(m) or {}).get("ovnpu")
+        if r is None or r["status"] != "ERROR":
+            return None
+        err = (r.get("first_pass") or {}).get("error") or ""
+        lines = [l.strip() for l in err.strip().splitlines() if l.strip()]
+        key = [l for l in lines if re.search(r"Failed Pass|Pass failed|ShapeInferenceError|Incompatible dimensions", l)]
+        pick = key[0] if key else (lines[-1] if lines else "no error text recorded")
+        pick = re.sub(r"^\[ERROR\] [0-9:.]+ ", "", pick)  # drop the log line's level and clock time
+        return pick.replace("`", "'")[:160]
+
+    ort_ok = [m for m in models if ort_error(m) is None]
     m0 = models[0]
     body += ["", "## Run it on the Intel NPU", "",
-             "From the folder of this repo. OpenVINO (`pip install openvino==2026.4.1`):", "", snippet_ov(m0, f"npu/{m0}.blob" in graphs[m0]["files"]), "",
-             "ONNX Runtime with the OpenVINO EP (`pip install onnxruntime==1.31.1 onnxruntime-ep-openvino==1.8.1`):", "",
-             snippet_ort(m0), ""]
+             "Download this repo, then run the snippets from its folder:", "",
+             "```sh", "pip install huggingface_hub", f"hf download {HUB_ORG}/{folder} --local-dir {folder}", f"cd {folder}", "```", "",
+             "OpenVINO (`pip install openvino==2026.4.1`):", "", snippet_ov(m0, f"npu/{m0}.blob" in graphs[m0]["files"]), ""]
+    if m0 in ort_ok:
+        body += ["ONNX Runtime with the OpenVINO EP (`pip install onnxruntime==1.31.1 onnxruntime-ep-openvino==1.8.1`):", "",
+                 snippet_ort(m0), ""]
     if len(models) > 1:
-        body += [f"The same lines run {', '.join(models[1:])} with its own file names.", ""]
+        rest = models[1:]
+        ort_rest = [m for m in rest if m in ort_ok] if m0 in ort_ok else []
+        if ort_rest == rest:
+            body += [f"The same lines run {', '.join(rest)} with its own file names.", ""]
+        else:
+            body += [f"The OpenVINO lines run {', '.join(rest)} with its own file names"
+                     + (f"; the ONNX Runtime lines run {', '.join(ort_rest)}" if ort_rest else "") + ".", ""]
+    for m in models:
+        if m not in ort_ok:
+            ov_runs = ((Rm.get(m) or {}).get("ovnpu_pre") or {}).get("status") not in (None, "ERROR")
+            body += [f"ONNX Runtime 1.31.1 with the OpenVINO EP 1.8.1 does not run `{m}.onnx` on the NPU: the session "
+                     f"fails to load (`{ort_error(m)}`)." + (" The OpenVINO lines above run it." if ov_runs else ""), ""]
     up = f" The upstream model: [{info['base_model']}](https://huggingface.co/{info['base_model']})." if info.get("base_model") else ""
-    body += ["## Licence", "", f"{info['license']}, the licence of [{repo}](https://huggingface.co/{repo}).{up}", ""]
+    lic = {"mit": "MIT", "apache-2.0": "Apache-2.0", "bsd-3-clause": "BSD-3-Clause", "bsd-2-clause": "BSD-2-Clause"}.get(info["license"], info["license"])
+    body += ["## Licence", "", f"{lic}, the licence of [{repo}](https://huggingface.co/{repo}).{up}", ""]
     return "\n".join(fm + body), None
 
 
