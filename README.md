@@ -43,7 +43,7 @@ on PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Ev
 (`onnx\`, `inputs\`, `runs\`, `out\`, `parity\`, `logs\`; all ignored by git). To try a few models first, add
 `-Only places_fp16,dewarp` to steps 2, 4 and 5.
 
-1. Code and venvs (four venvs, SIZE_FROM_WALK; versions in `pc\req\`):
+1. Code and venvs (four venvs, 4.2 GB on disk; versions in `pc\req\`):
 
    ```powershell
    git clone https://github.com/john-rocky/windows-zoo; cd windows-zoo

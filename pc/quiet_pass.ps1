@@ -1,5 +1,6 @@
 # Quiet pass: the table's timing. Streams N, R, G, C one after the other, each unit after the quiet gate (chain.ps1
-# -Quiet: the optional marker is held per unit and dropped for 90 s every 20 min). First, a control: places_fp16 on
+# -Quiet: the optional marker is held per unit and dropped between units for 90 s every 20 min, or for 15 min after 15
+# min while another job waits). First, a control: places_fp16 on
 # the CPU EP without and with ONNX Runtime profiling, alternating, in the same quiet window (does a profiled session
 # keep its speed after end_profiling?). Log = <root>\logs\quiet_pass.log, end marker <root>\quiet_pass.done
 # -ResumeSince <time>: a restarted pass skips the units it already ran since that time (chain.ps1 -ResumeSince).

@@ -2,6 +2,7 @@
 $Root = Split-Path -Parent $PSScriptRoot   # the repo root: pc\ sits in it, and so do the venvs, onnx\, inputs\, runs\
 $Busy = ""                                # optional: a marker file shared with other jobs on the PC (set in pc\local.ps1)
 $Label = "windows-zoo"
+$Own = ""                                 # optional: this job's name in the shared yield\ and active\ folders (pc\local.ps1)
 if (Test-Path "$PSScriptRoot\local.ps1") { . "$PSScriptRoot\local.ps1" }
 $Py = @{ ort = "$Root\.venv-ort\Scripts\python.exe"; cuda = "$Root\.venv-cuda\Scripts\python.exe"; ov = "$Root\.venv-ov\Scripts\python.exe" }
 $Run = "$Root\pc\zoo_run.py"
@@ -61,8 +62,17 @@ function Acquire-Busy([string]$What) {
         return $true
     } catch { return $false }
 }
+function Holds-Busy { [bool]($Busy -and (Test-Path $Busy) -and ((Get-Content $Busy -Raw -ErrorAction SilentlyContinue) -like "$Label *")) }
 function Release-Busy {
-    if ($Busy -and (Test-Path $Busy) -and ((Get-Content $Busy -Raw -ErrorAction SilentlyContinue) -like "$Label *")) { Remove-Item $Busy -Force }
+    if (Holds-Busy) { Remove-Item $Busy -Force }
+}
+# Other jobs waiting on this PC while the marker is held: their files in the marker's folder, yield\*.txt (a job
+# suspended or running under the PC's yield wrapper) and active\*.txt (a job's presence note), other than $Own's.
+# Returns their names (none without $Busy and $Own).
+function Others-Waiting {
+    if (-not $Busy -or -not $Own) { return @() }
+    $d = Split-Path $Busy
+    @(Get-ChildItem "$d\yield\*.txt", "$d\active\*.txt" -ErrorAction SilentlyContinue | Where-Object { $_.BaseName -ne $Own } | ForEach-Object { "$($_.Directory.Name)\$($_.Name)" })
 }
 
 function FreeRamGB { [math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB, 1) }

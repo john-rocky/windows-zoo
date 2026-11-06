@@ -41,16 +41,30 @@ function Gate {
 $list = Get-Content $Models | Where-Object { $_.Trim() -ne "" -and -not $_.StartsWith("#") }
 if ($Only) { $list = $list | Where-Object { $_ -in ($Only -split ",") } }
 Say $log "chain $Stream $Pass start pid=$PID models=$($list.Count) quiet=$Quiet"
+# Windows for the other jobs on the PC, between units: while one of them waits (Others-Waiting), the marker is held
+# for 15 min and dropped for 15 min; otherwise it is dropped for 90 s every 20 min. If a job takes it in the gap,
+# Wait-Other waits. After the marker is taken anew, the first unit waits 60 s more (the package may still be warm
+# from the other jobs' work), then the gate.
 $lastRelease = Get-Date
+$heldSince = Get-Date
+$settleNext = $true
+function Hold-Window {
+    if (-not $Busy) { return }
+    $others = Others-Waiting
+    if ($others -and ((Get-Date) - $script:heldSince).TotalMinutes -ge 15) {
+        Release-Busy
+        Say $log "marker released for 15 min (waiting: $($others -join ', '))"
+        Start-Sleep -Seconds 900
+        $script:lastRelease = Get-Date; $script:settleNext = $true
+    } elseif (-not $others -and ((Get-Date) - $script:lastRelease).TotalMinutes -ge 20) {
+        Release-Busy
+        Say $log "marker released for 90 s"
+        Start-Sleep -Seconds 90
+        $script:lastRelease = Get-Date
+    }
+}
 try {
     foreach ($m in $list) {
-        if ($Quiet -and ((Get-Date) - $lastRelease).TotalMinutes -ge 20) {
-            # give the other lanes a window: drop the marker for 90 s between models; if one takes it, Wait-Other waits
-            Release-Busy
-            Say $log "marker released for 90 s"
-            Start-Sleep -Seconds 90
-            $lastRelease = Get-Date
-        }
         foreach ($u in $cells[$Stream]) {
           try {  # a PowerShell error inside one unit is logged and the stream goes on
             $name = $u.cell + ($(if ($u.flags -contains "compile") { "_compile" } else { "" }))
@@ -66,11 +80,18 @@ try {
                 $fj = "$Root\runs\first\$m\$name.json"
                 if (-not (Test-Path $fj) -or -not ((Get-Content $fj -Raw) -match '"status": "OK"')) { Mark $m $name "skip-first-not-ok"; continue }
             }
+            if ($Quiet) { Hold-Window }
             $w = Wait-Other $log
             $wr = Wait-Ram $log
             $extra = @()
             if ($Quiet) {
+                $fresh = -not (Holds-Busy)
                 while (-not (Acquire-Busy "quiet pass, $m $name")) { $w += Wait-Other $log }
+                if ($fresh) {
+                    $heldSince = Get-Date
+                    if ($settleNext -and $Busy) { Say $log "marker taken: 60 s before the first unit"; Start-Sleep -Seconds 60 }
+                    $settleNext = $false
+                }
                 $g = Gate; $g.other_marker_wait_s = $w; $g.ram_wait_s = $wr; $g.free_ram_gb = FreeRamGB
                 $gf = "$Root\logs\$Pass\$m\$name.gate.json"
                 New-Item -ItemType Directory -Force (Split-Path $gf) | Out-Null

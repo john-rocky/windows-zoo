@@ -151,3 +151,8 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
   first 8 models (measured 18:19-18:36 JST) are measured once more after the pass and the table uses those: each of
   their units passed the gate, but the gate readings between them showed 15-24 % whole-CPU load from an unknown
   source.
+- 2026-11-07 01:1x JST, during the quiet pass (the other jobs on the machine asked for it, not a number): while
+  another job waits for the machine, the marker is held for 15 minutes and dropped for 15 minutes (before: dropped for
+  90 s every 20 minutes, still the rule when no job waits), and after it is taken back the first unit waits 60 s more
+  before the gate (`pc/chain.ps1`). The gate before each unit is unchanged. The pass was restarted between two units
+  for this, with the units already measured kept.
