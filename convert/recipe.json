@@ -1,6 +1,6 @@
 {
  "_about": {
-  "what": "how each of the 52 ONNX files of the table was made from the zoo's HF .tflite (x2e lane, 2026-10-30, onnx_wide.json)",
+  "what": "how each of the 52 ONNX files of the table was made from the zoo's HF .tflite (as converted for the X2 Elite / Galaxy S26 columns, 2026-10-30)",
   "tools": "tensorflow 2.21.0, tf2onnx 1.17.0 (+ patch_tf2onnx.py), onnx 1.23.2, opset 17; fold_fp16 = fold_deq.py first; continue_on_error = tf2onnx --continue_on_error",
   "onnx_sha256": "sha256 of the ONNX file the table was measured on",
   "graph_hash": "graph_signature.py hash of the measured file: ops, attributes, wiring and weights, names and node order ignored (tf2onnx 1.17.0 changes those from run to run)",

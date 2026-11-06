@@ -1,5 +1,5 @@
 # Stage the per-model Hugging Face repo files (stage_hub.py in .venv-ov) for every model: ONNX, OpenVINO IR, NPU blob,
-# manifest. Export work, not timing: each model waits while another lane holds the timing marker.
+# manifest. Export work, not timing: each model waits while another job holds the timing marker.
 # Log = <root>\logs\stage_hub.log
 param([string]$Models = "", [string]$Only = "")
 . "$PSScriptRoot\common.ps1"

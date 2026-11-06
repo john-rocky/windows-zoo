@@ -1,5 +1,5 @@
 # Rebuild the ONNX files from the zoo's .tflite on Hugging Face (convert\convert_all.py in .venv-tf) into <root>\onnx.
-# One model at a time; each waits for the other lanes' marker first (a conversion keeps a CPU core busy for minutes).
+# One model at a time; each waits for the marker of other jobs first (a conversion keeps a CPU core busy for minutes).
 # Needs .venv-tf: run setup_venvs.ps1 with $env:ZOO_WITH_CONVERT = "1". Log = <root>\logs\convert.log
 param([string]$Models = "", [string]$Only = "")
 . "$PSScriptRoot\common.ps1"

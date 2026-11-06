@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Extra TFLite -> TF handlers for tf2onnx (installed into tf2onnx/tflite_handlers/ by x2e/patch_tf2onnx.py).
+"""Extra TFLite -> TF handlers for tf2onnx (installed into tf2onnx/tflite_handlers/ by patch_tf2onnx.py).
 
 tf2onnx 1.17.0 has no handler for three ops that LiteRT (litert-torch) emits, so it leaves them as TFL_* nodes
 and the ONNX fails downstream ("No Op registered for TFL_GELU with domain_version of 17", seen on 5 zoo models

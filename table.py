@@ -1,11 +1,11 @@
-"""Render RESULTS_WINDOWS.md from results/<model>/<cell>.json and the X2E / Galaxy S26 rows of the earlier AI Hub lane.
+"""Render RESULTS_WINDOWS.md from results/<model>/<cell>.json and the X2E / Galaxy S26 rows of the earlier AI Hub runs.
 
     python3 table.py [--x2e aihub/results_wide.json]
 
 aihub/results_wide.json = the Qualcomm AI Hub records of the same 52 files on a Snapdragon X2 Elite and a Galaxy S26
-(one profile job per model x device x form, 2026-10-30; a byte copy of the earlier lane's results_wide.json).
+(one profile job per model x device x form, 2026-10-30; a byte copy of the earlier runs' results_wide.json).
 
-Speed = the quiet-pass median (PLAN.md section 6); a cell without a quiet number shows the first-pass median with *.
+Speed = the quiet-pass median (METHOD.md section 6); a cell without a quiet number shows the first-pass median with *.
 The conclusion lines are written by hand into CONCLUSION.md and copied in (only measured facts).
 """
 
@@ -157,7 +157,7 @@ def main():
         "`export_model` blob, loaded with `import_model`. Intel GPU = OpenVINO EP on the Intel iGPU (the EP's default precision). "
         "RTX fp16 = ONNX Runtime CUDA EP on an fp16 copy of the model (`convert_float_to_float16`, I/O kept fp32). CPU = "
         "ONNX Runtime CPU EP fp32 = the parity reference.",
-        "Parity (against the CPU EP fp32 outputs, PLAN.md section 3): a = Intel NPU as-is, p = precompiled, g = Intel GPU, "
+        "Parity (against the CPU EP fp32 outputs, METHOD.md section 3): a = Intel NPU as-is, p = precompiled, g = Intel GPU, "
         "h = RTX fp16, f = RTX fp32; P = PASS (every output cos ≥ 0.99, no NaN / Inf, class argmax kept ≥ 0.99), "
         "F = FAIL, E = ERROR (did not run; error in the note).",
     ]

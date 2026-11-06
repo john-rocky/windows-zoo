@@ -1,4 +1,5 @@
-"""Local patches for tf2onnx 1.17.0 in this venv (idempotent; re-run after any pip reinstall). From the x2e lane:
+"""Local patches for tf2onnx 1.17.0 in this venv (idempotent; re-run after any pip reinstall). Patches 1 and 2 come
+from the conversion for the X2 Elite / Galaxy S26 columns:
 
 1. tflite_handlers/tfl_math.py: a TFLite ADD/SUB/MUL/DIV node without a `fused_activation_function` attribute
    (the zoo's ssdlite_mobilenetv3_320_fp16.tflite has them) raised KeyError. TFLite's default is NONE.
@@ -43,7 +44,7 @@ replace_once(
     """    activation_fn = node.attr['fused_activation_function'].s
     del node.attr['fused_activation_function']
 """,
-    """    # x2e workaround: a missing attribute means the TFLite default, NONE.
+    """    # workaround: a missing attribute means the TFLite default, NONE.
     if 'fused_activation_function' not in node.attr:
         return
     activation_fn = node.attr['fused_activation_function'].s

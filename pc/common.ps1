@@ -18,9 +18,9 @@ function Append-Retry([string]$Path, [string]$Line) {
 function Say([string]$Log, [string]$t) { Append-Retry $Log "[$(Get-Date -Format o)] $t`r`n" }
 function Mark([string]$Model, [string]$Cell, [string]$State) { Append-Retry $Progress "$(Get-Date -Format o) $Model $Cell $State`r`n" }
 
-# Wait while another lane holds the marker (younger than 2 h). The marker must then stay absent for 3 minutes
-# (lanes chain plans back to back and drop the marker between them: about a second between plans, 1-2 minutes for a
-# build; L1 asked for at least a full minute on 11-06).
+# Wait while another job holds the marker (younger than 2 h). The marker must then stay absent for 3 minutes
+# (other jobs run plans back to back and drop the marker between them: about a second between plans, 1-2 minutes
+# for a build).
 # Returns the seconds waited.
 function Wait-Other([string]$Log) {
     if (-not $Busy) { return 0 }

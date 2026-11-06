@@ -1,5 +1,6 @@
-"""Rebuild the ONNX files from the zoo's .tflite files on Hugging Face (recipe.json: the 52 measured files of the x2e
-lane, and the 13 <model>_fixed files converted with the FULLY_CONNECTED bias fix of patch_tf2onnx.py).
+"""Rebuild the ONNX files from the zoo's .tflite files on Hugging Face (recipe.json: the 52 measured files, as
+converted for the X2 Elite / Galaxy S26 columns, and the 13 <model>_fixed files converted with the FULLY_CONNECTED
+bias fix of patch_tf2onnx.py).
 
     python convert_all.py --out <dir> [--model m ...]
 

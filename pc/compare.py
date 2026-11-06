@@ -2,7 +2,7 @@
 
     python compare.py --pass first [--root C:\\src\\zoo] [--spec C:\\src\\zoo\\pc\\inputs_spec.json] [--model m ...]
 
-Line (PLAN.md section 3): PASS = every output has cos >= 0.99 against the reference, no NaN / Inf, and every class-score
+Line (METHOD.md section 3): PASS = every output has cos >= 0.99 against the reference, no NaN / Inf, and every class-score
 output (spec "argmax_outputs") keeps >= 0.99 of its argmax positions (positions where the reference top-1 and top-2
 are exactly equal are not counted; a single-position output must match). Otherwise FAIL with the broken outputs and a
 reason candidate. Writes <root>/parity/<pass>/<model>/<cell>.json.

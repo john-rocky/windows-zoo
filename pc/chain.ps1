@@ -1,4 +1,4 @@
-# Z1 chain: one stream of units over the model list, each unit after the other lanes' marker and with free RAM.
+# Chain: one stream of units over the model list, each unit after the marker of other jobs on the PC and with free RAM.
 #   -Stream N : NPU      ovnpu (ONNX Runtime + OpenVINO EP, as is), then ovnpu_pre compile + run (OpenVINO blob)
 #   -Stream R : RTX      cuda32, cuda16
 #   -Stream G : Intel GPU ovgpu
