@@ -30,5 +30,23 @@ foreach ($s in "N", "R", "G", "C") {
     cmd /c "powershell -NoProfile -ExecutionPolicy Bypass -File `"$Root\pc\chain.ps1`" -Stream $s -Pass quiet -Quiet -Models `"$Models`" $sel >> `"$log`" 2>&1"
     Say $log "stream $s ended"
 }
+# A unit that ran after 60 minutes without quiet (gate=timeout) is measured once more at the end (METHOD.md section 6)
+$streamOf = @{ ovnpu = "N"; ovnpu_pre = "N"; cuda32 = "R"; cuda16 = "R"; ovgpu = "G"; cpu = "C" }
+$again = @{}
+foreach ($g in Get-ChildItem "$Root\logs\quiet" -Recurse -Filter "*.gate.json" -ErrorAction SilentlyContinue) {
+    $j = Get-Content $g.FullName -Raw | ConvertFrom-Json
+    if ($j.state -eq "timeout") {
+        $cell = $g.Name -replace "\.gate\.json$", ""
+        $s = $streamOf[$cell]
+        if ($s) { if (-not $again[$s]) { $again[$s] = @() }; $again[$s] += $g.Directory.Name }
+    }
+}
+foreach ($s in "N", "R", "G", "C") {
+    if (-not $again[$s]) { continue }
+    $mf = "$Root\logs\quiet_again_$s.txt"
+    ($again[$s] | Sort-Object -Unique) | Out-File $mf -Encoding ascii
+    Say $log "stream $s again for gate=timeout: $(($again[$s] | Sort-Object -Unique) -join ',')"
+    cmd /c "powershell -NoProfile -ExecutionPolicy Bypass -File `"$Root\pc\chain.ps1`" -Stream $s -Pass quiet -Quiet -Models `"$mf`" >> `"$log`" 2>&1"
+}
 Say $log "quiet pass done"
 "ok" | Out-File "$Root\quiet_pass.done" -Encoding ascii
