@@ -114,3 +114,8 @@ and Galaxy S26 run, whether it holds on the Intel NPU, looking for the counter-e
   an earlier node exactly, renames nodes whose name still repeats, and puts the nodes in dependency order (the
   converter appends the input Casts at the end). None of this changes the computation; the counts are in each
   `cuda16` record (`fp16_convert`).
+- 2026-11-06 14:3x JST, after looking at first-pass numbers (marked): the `ovnpu_pre` runner copied every output twice
+  per run (`infer()` already returns copies, and the runner copied them again), which inflates the time of models
+  with large outputs (faceparsing: 20 MB). It now takes the copies `infer()` returns, one host copy as in the other
+  cells. The first-pass `ovnpu_pre` times of the first 11 models in the list (6drepnet to dewarp) were taken before
+  the fix; every quiet-pass time (the table) is after it.

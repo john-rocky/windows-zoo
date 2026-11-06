@@ -388,8 +388,10 @@ def run_ov(args, rec, feeds):
     feed = {k: feeds[k] for k in in_names}
 
     def once():
-        request.infer(feed)
-        return [request.get_output_tensor(i).data.copy() for i in range(len(names))]
+        # infer() hands back a copy of every output (share_outputs=False): one host copy, as an app gets it and as
+        # ONNX Runtime returns them. (Before 2026-11-06 14:3x the runner copied the outputs a second time.)
+        res = request.infer(feed, share_outputs=False)
+        return [np.asarray(res[o]) for o in compiled.outputs]
 
     out = bench(once, rec)
     return names, out
