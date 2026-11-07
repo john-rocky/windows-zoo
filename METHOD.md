@@ -80,9 +80,10 @@ runtime's defaults. The JSON records a default where the runtime reports it (`IN
   26200.9711; the NPU, Intel GPU and RTX drivers stayed the same). The first pass ran on 26200.6899 except the
   last 31 units of the 13 fixed files (26200.9711); the quiet pass, the table's times, ran on 26200.9711. Times from
   the two builds are not compared: the first-pass times stay in the JSON records only.
-- The RTX runs under a 95 W software power cap; AC power, Windows balanced power mode (unchanged). `nvidia-smi`
-  pstate, clocks, power draw and the software power cap flag are written to `logs\chain_<stream>_<pass>.log` before
-  and after each unit (not to the JSON).
+- The RTX's power limit is 95 W (`nvidia-smi -q -d POWER`: current and requested 95 W, default 80 W, maximum 125 W).
+  The machine runs on AC power in Windows' Balanced power mode (read on 2026-11-07 at 10:06 JST; the scripts change
+  neither). `nvidia-smi` pstate, clocks, power draw and the software power cap flag are written to
+  `logs\chain_<stream>_<pass>.log` before and after each unit (not to the JSON).
 - The NPU as-is load is called "a compile that hits no cache" because loading the same file again in new processes
   stays in the same range (places_fp16 on 2026-11-06: 1,196 ms the first time that day, then 687 to 780 ms in five
   later processes, two of them with the EP's `cache_dir` set), far above the 13 ms its precompiled blob took to load

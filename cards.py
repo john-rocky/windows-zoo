@@ -19,7 +19,7 @@ LISTED = [l.strip() for l in open(os.path.join(HERE, "pc", "models.txt")) if l.s
 GITHUB = "https://github.com/john-rocky/windows-zoo"
 HUB_ORG = "mlboydaisuke"  # the proposed Hub owner (decided with the upload)
 EP = "ONNX Runtime 1.31.1 + OpenVINO EP 1.8.1"
-RTX = "RTX 5080 Laptop"
+RTX = "RTX 5080 Laptop (95 W limit)"  # nvidia-smi -q -d POWER: current power limit 95 W (read 2026-11-07)
 ROWS = [  # cell, processor, runtime, file
     ("ovnpu_pre", "Intel AI Boost NPU", "OpenVINO 2026.4.1", "`npu/` blob (`import_model`)"),
     ("ovnpu", "Intel AI Boost NPU", EP, "`.onnx`, compiled when the session loads"),
@@ -231,7 +231,8 @@ def card(repo, info, hubx):
         ref = "OpenVINO on the CPU, as ONNX Runtime 1.31.1 cannot load this file"
     else:
         ref = f"ONNX Runtime's CPU EP; OpenVINO on the CPU for {', '.join(ov_ref)}, which ONNX Runtime 1.31.1 cannot load"
-    how = (f"MSI Stealth 16 AI+ (Core Ultra 9 386H, {RTX}, Windows 11 build 26200.9711), {when}. On the laptop, each "
+    how = (f"MSI Stealth 16 AI+ (Core Ultra 9 386H, RTX 5080 Laptop GPU at a 95 W power limit, Windows 11 build "
+           f"26200.9711, on AC power), {when}. On the laptop, each "
            "row is one process: load, one run, 5 warmup runs, then the median of 30 timed runs (2 warmup + 10 timed "
            "runs when one run takes more than 3 s), numpy input to numpy output, every runtime at its default "
            "settings, one process at a time, each started after the CPU, the RTX and the Intel GPU had gone idle (the "

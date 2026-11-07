@@ -21,9 +21,10 @@ FULLY_CONNECTED layers in tf2onnx 1.17.0, so those 13 are converted again with a
 
 ## The machine
 
-MSI Stealth 16 AI+ (B3WI): Intel Core Ultra 9 386H with Intel AI Boost NPU (driver 32.0.100.4841) and Intel
-Graphics (driver 32.0.101.8724), NVIDIA GeForce RTX 5080 Laptop GPU (driver 591.74, runs under a 95 W software
-power cap on AC), 31.5 GB RAM, Windows 11 Home build 26200.9711 (the table's times; the first pass, see METHOD.md §6).
+MSI Stealth 16 AI+ (B3WI): Intel Core Ultra 9 386H with Intel AI Boost NPU (driver 32.0.100.4841) and Intel Graphics
+(driver 32.0.101.8724), NVIDIA GeForce RTX 5080 Laptop GPU (driver 591.74, power limit 95 W as `nvidia-smi` reports
+it), 31.5 GB RAM, on AC power in Windows' Balanced power mode. Windows 11 Home build 26200.9711 for the quiet pass
+(the table's times); the first pass ran on 26200.6899 until a Windows Update restart (METHOD.md §6).
 
 ## Cells
 

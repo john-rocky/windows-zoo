@@ -135,7 +135,8 @@ def main():
     head = [
         "# Vision zoo on one Windows laptop: Intel NPU, Intel GPU, RTX, CPU — next to Snapdragon X2 Elite and Galaxy S26\n",
         "52 single-graph ONNX files of LiteRT-Models (the same files as the X2 Elite / Galaxy S26 columns), run on an MSI "
-        "Stealth 16 AI+ (Core Ultra 9 386H with Intel AI Boost NPU and Intel Graphics, RTX 5080 Laptop GPU, Windows 11 "
+        "Stealth 16 AI+ (Core Ultra 9 386H with Intel AI Boost NPU and Intel Graphics, RTX 5080 Laptop GPU at a 95 W power "
+        "limit, on AC power, Windows 11 "
         "build 26200.9711). "
         "Times are medians of 30 runs (10 when one run takes more than 3 s) from host memory to host memory (copies "
         "included), taken one cell at a time, each after the CPU, the RTX and the Intel GPU went idle (METHOD.md section "
