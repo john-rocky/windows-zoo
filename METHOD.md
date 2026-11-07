@@ -168,7 +168,8 @@ holds on the Intel NPU, looking for the counter-example first.
   marker, and resumed with the units already measured kept (`pc/quiet_pass.ps1 -ResumeSince`). The NPU cells of the
   first 8 models in the list (6drepnet to dis) are measured once more after the pass, and the table uses those: 15 of
   their 16 units ran between 18:19 and 18:36 JST, and each passed the gate, but the gate readings between them showed
-  15-30 % whole-CPU load from an unknown source.
+  15-30 % whole-CPU load from an unknown source. The 16 units ran again on 2026-11-07 between 13:01 and 13:16 JST, each
+  after the gate.
 - 2026-11-07 01:1x JST, during the quiet pass (the other jobs on the machine asked for it, not a number): while
   another job waits for the machine, the marker is held for 15 minutes and dropped for 15 minutes (before: dropped for
   90 s every 20 minutes, still the rule when no job waits), and after it is taken back the first unit waits 60 s more

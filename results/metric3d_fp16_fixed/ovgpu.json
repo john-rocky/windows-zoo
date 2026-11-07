@@ -3,12 +3,12 @@
  "cell": "ovgpu",
  "status": "PASS",
  "table": {
-  "ms": null,
+  "ms": 56.251599999086466,
   "ms_first_pass": 104.49660000017502,
-  "load_ms": 11303.268399999979,
+  "load_ms": 10058.37579999934,
   "load_ms_first_pass": 11303.268399999979,
   "compile_ms": null,
-  "gate": null
+  "gate": "quiet"
  },
  "first_pass": {
   "model": "metric3d_fp16_fixed",
@@ -195,7 +195,193 @@
   "ended": "2026-11-06T18:10:50.365872+09:00"
  },
  "compile": null,
- "quiet": null,
+ "quiet": {
+  "model": "metric3d_fp16_fixed",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T10:53:38.328934+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "metric3d_fp16_fixed",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\metric3d_fp16_fixed\\ovgpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 10,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 20.7,
+   "state": "quiet",
+   "waited_s": 6,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "6e52fb9a1f8b028495316b68e60994d06b7dc079354122e1913728569e52f233",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     448,
+     448
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "0e26010000000000",
+   "counter_luid": "0x00000000_0x0001260e"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\metric3d_fp16_fixed.onnx",
+  "model_sha256": "05beedc220e804dd418a4e75faa20d001505ef64ca79ae558c30290571b2e185",
+  "load_ms": 10058.37579999934,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1,
+     448,
+     448
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 79.60399999865331,
+  "warmup": 5,
+  "ms": {
+   "median": 56.251599999086466,
+   "p10": 55.9718000004068,
+   "p90": 56.580400007078424,
+   "min": 55.82200000208104,
+   "max": 57.10370000451803,
+   "n": 30
+  },
+  "ms_all": [
+   57.1037,
+   56.6707,
+   56.9077,
+   56.2924,
+   56.4271,
+   56.4271,
+   56.494,
+   56.4212,
+   56.5804,
+   55.9866,
+   56.3481,
+   56.2806,
+   55.822,
+   56.018,
+   56.0707,
+   55.9718,
+   55.9055,
+   56.2248,
+   56.2621,
+   56.1127,
+   56.1552,
+   56.0815,
+   56.2411,
+   56.1335,
+   56.4639,
+   56.1961,
+   56.2883,
+   56.2065,
+   55.875,
+   56.3887
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.25,
+    "max": 6.0,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1,
+     448,
+     448
+    ],
+    "sha256": "145565866708c5180695600136f90ee0186507001b91f7b560059c3ca52b5d20",
+    "mean": 2.1888869927853953,
+    "std": 1.3395949027326708,
+    "sample_pos": [
+     24061,
+     24693,
+     49386,
+     50018,
+     74079,
+     74711,
+     99404,
+     100036,
+     124729,
+     125361,
+     149422,
+     150054,
+     174747,
+     175379,
+     199440,
+     200072
+    ],
+    "sample": [
+     2.25,
+     5.125,
+     5.125,
+     2.125,
+     2.25,
+     2.125,
+     1.125,
+     2.0,
+     1.625,
+     1.375,
+     1.125,
+     1.125,
+     1.125,
+     1.25,
+     0.75,
+     0.75
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x0001260e/compute": 2247.383
+  },
+  "ended": "2026-11-07T10:53:52.544401+09:00"
+ },
  "parity": {
   "status": "PASS",
   "fails": [],

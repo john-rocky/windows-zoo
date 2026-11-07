@@ -3,12 +3,12 @@
  "cell": "ovgpu",
  "status": "PASS",
  "table": {
-  "ms": null,
+  "ms": 6.8327999979374,
   "ms_first_pass": 11.455750005552545,
-  "load_ms": 4657.448300000397,
+  "load_ms": 2198.9983999956166,
   "load_ms_first_pass": 4657.448300000397,
   "compile_ms": null,
-  "gate": null
+  "gate": "quiet"
  },
  "first_pass": {
   "model": "w2v2_head_fp16",
@@ -182,7 +182,180 @@
   "ended": "2026-11-06T15:34:30.398842+09:00"
  },
  "compile": null,
- "quiet": null,
+ "quiet": {
+  "model": "w2v2_head_fp16",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T10:47:19.291214+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "w2v2_head_fp16",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\w2v2_head_fp16\\ovgpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 9,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 20.7,
+   "state": "quiet",
+   "waited_s": 62,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "ba7e74278d5faf60299bdb15ab267176c15144b2783ddfacff90b1edaa8fab33",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     49,
+     768
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "0e26010000000000",
+   "counter_luid": "0x00000000_0x0001260e"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\w2v2_head_fp16.onnx",
+  "model_sha256": "d314e168a377e5f8b5daebe9a7704afc61d681d6534ac3ea2ccb5db5968e1eb9",
+  "load_ms": 2198.9983999956166,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     12
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 8.513599997968413,
+  "warmup": 5,
+  "ms": {
+   "median": 6.8327999979374,
+   "p10": 4.666699998779222,
+   "p90": 7.198200000857469,
+   "min": 4.301699998904951,
+   "max": 8.358200000657234,
+   "n": 30
+  },
+  "ms_all": [
+   4.3017,
+   4.6466,
+   4.3261,
+   4.6667,
+   8.3582,
+   7.1982,
+   6.9219,
+   7.2146,
+   7.2298,
+   7.0378,
+   6.9764,
+   7.1195,
+   6.8409,
+   6.8136,
+   6.7391,
+   6.8278,
+   6.7484,
+   6.8941,
+   6.827,
+   6.7799,
+   6.8378,
+   6.97,
+   6.8111,
+   6.826,
+   6.9679,
+   6.8009,
+   6.888,
+   6.8159,
+   6.7345,
+   6.8873
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -11.176458358764648,
+    "max": 7.028534889221191,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     12
+    ],
+    "sha256": "fc1e9d87495d980e2547fa75fd4d4e80edcf1529f74858049c312355783007e3",
+    "mean": -0.12694579362869263,
+    "std": 5.120938244092469,
+    "sample_pos": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "sample": [
+     5.666665554046631,
+     -2.1513171195983887,
+     7.028534889221191,
+     -11.176458358764648,
+     4.788364887237549,
+     2.3890371322631836,
+     -6.465373992919922,
+     1.085227370262146,
+     -5.44614315032959,
+     0.8123962879180908,
+     0.9553859233856201,
+     0.9903310537338257
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x0001260e/compute": 276.645
+  },
+  "ended": "2026-11-07T10:47:23.723494+09:00"
+ },
  "parity": {
   "status": "PASS",
   "fails": [],

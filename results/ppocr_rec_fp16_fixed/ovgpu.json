@@ -3,12 +3,12 @@
  "cell": "ovgpu",
  "status": "PASS",
  "table": {
-  "ms": null,
+  "ms": 2.553850001277169,
   "ms_first_pass": 13.534800000002178,
-  "load_ms": 4401.701900000035,
+  "load_ms": 1430.9113000053912,
   "load_ms_first_pass": 4401.701900000035,
   "compile_ms": null,
-  "gate": null
+  "gate": "quiet"
  },
  "first_pass": {
   "model": "ppocr_rec_fp16_fixed",
@@ -194,7 +194,192 @@
   "ended": "2026-11-06T18:08:33.100529+09:00"
  },
  "compile": null,
- "quiet": null,
+ "quiet": {
+  "model": "ppocr_rec_fp16_fixed",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T10:51:15.374898+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "ppocr_rec_fp16_fixed",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\ppocr_rec_fp16_fixed\\ovgpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 10,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 20.7,
+   "state": "quiet",
+   "waited_s": 6,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "5aa3debb122b68c74b073813e4ffb42df33cc96e516ac973c86f70049b80c146",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     48,
+     320
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "0e26010000000000",
+   "counter_luid": "0x00000000_0x0001260e"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\ppocr_rec_fp16_fixed.onnx",
+  "model_sha256": "0b7dd3e87499ed80dab5ed25234b177e3058fa51bbfb7a9c5b7e593c4ad21e90",
+  "load_ms": 1430.9113000053912,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     40,
+     18385
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 8.072699994954746,
+  "warmup": 5,
+  "ms": {
+   "median": 2.553850001277169,
+   "p10": 2.528800003346987,
+   "p90": 2.617300000565592,
+   "min": 2.501399998436682,
+   "max": 2.754000001004897,
+   "n": 30
+  },
+  "ms_all": [
+   2.5452,
+   2.7146,
+   2.5338,
+   2.5403,
+   2.5704,
+   2.5508,
+   2.5781,
+   2.5151,
+   2.5312,
+   2.568,
+   2.5417,
+   2.754,
+   2.575,
+   2.5288,
+   2.6173,
+   2.5385,
+   2.5367,
+   2.5418,
+   2.5591,
+   2.5204,
+   2.5593,
+   2.6133,
+   2.6167,
+   2.6215,
+   2.5569,
+   2.5495,
+   2.5502,
+   2.571,
+   2.564,
+   2.5014
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.0,
+    "max": 1.0,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     40,
+     18385
+    ],
+    "sha256": "34aa23b552e4ac0ed582f885edf05a4919a439fdb1588f723ae9ca51be489d0c",
+    "mean": 5.440062913422614e-05,
+    "std": 0.007091669423504275,
+    "sample_pos": [
+     18922,
+     37844,
+     56766,
+     75688,
+     94610,
+     113532,
+     132454,
+     151376,
+     377161,
+     396083,
+     415005,
+     433927,
+     452849,
+     471771,
+     490693,
+     509615
+    ],
+    "sample": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x0001260e/copy": 2.524,
+   "0x00000000_0x0001260e/compute": 118.078
+  },
+  "ended": "2026-11-07T10:51:18.722009+09:00"
+ },
  "parity": {
   "status": "PASS",
   "fails": [],

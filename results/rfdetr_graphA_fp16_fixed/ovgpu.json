@@ -3,12 +3,12 @@
  "cell": "ovgpu",
  "status": "PASS",
  "table": {
-  "ms": null,
+  "ms": 16.102349996799603,
   "ms_first_pass": 46.72335000009298,
-  "load_ms": 4244.018600000118,
+  "load_ms": 2038.5190000015427,
   "load_ms_first_pass": 4244.018600000118,
   "compile_ms": null,
-  "gate": null
+  "gate": "quiet"
  },
  "first_pass": {
   "model": "rfdetr_graphA_fp16_fixed",
@@ -315,7 +315,313 @@
   "ended": "2026-11-06T18:08:58.326000+09:00"
  },
  "compile": null,
- "quiet": null,
+ "quiet": {
+  "model": "rfdetr_graphA_fp16_fixed",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T10:51:38.873919+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "rfdetr_graphA_fp16_fixed",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\rfdetr_graphA_fp16_fixed\\ovgpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 10,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 20.7,
+   "state": "quiet",
+   "waited_s": 6,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "f2f81c637407128c3323fb2a18313b9b16e4e5f07d7a496170062fd6361812b1",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     3,
+     384,
+     384
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "0e26010000000000",
+   "counter_luid": "0x00000000_0x0001260e"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\rfdetr_graphA_fp16_fixed.onnx",
+  "model_sha256": "6bdbf0d3a0c943d484a404935d0b3119d8e52cc79003c6ee26efe3298a7723c7",
+  "load_ms": 2038.5190000015427,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     576,
+     91
+    ],
+    "type": "tensor(float)"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     576,
+     4
+    ],
+    "type": "tensor(float)"
+   },
+   {
+    "name": "serving_default_output_2_output",
+    "shape": [
+     1,
+     576,
+     256
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 21.87720000074478,
+  "warmup": 5,
+  "ms": {
+   "median": 16.102349996799603,
+   "p10": 15.149900005781092,
+   "p90": 16.83670000056736,
+   "min": 15.04189999832306,
+   "max": 17.036199998983648,
+   "n": 30
+  },
+  "ms_all": [
+   15.3512,
+   16.1272,
+   15.3836,
+   15.2504,
+   15.444,
+   15.1595,
+   15.1472,
+   15.3771,
+   16.0775,
+   15.1499,
+   15.1391,
+   15.1535,
+   15.2048,
+   15.2526,
+   15.0419,
+   15.5128,
+   17.0362,
+   16.744,
+   16.713,
+   16.8367,
+   16.7339,
+   16.8769,
+   16.1755,
+   16.3581,
+   16.9855,
+   16.6323,
+   16.4488,
+   16.6124,
+   16.14,
+   16.6351
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -11.8671875,
+    "max": 2.37109375,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     576,
+     91
+    ],
+    "sha256": "2ff1aa0146a3a22049f5a853ed86ee79f0b16594a7a8473c93f66687f19f1c9c",
+    "mean": -6.483297219934335,
+    "std": 0.9341396707883912,
+    "sample_pos": [
+     4138,
+     6483,
+     10621,
+     12966,
+     17104,
+     19449,
+     21794,
+     25932,
+     28277,
+     32415,
+     34760,
+     37105,
+     41243,
+     43588,
+     47726,
+     50071
+    ],
+    "sample": [
+     -6.24609375,
+     -6.75390625,
+     -7.08203125,
+     -6.13671875,
+     -6.6328125,
+     -6.19921875,
+     -6.06640625,
+     -4.40625,
+     -5.109375,
+     -6.63671875,
+     -7.51171875,
+     -6.52734375,
+     -5.51171875,
+     -6.6171875,
+     -6.25,
+     -4.66796875
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": 0.002460479736328125,
+    "max": 1.0302734375,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     576,
+     4
+    ],
+    "sha256": "2742b728a2da7ea96c978fa233550400540778bff90e97349f9902fbf5199e07",
+    "mean": 0.3456367568837272,
+    "std": 0.25399173222209326,
+    "sample_pos": [
+     253,
+     294,
+     588,
+     629,
+     923,
+     964,
+     1258,
+     1299,
+     1552,
+     1593,
+     1634,
+     1887,
+     1928,
+     1969,
+     2222,
+     2263
+    ],
+    "sample": [
+     0.2344970703125,
+     0.050628662109375,
+     0.1865234375,
+     0.298583984375,
+     0.042999267578125,
+     0.060943603515625,
+     0.02734375,
+     0.2275390625,
+     0.20166015625,
+     0.658203125,
+     0.0072479248046875,
+     0.04339599609375,
+     0.291259765625,
+     0.483154296875,
+     0.6982421875,
+     0.034820556640625
+    ]
+   },
+   {
+    "name": "serving_default_output_2_output",
+    "min": -0.81787109375,
+    "max": 4.63671875,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     576,
+     256
+    ],
+    "sha256": "3920234ddce46424133fcc45f271e9d2836eb97dde2238ac1667ebfebbb26a61",
+    "mean": 0.0032655841084003137,
+    "std": 0.33279547236119456,
+    "sample_pos": [
+     11773,
+     13154,
+     24927,
+     26308,
+     39462,
+     52616,
+     65770,
+     78924,
+     80305,
+     92078,
+     93459,
+     105232,
+     106613,
+     119767,
+     132921,
+     146075
+    ],
+    "sample": [
+     -0.40966796875,
+     0.30419921875,
+     -0.1436767578125,
+     -0.168212890625,
+     0.17626953125,
+     -0.136962890625,
+     0.0224456787109375,
+     -0.370361328125,
+     0.11334228515625,
+     0.200927734375,
+     0.07977294921875,
+     -0.316650390625,
+     0.079833984375,
+     0.260986328125,
+     0.01483917236328125,
+     -0.1414794921875
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x0001260e/compute": 599.565
+  },
+  "ended": "2026-11-07T10:51:43.421123+09:00"
+ },
  "parity": {
   "status": "PASS",
   "fails": [],

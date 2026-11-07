@@ -9,7 +9,12 @@ Each ONNX file is also checked against the `.tflite` it was converted from: 13 o
 FULLY_CONNECTED layers in tf2onnx 1.17.0, so those 13 are converted again with a one-line fix
 (`convert/patch_tf2onnx.py`) and measured as `<model>_fixed`.
 
-(results paragraph: written after the quiet pass)
+Results are in [RESULTS_WINDOWS.md](RESULTS_WINDOWS.md): one row per file with its times, load times and parity, under
+a five-line conclusion; `results/<model>/<cell>.json` holds each record. Counting only cells that pass the parity
+line, the fastest processor is the RTX for 30 of the 52 files, the Intel GPU for 15 and the Intel NPU for 7.
+Precompiled, the Intel NPU's median time is 1.55× the X2 Elite NPU's (host to host here, AI Hub's device timer there).
+The precompiled blob loads in 0.18 s or less, where the plain ONNX file takes 0.6 to 396 s to compile on the NPU at
+session load.
 
 - The table: [RESULTS_WINDOWS.md](RESULTS_WINDOWS.md)
 - One JSON per model and cell: [results/](results/) (`results/<model>/<cell>.json`: load time, the run times, node

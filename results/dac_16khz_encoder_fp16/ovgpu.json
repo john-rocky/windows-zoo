@@ -3,12 +3,12 @@
  "cell": "ovgpu",
  "status": "PASS",
  "table": {
-  "ms": null,
+  "ms": 8.242449999670498,
   "ms_first_pass": 11.62905000091996,
-  "load_ms": 2148.6236000055214,
+  "load_ms": 1100.6010999990394,
   "load_ms_first_pass": 2148.6236000055214,
   "compile_ms": null,
-  "gate": null
+  "gate": "quiet"
  },
  "first_pass": {
   "model": "dac_16khz_encoder_fp16",
@@ -192,7 +192,190 @@
   "ended": "2026-11-06T15:34:52.847923+09:00"
  },
  "compile": null,
- "quiet": null,
+ "quiet": {
+  "model": "dac_16khz_encoder_fp16",
+  "cell": "ovgpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T10:47:46.560755+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1",
+   "onnxruntime_ep_openvino": null,
+   "openvino_ep_plugin": "1.8.1+95d534b.ci.79"
+  },
+  "argv": [
+   "--model",
+   "dac_16khz_encoder_fp16",
+   "--cell",
+   "ovgpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\dac_16khz_encoder_fp16\\ovgpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 4,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 20.6,
+   "state": "quiet",
+   "waited_s": 6,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "dfcb3ba13d7f7829eced126243a878e8305d5768572064ab2cae606f2a696de4",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     1,
+     16000
+    ],
+    "dtype": "float32"
+   }
+  },
+  "device": {
+   "FULL_DEVICE_NAME": "Intel(R) Graphics (iGPU)",
+   "ov_device": "GPU.0",
+   "version": "1.8.1+95d534b.ci.79",
+   "os_driver_version": null,
+   "NPU_COMPILER_VERSION": null,
+   "DEVICE_ARCHITECTURE": "GPU: vendor=0x8086 arch=v30.1.0",
+   "DEVICE_LUID": "0e26010000000000",
+   "counter_luid": "0x00000000_0x0001260e"
+  },
+  "ep_options": {},
+  "model_path": "C:\\src\\zoo\\onnx\\dac_16khz_encoder_fp16.onnx",
+  "model_sha256": "544231058e78b9228b00a6bfd3f451ea45e561acb46423d7f6c24ac229eac732",
+  "load_ms": 1100.6010999990394,
+  "providers": [
+   "OpenVINOExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "OpenVINOExecutionProvider": {},
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     1024,
+     50
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 13.872800001990981,
+  "warmup": 5,
+  "ms": {
+   "median": 8.242449999670498,
+   "p10": 8.177199997589923,
+   "p90": 8.351399999810383,
+   "min": 8.128600005875342,
+   "max": 8.3781000066665,
+   "n": 30
+  },
+  "ms_all": [
+   8.2793,
+   8.2394,
+   8.3781,
+   8.3706,
+   8.3395,
+   8.2996,
+   8.1826,
+   8.2239,
+   8.3514,
+   8.2594,
+   8.2269,
+   8.2576,
+   8.1772,
+   8.1327,
+   8.1974,
+   8.2064,
+   8.3072,
+   8.3551,
+   8.3264,
+   8.2526,
+   8.1885,
+   8.2426,
+   8.2423,
+   8.2792,
+   8.2036,
+   8.1949,
+   8.1286,
+   8.3075,
+   8.2242,
+   8.155
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -13.4375,
+    "max": 13.421875,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     1024,
+     50
+    ],
+    "sha256": "cf3a7ba94b2d48569bf944fe9ea439350118b19fac92c432ece7481e84f58bbc",
+    "mean": -0.06118457495467737,
+    "std": 3.018207520103083,
+    "sample_pos": [
+     1849,
+     7127,
+     8976,
+     12405,
+     14254,
+     17683,
+     19532,
+     22961,
+     24810,
+     30088,
+     35366,
+     37215,
+     40644,
+     42493,
+     45922,
+     47771
+    ],
+    "sample": [
+     4.4296875,
+     0.2337646484375,
+     -0.525390625,
+     2.7578125,
+     0.97216796875,
+     -0.89111328125,
+     2.873046875,
+     -1.158203125,
+     1.232421875,
+     -5.40234375,
+     1.134765625,
+     -0.70751953125,
+     -0.5517578125,
+     2.12890625,
+     -0.1356201171875,
+     1.4619140625
+    ]
+   }
+  ],
+  "engine_running_ms": {
+   "0x00000000_0x0001260e/compute": 314.104
+  },
+  "ended": "2026-11-07T10:47:49.788244+09:00"
+ },
  "parity": {
   "status": "PASS",
   "fails": [],

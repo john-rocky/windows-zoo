@@ -3,12 +3,12 @@
  "cell": "cpu",
  "status": "PASS",
  "table": {
-  "ms": null,
+  "ms": 13.561899999331217,
   "ms_first_pass": 20.389399999885427,
-  "load_ms": 71.06219999991481,
+  "load_ms": 78.7343999982113,
   "load_ms_first_pass": 71.06219999991481,
   "compile_ms": null,
-  "gate": null
+  "gate": "quiet"
  },
  "first_pass": {
   "model": "rfdetr_graphB_fp16_fixed",
@@ -269,7 +269,242 @@
   "ended": "2026-11-06T18:08:53.782040+09:00"
  },
  "compile": null,
- "quiet": null,
+ "quiet": {
+  "model": "rfdetr_graphB_fp16_fixed",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T12:53:03.477315+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "rfdetr_graphB_fp16_fixed",
+   "--cell",
+   "cpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\rfdetr_graphB_fp16_fixed\\cpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 2,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 19.5,
+   "state": "quiet",
+   "waited_s": 63,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "e227114256be58284439c8ffb1e50f19eb20232b3146d38d6456cbbd797adde3",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     576,
+     256
+    ],
+    "dtype": "float32"
+   },
+   "serving_default_args_1": {
+    "shape": [
+     1,
+     300,
+     4
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\rfdetr_graphB_fp16_fixed.onnx",
+  "model_sha256": "c60c3f9fee15d6cd5d3e1cdfdf280e0c0bcd42caa6f7fc802b2ebeb6e07163ae",
+  "load_ms": 78.7343999982113,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     300,
+     4
+    ],
+    "type": "tensor(float)"
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "shape": [
+     1,
+     300,
+     91
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 71.25340000493452,
+  "warmup": 5,
+  "ms": {
+   "median": 13.561899999331217,
+   "p10": 12.911899990285747,
+   "p90": 13.94050000817515,
+   "min": 12.858899994171225,
+   "max": 15.762600000016391,
+   "n": 30
+  },
+  "ms_all": [
+   15.7626,
+   13.7823,
+   12.8792,
+   12.9119,
+   12.9154,
+   13.0829,
+   13.2738,
+   13.0314,
+   13.1777,
+   12.9106,
+   12.97,
+   12.8589,
+   12.9388,
+   14.5612,
+   14.3459,
+   13.9405,
+   13.6107,
+   13.6628,
+   13.5518,
+   13.6264,
+   13.5453,
+   13.5666,
+   13.6951,
+   13.5572,
+   13.7452,
+   13.5928,
+   13.7928,
+   13.5847,
+   13.7623,
+   13.5507
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": 0.0009123828494921327,
+    "max": 0.9992725849151611,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     300,
+     4
+    ],
+    "sha256": "099c8a97debec89791815e8813a5244ff891558aee28e3065bd386083b01dde8",
+    "mean": 0.35871915909442276,
+    "std": 0.2655291313289972,
+    "sample_pos": [
+     5,
+     10,
+     15,
+     244,
+     249,
+     254,
+     483,
+     488,
+     493,
+     722,
+     727,
+     732,
+     961,
+     966,
+     971,
+     976
+    ],
+    "sample": [
+     0.6401167511940002,
+     0.17395713925361633,
+     0.23844139277935028,
+     0.7351680994033813,
+     0.3631148040294647,
+     0.5457350611686707,
+     0.018716055899858475,
+     0.8625121116638184,
+     0.4139140546321869,
+     0.5497468709945679,
+     0.21929043531417847,
+     0.8933852910995483,
+     0.6081333160400391,
+     0.02180830016732216,
+     0.10307305306196213,
+     0.3108214735984802
+    ]
+   },
+   {
+    "name": "serving_default_output_1_output",
+    "min": -12.202552795410156,
+    "max": 2.973489284515381,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     300,
+     91
+    ],
+    "sha256": "60dcc16344aa1134314d2035323bb586d922bb160ec2b2b44feb30aadc8955ea",
+    "mean": -6.16743644122239,
+    "std": 1.0386466108002612,
+    "sample_pos": [
+     793,
+     2161,
+     2954,
+     4322,
+     5115,
+     6483,
+     7276,
+     8644,
+     10805,
+     12966,
+     15127,
+     17288,
+     19449,
+     21610,
+     23771,
+     25932
+    ],
+    "sample": [
+     -5.364816665649414,
+     -7.139708042144775,
+     -5.130394458770752,
+     -7.140478610992432,
+     -5.085404872894287,
+     -6.251266956329346,
+     -8.048364639282227,
+     -6.637982368469238,
+     -7.43643856048584,
+     -6.066700458526611,
+     -3.5353193283081055,
+     -8.117728233337402,
+     -6.901467323303223,
+     -6.738480567932129,
+     -4.512215614318848,
+     -5.900226593017578
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-07T12:53:04.602284+09:00"
+ },
  "parity": null,
  "stderr_fallback_lines": []
 }

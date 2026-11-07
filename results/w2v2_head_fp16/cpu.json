@@ -3,12 +3,12 @@
  "cell": "cpu",
  "status": "PASS",
  "table": {
-  "ms": null,
+  "ms": 19.4234000009601,
   "ms_first_pass": 49.31625000608619,
-  "load_ms": 573.2119999884162,
+  "load_ms": 498.4429000032833,
   "load_ms_first_pass": 573.2119999884162,
   "compile_ms": null,
-  "gate": null
+  "gate": "quiet"
  },
  "first_pass": {
   "model": "w2v2_head_fp16",
@@ -183,7 +183,163 @@
   "ended": "2026-11-06T15:29:10.732577+09:00"
  },
  "compile": null,
- "quiet": null,
+ "quiet": {
+  "model": "w2v2_head_fp16",
+  "cell": "cpu",
+  "phase": "run",
+  "pass": "quiet",
+  "tag": "",
+  "started": "2026-11-07T12:25:47.450537+09:00",
+  "host": "WIN-79VR0TO4MR1",
+  "python": "3.12.10",
+  "versions": {
+   "numpy": "2.5.4",
+   "onnxruntime": "1.31.1"
+  },
+  "argv": [
+   "--model",
+   "w2v2_head_fp16",
+   "--cell",
+   "cpu",
+   "--pass",
+   "quiet",
+   "--gate",
+   "C:\\src\\zoo\\logs\\quiet\\w2v2_head_fp16\\cpu.gate.json"
+  ],
+  "status": "OK",
+  "gate": {
+   "other_marker_wait_s": 0,
+   "rtx_mem_mib": 0,
+   "cpu_pct_max3": 11,
+   "rtx_util": 0,
+   "rtx_pstate": "P0",
+   "ram_wait_s": 0,
+   "free_ram_gb": 21.4,
+   "state": "quiet",
+   "waited_s": 7,
+   "igpu_util_sum": 0
+  },
+  "input_sha256": "ba7e74278d5faf60299bdb15ab267176c15144b2783ddfacff90b1edaa8fab33",
+  "inputs": {
+   "serving_default_args_0": {
+    "shape": [
+     1,
+     49,
+     768
+    ],
+    "dtype": "float32"
+   }
+  },
+  "model_path": "C:\\src\\zoo\\onnx\\w2v2_head_fp16.onnx",
+  "model_sha256": "d314e168a377e5f8b5daebe9a7704afc61d681d6534ac3ea2ccb5db5968e1eb9",
+  "load_ms": 498.4429000032833,
+  "providers": [
+   "CPUExecutionProvider"
+  ],
+  "provider_options": {
+   "CPUExecutionProvider": {}
+  },
+  "outputs": [
+   {
+    "name": "serving_default_output_0_output",
+    "shape": [
+     1,
+     12
+    ],
+    "type": "tensor(float)"
+   }
+  ],
+  "first_run_ms": 63.776499999221414,
+  "warmup": 5,
+  "ms": {
+   "median": 19.4234000009601,
+   "p10": 17.89759998791851,
+   "p90": 19.9270000011893,
+   "min": 17.689700005576015,
+   "max": 26.889300002949312,
+   "n": 30
+  },
+  "ms_all": [
+   19.9902,
+   19.1618,
+   17.9647,
+   17.8866,
+   18.1944,
+   17.8976,
+   18.0162,
+   17.7449,
+   17.6897,
+   17.8978,
+   18.3236,
+   17.9471,
+   18.0813,
+   18.3343,
+   19.7298,
+   19.7042,
+   19.4164,
+   19.3949,
+   19.5344,
+   19.505,
+   19.6723,
+   19.5683,
+   26.8893,
+   19.6198,
+   19.4304,
+   19.781,
+   20.1575,
+   19.6566,
+   19.927,
+   19.573
+  ],
+  "first_vs_last_max_abs": 0.0,
+  "output_stats": [
+   {
+    "name": "serving_default_output_0_output",
+    "min": -11.175126075744629,
+    "max": 7.0282206535339355,
+    "nan": 0,
+    "inf": 0,
+    "dtype": "float32",
+    "shape": [
+     1,
+     12
+    ],
+    "sha256": "3dc7b5fed1daa3a7e107f3e815d326f6f3625b343373c0ca883e249562f47778",
+    "mean": -0.1269987871249517,
+    "std": 5.12084086945393,
+    "sample_pos": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "sample": [
+     5.665999889373779,
+     -2.152277946472168,
+     7.0282206535339355,
+     -11.175126075744629,
+     4.78927755355835,
+     2.3900182247161865,
+     -6.4665045738220215,
+     1.0839158296585083,
+     -5.446135997772217,
+     0.8133509159088135,
+     0.955501914024353,
+     0.9897741675376892
+    ]
+   }
+  ],
+  "engine_running_ms": {},
+  "ended": "2026-11-07T12:25:49.670854+09:00"
+ },
  "parity": null,
  "stderr_fallback_lines": []
 }
