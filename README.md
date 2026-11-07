@@ -47,8 +47,9 @@ it), 31.5 GB RAM, on AC power in Windows' Balanced power mode. Windows 11 Home b
 Windows 11 with an Intel Core Ultra NPU and an NVIDIA GPU, Python 3.12, git, and [uv](https://docs.astral.sh/uv/) on
 PATH (`winget install astral-sh.uv`). In PowerShell, from an empty folder. Every script writes into the clone, into
 folders git ignores (`onnx\`, `fp16\`, `blobs\`, `inputs\`, `samples\`, `runs\`, `out\`, `parity\`, `prof\`, `logs\`,
-and the venvs). To try a few models first, add `-Only places_fp16,dewarp` to steps 2, 4 and 5 (dewarp has a cell that
-does not run and one that fails the line).
+and the venvs). To try a few models first, add `-Only places_fp16,dewarp` to steps 2, 4 and 5 and
+`--model places_fp16 dewarp` to the two checks of step 6 (dewarp has a cell that does not run and one that fails the
+line).
 
 1. Code and venvs (four venvs, 4.2 GB on disk; versions in `pc\req\`):
 
