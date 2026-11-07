@@ -34,6 +34,9 @@ ROWS = [  # cell, processor, runtime, file
 # The source cards' `base_model` names that are public Hugging Face model repos (the Hub API answered 200 on 2026-11-07;
 # the other names answered 401, e.g. GitHub project names): only these get a link.
 HUB_UPSTREAM = {"OpenGVLab/Vision-RWKV", "PaddlePaddle/PP-OCRv5_mobile_det", "PaddlePaddle/PP-OCRv5_mobile_rec", "PekingU/rtdetr_v2_r18vd", "Roboflow/rf-detr-nano", "cpoisson/plantnet300k-resnet18", "dbolya/yolact-resnet50", "depth-anything/DA3-SMALL", "eugenesiow/edsr-base", "facebook/dinov2-small", "facebook/sam2.1-hiera-tiny", "schirrmacher/ormbg", "superb/wav2vec2-base-superb-ks", "ustc-community/dfine-small-coco"}
+# Source repos whose Hub metadata has no pipeline_tag: the task their upstream base models carry (HF API, 2026-11-07:
+# PaddlePaddle/PP-OCRv5_mobile_det and PaddlePaddle/PP-OCRv5_mobile_rec are both image-to-text).
+PIPELINE_FALLBACK = {"litert-community/PP-OCRv5-LiteRT": "image-to-text"}
 HUB_ROWS = [  # key form, device, label, runtime, file
     ("X2E", "pqo", "Snapdragon X2 Elite NPU", "Qualcomm AI Hub, precompiled QNN ONNX", "`.onnx` compiled by AI Hub"),
     ("X2E", "onnx", "Snapdragon X2 Elite NPU", "Qualcomm AI Hub, ONNX Runtime QNN EP", "`.onnx`, compiled when it loads"),
@@ -202,8 +205,9 @@ def card(repo, info, hubx):
     name = folder.rsplit("-", 1)[0]
     rev = info["revision"]
     fm = ["---", f"license: {info['license']}", f"base_model: {repo}", "base_model_relation: quantized", "library_name: openvino"]
-    if info.get("pipeline_tag"):
-        fm.append(f"pipeline_tag: {info['pipeline_tag']}")
+    tag = info.get("pipeline_tag") or PIPELINE_FALLBACK.get(repo)
+    if tag:
+        fm.append(f"pipeline_tag: {tag}")
     fm += ["tags:", "- openvino", "- onnx", "- intel-npu", "---", ""]
     graphs_txt = models[0] if len(models) == 1 else " and ".join(models)
     blob_ms = []
