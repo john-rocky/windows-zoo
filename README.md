@@ -11,10 +11,10 @@ FULLY_CONNECTED layers in tf2onnx 1.17.0, so those 13 are converted again with a
 
 Results are in [RESULTS_WINDOWS.md](RESULTS_WINDOWS.md): one row per file with its times, load times and parity, under
 a five-line conclusion; `results/<model>/<cell>.json` holds each record. Counting only cells that pass the parity
-line, the fastest processor is the RTX for 30 of the 52 files, the Intel GPU for 15 and the Intel NPU for 7.
-Precompiled, the Intel NPU's median time is 1.55× the X2 Elite NPU's (host to host here, AI Hub's device timer there).
-The precompiled blob loads in 0.18 s or less, where the plain ONNX file takes 0.6 to 396 s to compile on the NPU at
-session load.
+line, the fastest processor is the RTX for 30 of the 52 files, the Intel GPU for 15 and the Intel NPU for 7 (either
+RTX precision; either NPU form). Precompiled, the Intel NPU takes 1.55× the X2 Elite NPU's time at the median of the
+per-file ratios (host to host here, AI Hub's device timer there). The precompiled blob loads in under 0.2 s (0.003 to
+0.18 s), where the plain ONNX file takes 0.6 to 396 s to compile on the NPU at session load.
 
 - The table: [RESULTS_WINDOWS.md](RESULTS_WINDOWS.md)
 - One JSON per model and cell: [results/](results/) (`results/<model>/<cell>.json`: load time, the run times, node
@@ -112,4 +112,5 @@ does not run and one that fails the line).
 The models keep the licences of their Hugging Face repos ([LICENSES.md](LICENSES.md)). The code here is
 Apache-2.0 ([LICENSE](LICENSE)); `convert/fold_deq.py` is copied from
 [LiteRT-Models](https://github.com/john-rocky/LiteRT-Models) (MIT). `aihub/results_wide.json` holds the Qualcomm AI
-Hub profile records of the X2 Elite and Galaxy S26 columns.
+Hub profile records of the X2 Elite and Galaxy S26 columns, and `aihub/results_recheck.json` two more jobs of the same
+assets for 3 of the models.

@@ -4,6 +4,8 @@
 
 aihub/results_wide.json = the Qualcomm AI Hub records of the same 52 files on a Snapdragon X2 Elite and a Galaxy S26
 (one profile job per model x device x form, 2026-10-30; a byte copy of the earlier runs' results_wide.json).
+aihub/results_recheck.json = two more AI Hub jobs of the same assets for 3 models (2026-10-30, a byte copy too): a row's
+note gives them where one differs from the column by more than 10 %.
 
 Speed = the quiet-pass median (METHOD.md section 6); a cell without a quiet-pass number shows "-" (the first-pass
 times ran on another Windows build and stay in the JSON records).
@@ -38,6 +40,34 @@ def ms_text(r):
     return "-", None
 
 
+def short(items, cap=150):
+    """'; '-joined items without the 'serving_default_' prefix, cut only between items (with the count left out)."""
+    items = [i.replace("serving_default_", "") for i in items]
+    out = []
+    for i in items:
+        if out and len("; ".join(out + [i])) > cap:
+            break
+        out.append(i)
+    return "; ".join(out) + (f" (+{len(items) - len(out)} more)" if len(out) < len(items) else "")
+
+
+def error_line(r):
+    """The last line of a cell's error, without the exception class and the file path before 'failed:'."""
+    err = ((r.get("compile") or {}).get("error") or (r.get("first_pass") or {}).get("error") or "")
+    last = ([l.strip() for l in err.strip().splitlines() if l.strip()][-1:] or ["?"])[0]
+    return last.split("failed:", 1)[1].strip() if "failed:" in last else last
+
+
+def rechecks(R2, key, orig_us):
+    """AI Hub's extra jobs of the same asset as text, when one differs from the column's job by more than 10 %."""
+    reps = [R2[k] for k in (f"{key}|rep1", f"{key}|rep2") if k in R2]
+    ok = [r["infer_us"] for r in reps if r.get("status") == "SUCCESS"]
+    if not any(abs(u / orig_us - 1) > 0.10 for u in ok):
+        return None
+    return " and ".join(f"{r['infer_us'] / 1000:.2f} ms" if r.get("status") == "SUCCESS" else
+                        f"an error ({(r.get('message') or 'failed').rstrip('.')})" for r in reps)
+
+
 def cpu_nodes(r):
     fp = (r or {}).get("first_pass") or {}
     return ((fp.get("placement") or {}).get("nodes_by_provider") or {}).get("CPUExecutionProvider", 0)
@@ -59,6 +89,7 @@ def main():
     ap.add_argument("--x2e", default=os.path.join(HERE, "aihub", "results_wide.json"))
     a = ap.parse_args()
     X = json.load(open(a.x2e))
+    R2 = json.load(open(os.path.join(HERE, "aihub", "results_recheck.json")))
 
     def hub(m, dev, form):
         r = X.get(f"{m}|{dev}|{form}|npu")
@@ -77,7 +108,7 @@ def main():
             c = min((o["cos"] for o in t.get("outputs", []) if "cos" in o), default=None)
             return f"ONNX vs .tflite: PASS, cos ≥ {math.floor(c * 1e4) / 1e4:.4f}" if c is not None and c < 0.9999 else None
         if t.get("status") == "FAIL":
-            return f"ONNX vs .tflite: FAIL ({'; '.join(f.replace('serving_default_', '') for f in t.get('fails', []))[:90]})"
+            return f"ONNX vs .tflite: FAIL ({short(t.get('fails', []))})"
         return f"ONNX vs .tflite: {t.get('status')} ({str(t.get('error', ''))[:60]})"
 
     rows, fixed_rows = [], []
@@ -101,15 +132,20 @@ def main():
             loads.append(f"{v / 1000:.2f}" if v is not None else "-")
         loads.append(f"{x2e_asis_load / 1e6:.2f}" if x2e_asis_load else "-")
         par = " ".join(f"{CODE[c]}:{(R[c] or {}).get('status', '-')[0] if R[c] else '-'}" for c in ("ovnpu", "ovnpu_pre", "ovgpu", "cuda16", "cuda32"))
-        notes = []
+        notes, errs = [], {}
         for c in ("ovnpu", "ovnpu_pre", "ovgpu", "cuda16", "cuda32", "cpu"):
             r = R[c]
             if r and r["status"] == "ERROR":
-                err = ((r.get("compile") or {}).get("error") or (r.get("first_pass") or {}).get("error") or "")
-                last = [l for l in err.strip().splitlines() if l.strip()][-1:] or ["?"]
-                notes.append(f"{c} ERROR: {last[0][:90]}")
+                errs.setdefault(error_line(r), []).append(c)
             elif r and r["status"] == "FAIL":
-                notes.append(f"{c} FAIL: {'; '.join((r.get('parity') or {}).get('fails', []))[:90]}")
+                notes.append(f"{c} FAIL: {short((r.get('parity') or {}).get('fails', []))}")
+        notes[:0] = [f"{', '.join(cs)} ERROR: {e}" for e, cs in errs.items()]
+        for dev in ("S26", "X2E"):
+            h = X.get(f"{m}|{dev}|pqo|npu")
+            again = rechecks(R2, f"{m}|{dev}|pqo|npu", h["infer_us"]) if h and h.get("status") == "SUCCESS" else None
+            if again:
+                notes.append(f"{dev} NPU: AI Hub ran the same asset twice more the same day: {again} "
+                             f"(`aihub/results_recheck.json`)")
         refs = {((R[c] or {}).get("parity") or {}).get("reference") for c in CODE if R[c]}
         if "ovcpu" in refs:
             notes.append("parity against OpenVINO on the CPU in fp32 (ONNX Runtime cannot load this file)")
@@ -140,14 +176,16 @@ def main():
         "Stealth 16 AI+ (Core Ultra 9 386H with Intel AI Boost NPU and Intel Graphics, RTX 5080 Laptop GPU at a 95 W power "
         "limit, on AC power, Windows 11 "
         "build 26200.9711). "
-        "Times are medians of 30 runs (10 when one run takes more than 3 s) from host memory to host memory (copies "
+        "Times are medians of 30 runs (10 when the first run takes more than 3 s) from host memory to host memory (copies "
         "included), taken one cell at a time, each after the CPU, the RTX and the Intel GPU went idle (METHOD.md section "
         "6); - = no quiet-pass number. Each ONNX file "
         "is also run against the `.tflite` it was converted from (`convert/check_tflite.py`): 13 of the 52 drop biases of "
         "FULLY_CONNECTED layers in tf2onnx 1.17.0 (the note says so), and their fixed files are in the second table. "
         "The X2E / S26 columns are Qualcomm AI Hub's "
         "`estimated_inference_time` of the precompiled QNN form (one profile job per cell, 2026-10-30, "
-        "`aihub/results_wide.json`): AI Hub's own timer on the device, not this repo's host-to-host timer.\n",
+        "`aihub/results_wide.json`): AI Hub's own timer on the device, not this repo's host-to-host timer. For 3 models "
+        "AI Hub ran the same assets twice more that day (`aihub/results_recheck.json`); a note gives those runs where one "
+        "differs from the column by more than 10 %.\n",
         concl + "\n",
         "| model | Galaxy S26 NPU ms | X2E NPU ms | Intel NPU as-is ms | Intel NPU precompiled ms | Intel GPU ms | RTX fp16 ms | CPU ms | "
         "load s: Intel NPU as-is / Intel NPU precompiled / X2E as-is | parity | note |",
@@ -156,7 +194,8 @@ def main():
     legend = [
         "",
         "Columns: Intel NPU as-is = ONNX Runtime 1.31.1 + OpenVINO EP 1.8.1 on the NPU, the plain ONNX compiled at load; "
-        "(CPU n) = n graph nodes left on the CPU EP (in the X2E / S26 columns: n layers that AI Hub placed on the CPU). "
+        + ("(CPU n) = n graph nodes left on the CPU EP (in the X2E / S26 columns: n layers that AI Hub placed on the CPU). "
+           if any("(CPU " in r for r in rows + fixed_rows) else "") +
         "Intel NPU precompiled = OpenVINO 2026.4.1 `compile_model` → "
         "`export_model` blob, loaded with `import_model`. Intel GPU = OpenVINO EP on the Intel iGPU (the EP's default precision). "
         "RTX fp16 = ONNX Runtime CUDA EP on an fp16 copy of the model (`convert_float_to_float16`, I/O kept fp32). CPU = "

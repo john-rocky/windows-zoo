@@ -73,7 +73,8 @@ runtime's defaults. The JSON records a default where the runtime reports it (`IN
 - **Quiet pass**: serial, only the cells that ran in the first pass. Before each unit: whole-CPU load < 15 % (max of 3
   one-second reads), RTX `utilization.gpu` = 0 %, RTX memory.used < 800 MiB before an RTX unit (before every unit
   until 2026-11-07 12:0x JST, see Changes), Intel GPU engine utilisation sum < 5 %. After 10 minutes without quiet the
-  unit runs anyway and its row carries `gate=timeout` and the readings (such a unit is measured once more at the end).
+  unit runs anyway and its gate record carries `state: timeout` and the readings (a card marks such a row with †; such a
+  unit is measured once more at the end).
   The marker file that the jobs on this machine share (last bullet) is created only if no other job holds it.
 - The table's speed = the quiet-pass median.
 - Windows build: Windows Update restarted the machine on 2026-11-06 between 17:29 and 17:35 JST (26200.6899 →
@@ -85,9 +86,9 @@ runtime's defaults. The JSON records a default where the runtime reports it (`IN
   neither). `nvidia-smi` pstate, clocks, power draw and the software power cap flag are written to
   `logs\chain_<stream>_<pass>.log` before and after each unit (not to the JSON).
 - The NPU as-is load is called "a compile that hits no cache" because loading the same file again in new processes
-  stays in the same range (places_fp16 on 2026-11-06: 1,196 ms the first time that day, then 687 to 780 ms in five
-  later processes, two of them with the EP's `cache_dir` set), far above the 13 ms its precompiled blob took to load
-  on the same build.
+  stays in the same range (places_fp16 on 2026-11-06: 1,196 ms in the first process of that day, then 663 to 780 ms in
+  seven later processes, two of them with the EP's `cache_dir` set), far above the 13 ms its precompiled blob took to
+  load on the same build.
 - A free-RAM floor of 4 GB before each unit; an optional marker file lets the scripts wait for other jobs that share
   the machine (`pc/local.ps1`, not in the repo).
 
@@ -140,10 +141,10 @@ holds on the Intel NPU, looking for the counter-example first.
   the list (6drepnet to dmcount) were taken before the fix (placed on the machine at 14:26 JST); every quiet-pass time
   (the table) is after it.
 - 2026-11-06 14:5x JST, during the first pass (the NPU stream's long waits for other jobs' markers prompted it, not
-  a number): the Intel GPU and CPU streams were started next to the NPU stream, while the RTX stream had one unit
-  left, instead of after both. After waiting for the marker they ran from 15:20 JST, to 15:36 (Intel GPU) and 15:32
-  (CPU), at the same time as the NPU stream (until 16:43 JST). The first pass's times are not the table's (section
-  6).
+  a number): the Intel GPU and CPU streams were started next to the NPU stream, while the RTX stream had one model
+  (ssdlite's two units) left, instead of after both. After waiting for the marker they ran from 15:20 JST, to 15:36
+  (Intel GPU) and 15:32 (CPU), at the same time as the NPU stream (until 16:43 JST); these are the 52 files, and the 13
+  fixed files ran on all four streams from 16:50 to 18:11 JST. The first pass's times are not the table's (section 6).
 - 2026-11-06 15:3x JST, before the quiet pass: the quiet gate waits at most 10 minutes (was 60), the cap used by every
   timing job on this shared machine; a unit that hits it is measured once more at the end. The marker is now taken
   only when no one holds it (create-new), never overwritten.
@@ -177,7 +178,8 @@ holds on the Intel NPU, looking for the counter-example first.
   for this, with the units already measured kept.
 - 2026-11-07 11:5x JST, during the quiet pass (a gate state prompted it, not a number): the gate reads the RTX's
   memory only before the RTX units (`cuda32`, `cuda16`). Other jobs on the machine pause their work while this pass
-  holds the marker, and a paused CUDA process keeps its RTX memory: 4.8 GB from 10:06 JST, and 16.0 GB from about
-  11:25 to 11:46 JST, with the RTX at 0 % utilisation. So the Intel GPU and CPU units of those turns waited the
+  holds the marker, and a paused CUDA process keeps its RTX memory: `nvidia-smi` read 4,832 MiB in use from 10:07 JST
+  (another job's paused CUDA process) and 15,968 MiB from 11:25 to 11:46 JST (its owner was not read), with the RTX at
+  0 % utilisation. So two Intel GPU units and two CPU units that came up while that memory was held waited the
   10-minute cap. The other conditions are unchanged. The units that ran after the cap are measured once more at the
   end, with this gate. The pass was restarted between two units for this, with the units already measured kept.

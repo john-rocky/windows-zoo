@@ -16,6 +16,7 @@ import os
 import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+RECHECK = json.load(open(os.path.join(HERE, "aihub", "results_recheck.json"), encoding="utf-8"))
 LISTED = [l.strip() for l in open(os.path.join(HERE, "pc", "models.txt")) if l.strip()]
 GITHUB = "https://github.com/john-rocky/windows-zoo"
 HUB_ORG = "mlboydaisuke"  # the proposed Hub owner (decided with the upload)
@@ -30,6 +31,9 @@ ROWS = [  # cell, processor, runtime, file
     ("cpu", "Core Ultra 9 386H CPU", "ONNX Runtime 1.31.1, CPU EP", "`.onnx`"),
     ("ovcpu", "Core Ultra 9 386H CPU", "OpenVINO 2026.4.1", "`.onnx`, f32"),
 ]
+# The source cards' `base_model` names that are public Hugging Face model repos (the Hub API answered 200 on 2026-11-07;
+# the other names answered 401, e.g. GitHub project names): only these get a link.
+HUB_UPSTREAM = {"OpenGVLab/Vision-RWKV", "PaddlePaddle/PP-OCRv5_mobile_det", "PaddlePaddle/PP-OCRv5_mobile_rec", "PekingU/rtdetr_v2_r18vd", "Roboflow/rf-detr-nano", "cpoisson/plantnet300k-resnet18", "dbolya/yolact-resnet50", "depth-anything/DA3-SMALL", "eugenesiow/edsr-base", "facebook/dinov2-small", "facebook/sam2.1-hiera-tiny", "schirrmacher/ormbg", "superb/wav2vec2-base-superb-ks", "ustc-community/dfine-small-coco"}
 HUB_ROWS = [  # key form, device, label, runtime, file
     ("X2E", "pqo", "Snapdragon X2 Elite NPU", "Qualcomm AI Hub, precompiled QNN ONNX", "`.onnx` compiled by AI Hub"),
     ("X2E", "onnx", "Snapdragon X2 Elite NPU", "Qualcomm AI Hub, ONNX Runtime QNN EP", "`.onnx`, compiled when it loads"),
@@ -91,6 +95,17 @@ def timing(r):
             "cpu_nodes": ((q.get("placement") or (r.get("first_pass") or {}).get("placement") or {}).get("nodes_by_provider") or {}).get("CPUExecutionProvider", 0)}
 
 
+def rechecks(key, orig_us):
+    """AI Hub's two extra jobs of the same asset (aihub/results_recheck.json) as text, when one differs from the
+    table's job by more than 10 %."""
+    reps = [RECHECK[k] for k in (f"{key}|rep1", f"{key}|rep2") if k in RECHECK]
+    ok = [r["infer_us"] for r in reps if r.get("status") == "SUCCESS"]
+    if not any(abs(u / orig_us - 1) > 0.10 for u in ok):
+        return None
+    return " and ".join(f"{r['infer_us'] / 1000:.2f} ms" if r.get("status") == "SUCCESS" else
+                        f"an error ({(r.get('message') or 'failed').rstrip('.')})" for r in reps)
+
+
 def graph_rows(m, hubx, with_hub):
     """The table rows of one graph, its notes, the days its quiet-pass rows were measured, and the Snapdragon row count."""
     R = {c: load(os.path.join(HERE, "results", m, c + ".json")) for c, *_ in ROWS}
@@ -121,6 +136,10 @@ def graph_rows(m, hubx, with_hub):
             continue
         cpu = (h.get("units") or {}).get("CPU", 0)
         ms = f"{h['infer_us'] / 1000:.2f}" + (f" ({cpu} layers on the CPU)" if cpu else "")
+        again = rechecks(f"{m}|{dev}|{form}|npu", h["infer_us"])
+        if again:
+            ms += " ‡"
+            notes.add(f"‡ AI Hub ran the same asset twice more the same day: {again}.")
         load_s = f"{h['first_load_us'] / 1e6:.2f}" if h.get("first_load_us") else "-"
         rows.append(f"| {label} | {rt} | {f} | {ms} | {load_s} | not compared (AI Hub profile job, 2026-10-30) |")
         n_hub += 1
@@ -240,7 +259,7 @@ def card(repo, info, hubx):
     how = (f"MSI Stealth 16 AI+ (Core Ultra 9 386H, RTX 5080 Laptop GPU at a 95 W power limit, Windows 11 build "
            f"26200.9711, on AC power), {when}. On the laptop, each "
            "row is one process: load, one run, 5 warmup runs, then the median of 30 timed runs (2 warmup + 10 timed "
-           "runs when one run takes more than 3 s), numpy input to numpy output, every runtime at its default "
+           "runs when the first run takes more than 3 s), numpy input to numpy output, every runtime at its default "
            "settings, one process at a time, each started after the CPU, the RTX and the Intel GPU had gone idle (the "
            f"thresholds are in METHOD.md of the GitHub repo). Output check: each output against the CPU output in "
            f"fp32 on the same input ({ref}); PASS = cosine ≥ 0.99, no NaN or Inf, and top-1 agreement ≥ 0.99 for "
@@ -249,9 +268,11 @@ def card(repo, info, hubx):
         how += " The Snapdragon rows are Qualcomm AI Hub profile jobs of the same ONNX files (their own timer)."
     if fixed:
         how += ((" No Snapdragon rows: " if len(fixed) == len(models) else f" No Snapdragon rows for {' and '.join(fixed)}: ")
-                + "Qualcomm AI Hub measured the file before the bias fix (its numbers are in the GitHub table).")
+                + f"Qualcomm AI Hub measured the file{'s' if len(fixed) > 1 else ''} before the bias fix (its numbers are in "
+                "the GitHub table).")
     body += ["", "## How it was measured", "", how, ""]
-    body += sections
+    for i, sec in enumerate(sections):
+        body += ([""] if i else []) + [sec]
     if notes_all:
         body += [""] + sorted(notes_all)
     def ort_error(m):  # the last line of the error when the ONNX Runtime + OpenVINO EP NPU session did not load
@@ -287,7 +308,12 @@ def card(repo, info, hubx):
             ov_runs = ((Rm.get(m) or {}).get("ovnpu_pre") or {}).get("status") not in (None, "ERROR")
             body += [f"ONNX Runtime 1.31.1 with the OpenVINO EP 1.8.1 does not run `{m}.onnx` on the NPU: the session "
                      f"fails to load (`{ort_error(m)}`)." + (" The OpenVINO lines above run it." if ov_runs else ""), ""]
-    up = f" The upstream model: [{info['base_model']}](https://huggingface.co/{info['base_model']})." if info.get("base_model") else ""
+    ups = info.get("base_model") or []
+    ups = ups if isinstance(ups, list) else [ups]
+    linked = [f"[{n}](https://huggingface.co/{n})" for n in ups if n in HUB_UPSTREAM]
+    named = [f"`{n}`" for n in ups if n not in HUB_UPSTREAM]
+    up = (f" The upstream model{'s' if len(linked) > 1 else ''}: {' and '.join(linked)}." if linked else "") + \
+         (f" The source card names the upstream model as {' and '.join(named)} (not a Hugging Face repo)." if named else "")
     lic = {"mit": "MIT", "apache-2.0": "Apache-2.0", "bsd-3-clause": "BSD-3-Clause", "bsd-2-clause": "BSD-2-Clause"}.get(info["license"], info["license"])
     body += ["## Licence", "", f"{lic}, the licence of [{repo}](https://huggingface.co/{repo}).{up}", ""]
     return "\n".join(fm + body), None
@@ -307,7 +333,7 @@ def main():
         if text is None:
             held.append(f"{repo_folder(repo)}: {why}")
             continue
-        with open(os.path.join(HERE, "hub", repo_folder(repo), "README.md"), "w", encoding="utf-8") as f:
+        with open(os.path.join(HERE, "hub", repo_folder(repo), "README.md"), "w", encoding="utf-8", newline="\n") as f:  # LF on Windows too
             f.write(text)
         done += 1
     print(f"{done} cards written, {len(held)} held")
