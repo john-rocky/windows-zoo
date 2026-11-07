@@ -17,6 +17,8 @@ per-file ratios (host to host here, AI Hub's device timer there). The precompile
 0.18 s), where the plain ONNX file takes 0.6 to 396 s to compile on the NPU at session load.
 
 - The table: [RESULTS_WINDOWS.md](RESULTS_WINDOWS.md)
+- The files: a [Hugging Face collection](https://huggingface.co/collections/mlboydaisuke/windows-zoo-onnx-openvino-ir-and-intel-npu-blobs-6aeee0fd4065ed9b3e58d994) of 45 repos (`mlboydaisuke/<model>-OpenVINO`), each with the
+  fp16 ONNX file, its OpenVINO IR (`openvino/`), the precompiled Intel NPU blob (`npu/`) and a `manifest.json`
 - One JSON per model and cell: [results/](results/) (`results/<model>/<cell>.json`: load time, the run times, node
   placement, the parity numbers, the error text of a cell that did not run, and the versions;
   `results/<model>/tflite.json`: the ONNX file against its `.tflite`)
