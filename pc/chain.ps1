@@ -31,7 +31,9 @@ function Gate {
         $r = (RtxLine) -split ",\s*"
         $ig = IgpuPct
         $g = @{ cpu_pct_max3 = $c; rtx_util = [int]$r[0]; rtx_mem_mib = [int]$r[1]; rtx_pstate = $r[2]; igpu_util_sum = $ig; waited_s = [int]((Get-Date) - $t0).TotalSeconds; state = "quiet" }
-        if ($c -lt 15 -and [int]$r[0] -eq 0 -and [int]$r[1] -lt 800 -and $ig -lt 5) { return $g }
+        # RTX memory counts only before the RTX units (stream R): a paused CUDA process of another job keeps its RTX
+        # memory while the Intel GPU, CPU and NPU units run (METHOD.md, change of 2026-11-07 11:5x).
+        if ($c -lt 15 -and [int]$r[0] -eq 0 -and ($Stream -ne "R" -or [int]$r[1] -lt 800) -and $ig -lt 5) { return $g }
         if ((Get-Date) -ge $deadline) { $g.state = "timeout"; Say $log "not quiet for 10 min, running: cpu $c rtx $($r[0]) % $($r[1]) MiB igpu $ig"; return $g }
         $t = "not quiet: cpu $c %, rtx $($r[0]) % $($r[1]) MiB, igpu $ig %"
         if ($t -ne $last) { Say $log $t; $last = $t }

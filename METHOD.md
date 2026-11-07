@@ -70,11 +70,11 @@ runtime's defaults. The JSON records a default where the runtime reports it (`IN
   same time as two detached jobs, then the Intel GPU stream (`ovgpu`) and the CPU stream (`cpu`) (`pc/first_pass.ps1`;
   in this run the Intel GPU and CPU streams started earlier, see the change of 14:5x). Parity and the first timing
   come from this pass (`first_pass` in the JSON; not the table's timing).
-- **Quiet pass**: serial, only the cells that ran in the first pass. Before each unit: whole-CPU load < 15 % (max of
-  3 one-second reads), RTX `utilization.gpu` = 0 % and memory.used < 800 MiB, Intel GPU engine utilisation sum < 5 %.
-  After 10 minutes without quiet the unit runs anyway and its row carries `gate=timeout` and the readings (such a
-  unit is measured once more at the end). The marker file that the jobs on this machine share (last bullet) is
-  created only if no other job holds it.
+- **Quiet pass**: serial, only the cells that ran in the first pass. Before each unit: whole-CPU load < 15 % (max of 3
+  one-second reads), RTX `utilization.gpu` = 0 %, RTX memory.used < 800 MiB before an RTX unit (before every unit
+  until 2026-11-07 12:0x JST, see Changes), Intel GPU engine utilisation sum < 5 %. After 10 minutes without quiet the
+  unit runs anyway and its row carries `gate=timeout` and the readings (such a unit is measured once more at the end).
+  The marker file that the jobs on this machine share (last bullet) is created only if no other job holds it.
 - The table's speed = the quiet-pass median.
 - Windows build: Windows Update restarted the machine on 2026-11-06 between 17:29 and 17:35 JST (26200.6899 →
   26200.9711; the NPU, Intel GPU and RTX drivers stayed the same). The first pass ran on 26200.6899 except the
@@ -172,3 +172,9 @@ holds on the Intel NPU, looking for the counter-example first.
   90 s every 20 minutes, still the rule when no job waits), and after it is taken back the first unit waits 60 s more
   before the gate (`pc/chain.ps1`). The gate before each unit is unchanged. The pass was restarted between two units
   for this, with the units already measured kept.
+- 2026-11-07 11:5x JST, during the quiet pass (a gate state prompted it, not a number): the gate reads the RTX's
+  memory only before the RTX units (`cuda32`, `cuda16`). Other jobs on the machine pause their work while this pass
+  holds the marker, and a paused CUDA process keeps its RTX memory: 4.8 GB from 10:06 JST, and 16.0 GB from about
+  11:25 to 11:46 JST, with the RTX at 0 % utilisation. So the Intel GPU and CPU units of those turns waited the
+  10-minute cap. The other conditions are unchanged. The units that ran after the cap are measured once more at the
+  end, with this gate. The pass was restarted between two units for this, with the units already measured kept.
