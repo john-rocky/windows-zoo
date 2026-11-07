@@ -12,6 +12,7 @@ The conclusion lines are read from CONCLUSION.md and copied in (only measured fa
 
 import argparse
 import json
+import math
 import os
 import statistics
 
@@ -74,7 +75,7 @@ def main():
             return None
         if t.get("status") == "PASS":
             c = min((o["cos"] for o in t.get("outputs", []) if "cos" in o), default=None)
-            return f"ONNX vs .tflite: PASS, cos ≥ {c:.4f}" if c is not None and c < 0.9999 else None
+            return f"ONNX vs .tflite: PASS, cos ≥ {math.floor(c * 1e4) / 1e4:.4f}" if c is not None and c < 0.9999 else None
         if t.get("status") == "FAIL":
             return f"ONNX vs .tflite: FAIL ({'; '.join(f.replace('serving_default_', '') for f in t.get('fails', []))[:90]})"
         return f"ONNX vs .tflite: {t.get('status')} ({str(t.get('error', ''))[:60]})"

@@ -11,6 +11,7 @@ card: a cell without a quiet-pass number shows "-".
 
 import argparse
 import json
+import math
 import os
 import re
 
@@ -43,6 +44,11 @@ def load(p):
         return json.load(f)
 
 
+def floor4(c):
+    """c rounded down to 4 decimals, so that "≥ c" stays true when printed (0.99996 prints as 0.9999, not 1.0000)."""
+    return math.floor(c * 1e4) / 1e4
+
+
 def repo_folder(repo):  # same rule as pc/stage_hub.py
     name = repo.split("/", 1)[1]
     if name.endswith("-LiteRT"):
@@ -68,7 +74,7 @@ def check_text(r):
         return "not compared"
     c = min_cos(p)
     if p["status"] == "PASS":
-        return f"PASS (cos ≥ {c:.4f})" if c is not None else "PASS"
+        return f"PASS (cos ≥ {floor4(c):.4f})" if c is not None else "PASS"
     return "FAIL: " + "; ".join(f.replace("serving_default_", "") for f in p.get("fails", []))
 
 
@@ -196,12 +202,12 @@ def card(repo, info, hubx):
         sec = [f"## {m}" if len(models) > 1 else "## Speed and output check", ""]
         sec += ["| processor | runtime | file | ms | load s | output check |", "|---|---|---|---|---|---|"] + rows
         sec += ["", f"The ONNX file against the source `.tflite` (LiteRT interpreter on the CPU, the same input): "
-                    f"PASS, cosine ≥ {tc:.4f} for every output."]
+                    f"PASS, cosine ≥ {floor4(tc):.4f} for every output."]
         sections.append("\n".join(sec))
     fixed = [m for m in models if srcs[m] != m]
     lead = (f"{name} for Intel NPUs, GPUs and CPUs: {graphs_txt} from "
             f"[{repo}](https://huggingface.co/{repo}/tree/{rev}) as ONNX (tf2onnx 1.17.0, opset 17), OpenVINO IR "
-            "with fp32 weights, and a precompiled Intel NPU blob" + ("s" if len(models) > 1 else "") + ".")
+            "with fp32 weights, and " + ("precompiled Intel NPU blobs" if len(models) > 1 else "a precompiled Intel NPU blob") + ".")
     if fixed:
         recipe = load(os.path.join(HERE, "convert", "recipe.json")) or {}
         n = sum((recipe.get(m + "_fixed") or {}).get("fc_biases_restored", 0) for m in fixed)
