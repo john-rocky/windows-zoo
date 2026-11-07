@@ -7,7 +7,7 @@ aihub/results_wide.json = the Qualcomm AI Hub records of the same 52 files on a 
 
 Speed = the quiet-pass median (METHOD.md section 6); a cell without a quiet-pass number shows "-" (the first-pass
 times ran on another Windows build and stay in the JSON records).
-The conclusion lines are written by hand into CONCLUSION.md and copied in (only measured facts).
+The conclusion lines are read from CONCLUSION.md and copied in (only measured facts).
 """
 
 import argparse
@@ -121,13 +121,14 @@ def main():
         if m.endswith("_fixed"):
             base = m[: -len("_fixed")]
             n = (recipe.get(m) or {}).get("fc_biases_restored")
-            notes.insert(0, f"{base} with {n} FULLY_CONNECTED biases restored" if n else f"{base}, fixed conversion")
+            notes.insert(0, f"{base} with {n} FULLY_CONNECTED {'bias' if n == 1 else 'biases'} restored" if n else f"{base}, fixed conversion")
             fixed_rows.append(f"| {m} | {cols['ovnpu']} | {cols['ovnpu_pre']} | {cols['ovgpu']} | {cols['cuda16']} | {cols['cpu']} | "
                               f"{' / '.join(loads[:2])} | {par} | {'; '.join(notes)} |")
             continue
         if m + "_fixed" in MODELS:
-            notes.insert(0, f"this file drops {(recipe.get(m + '_fixed') or {}).get('fc_biases_restored', '?')} "
-                            f"FULLY_CONNECTED biases (tf2onnx 1.17.0); fixed file: {m}_fixed below")
+            n = (recipe.get(m + "_fixed") or {}).get("fc_biases_restored", "?")
+            notes.insert(0, f"this file drops {n} FULLY_CONNECTED {'bias' if n == 1 else 'biases'} (tf2onnx 1.17.0); "
+                            f"fixed file: {m}_fixed below")
         rows.append(f"| {m} | {s26} | {x2e} | {cols['ovnpu']} | {cols['ovnpu_pre']} | {cols['ovgpu']} | {cols['cuda16']} | {cols['cpu']} | "
                     f"{' / '.join(loads)} | {par} | {'; '.join(notes)} |")
 

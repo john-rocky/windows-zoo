@@ -102,8 +102,10 @@ plus the NPU driver's cache folder stay under 50 GB.
 full error text, versions (Python, ONNX Runtime, the OpenVINO EP, OpenVINO, the CUDA / cuDNN wheels, the NPU
 driver), device name, `load_ms`, `compile_ms`, `first_run_ms`, timing statistics and run count, node placement,
 `query_model`, the quiet-gate readings (CPU %, RTX utilisation, memory and pstate, Intel GPU %), start and end times,
-the input sha256, output names and shapes, an output fingerprint (sha256, mean, std, 16 fixed sample values) and the
-parity values.
+the input sha256, output names and shapes, an output fingerprint (sha256, mean, std, 16 fixed sample values), the
+parity values, and `engine_running_ms`: the process's running time per adapter and engine type, read from Windows'
+`GPU Engine(pid_<pid>_*)\Running Time` counters at the end of the process (the NPU's engine type is `neural`). The
+table notes a cell whose own processor shows no running time there.
 
 ## 9. The table
 
