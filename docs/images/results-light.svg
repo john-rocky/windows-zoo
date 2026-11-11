@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 406" width="860" height="406" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t">Results for 52 files on each processor</title>
+<desc id="d">Intel NPU, compiled at load: 38 passed, 12 differed, 2 did not run. Intel NPU, precompiled: 40 passed, 12 differed, 0 did not run. Intel GPU: 43 passed, 8 differed, 1 did not run. RTX, fp16: 41 passed, 10 differed, 1 did not run. RTX, fp32: 50 passed, 1 differed, 1 did not run.</desc>
+<text x="0" y="28" font-size="20" font-weight="600" fill="#0b0b0b">Results for 52 files on each processor</text>
+<rect x="0" y="44" width="14" height="14" rx="4" fill="#2a78d6"/>
+<text x="20" y="56" font-size="14" font-weight="400" fill="#52514e">Output stayed close to the CPU's</text>
+<rect x="0" y="66" width="14" height="14" rx="4" fill="#eb6834"/>
+<text x="20" y="78" font-size="14" font-weight="400" fill="#52514e">Output differed, or the file did not run</text>
+<text x="0" y="118" font-size="15" font-weight="400" fill="#0b0b0b">Intel NPU, compiled at load: 38 passed, 12 differed, 2 did not run</text>
+<rect x="0" y="126" width="626.462" height="24" rx="4" fill="#2a78d6"/>
+<rect x="628.462" y="126" width="229.538" height="24" rx="4" fill="#eb6834"/>
+<text x="0" y="180" font-size="15" font-weight="400" fill="#0b0b0b">Intel NPU, precompiled: 40 passed, 12 differed, 0 did not run</text>
+<rect x="0" y="188" width="659.538" height="24" rx="4" fill="#2a78d6"/>
+<rect x="661.538" y="188" width="196.462" height="24" rx="4" fill="#eb6834"/>
+<text x="0" y="242" font-size="15" font-weight="400" fill="#0b0b0b">Intel GPU: 43 passed, 8 differed, 1 did not run</text>
+<rect x="0" y="250" width="709.154" height="24" rx="4" fill="#2a78d6"/>
+<rect x="711.154" y="250" width="146.846" height="24" rx="4" fill="#eb6834"/>
+<text x="0" y="304" font-size="15" font-weight="400" fill="#0b0b0b">RTX, fp16: 41 passed, 10 differed, 1 did not run</text>
+<rect x="0" y="312" width="676.077" height="24" rx="4" fill="#2a78d6"/>
+<rect x="678.077" y="312" width="179.923" height="24" rx="4" fill="#eb6834"/>
+<text x="0" y="366" font-size="15" font-weight="400" fill="#0b0b0b">RTX, fp32: 50 passed, 1 differed, 1 did not run</text>
+<rect x="0" y="374" width="824.923" height="24" rx="4" fill="#2a78d6"/>
+<rect x="826.923" y="374" width="31.0769" height="24" rx="4" fill="#eb6834"/>
+</svg>
